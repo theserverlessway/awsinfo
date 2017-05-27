@@ -2,12 +2,6 @@
 
 set -euo pipefail
 
-SECOND=1000
-MINUTE=$((SECOND * 60))
-HOUR=$((MINUTE * 60))
-DAY=$((HOUR * 24))
-WEEK=$((DAY * 7))
-
 function time_parsing() {
     timestamp=$(date --date "$1" +%s)
     echo $((timestamp * 1000))

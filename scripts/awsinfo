@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -euo pipefail
+
+export DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+export SECOND=1000
+export MINUTE=$((SECOND * 60))
+export HOUR=$((MINUTE * 60))
+export DAY=$((HOUR * 24))
+export WEEK=$((DAY * 7))
+
+if [[ "$#" -gt 0 ]]
+then
+    command=$1
+    shift
+else
+    echo "Please provide the command to run"
+    exit 1
+fi
+
+if [[ -d "$DIR/$command" ]]
+then
+    if [[ "$#" -gt 1 && -f "$DIR/$command/$1.bash" ]]
+    then
+        subcommand=$1
+        shift
+        bash $DIR/$command/$subcommand.bash $@
+    else
+        index_file=$DIR/$command/index.bash
+        if [[ -f "$index_file" ]];
+        then
+            bash $index_file $@
+        else
+            echo "Command not available: $command"
+            exit 1
+        fi
+    fi
+else
+    echo "Command not available: $command"
+    exit 1
+fi

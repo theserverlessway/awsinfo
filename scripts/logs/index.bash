@@ -127,7 +127,7 @@ while true; do
                 OUTPUT_QUERY+="\"$INGESTION_COLOR\"+((.ingestionTime/1000)|todate)+\"$NC\",";
             fi
             OUTPUT_QUERY+=".message"
-            echo -e $(echo -e "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
+            echo -e $(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
         fi
     done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --interleaved --query events[] $AWS_OPTIONS | jq .[] -c)
 

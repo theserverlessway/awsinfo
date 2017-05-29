@@ -100,35 +100,36 @@ END=$(now)
 
 LOG_GROUP=$1
 
-GROUP_COLOR='\033[0;32m'
-STREAM_COLOR='\033[0;36m'
-TIMESTAMP_COLOR='\033[0;33m'
-INGESTION_COLOR='\033[0;34m'
-NC='\033[0m'
+GROUP_COLOR='\\033[0;32m'
+STREAM_COLOR='\\033[0;36m'
+TIMESTAMP_COLOR='\\033[0;33m'
+INGESTION_COLOR='\\033[0;34m'
+NC='\\033[0m'
 
 while true; do
     while read -r event; do
-        IFS=$'\t' read message logStreamName timestamp ingestiontime eventId < <(echo "$event")
+        eventId=$(echo $event | jq .eventId -r)
         if [[ ! -n "$eventId" || ! -v SEEN["$eventId"] ]]
         then
-            SEEN[$eventId]=$eventId
-            OUTPUT_LINE=""
+            SEEN[$eventId]=
+            OUTPUT_QUERY=""
+
             if [[ ! -v DISABLE_PRINT_GROUP ]]; then
-                OUTPUT_LINE+="$GROUP_COLOR$LOG_GROUP$NC ";
+                OUTPUT_QUERY+="\"$GROUP_COLOR$LOG_GROUP$NC\",";
             fi
             if [[ ! -v DISABLE_PRINT_STREAM ]]; then
-                OUTPUT_LINE+="$STREAM_COLOR$logStreamName$NC ";
+                OUTPUT_QUERY+="\"$STREAM_COLOR\"+.logStreamName+\"$NC\",";
             fi
             if [[ -v PRINT_TIMESTAMP ]]; then
-                OUTPUT_LINE+="$TIMESTAMP_COLOR$(formatted_date $timestamp)$NC ";
+                OUTPUT_QUERY+="\"$TIMESTAMP_COLOR\"+((.timestamp/1000)|todate)+\"$NC\",";
             fi
             if [[ -v PRINT_INGESTION ]]; then
-                OUTPUT_LINE+="$INGESTION_COLOR$(formatted_date $ingestiontime)$NC ";
+                OUTPUT_QUERY+="\"$INGESTION_COLOR\"+((.ingestionTime/1000)|todate)+\"$NC\",";
             fi
-            OUTPUT_LINE+=" $message"
-            echo -e $OUTPUT_LINE | grep -v "^$"
+            OUTPUT_QUERY+=".message"
+            echo -e $(echo -e "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
         fi
-    done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --interleaved --query events[].[message,logStreamName,timestamp,ingestionTime,eventId] --output text $AWS_OPTIONS)
+    done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --interleaved --query events[] $AWS_OPTIONS | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

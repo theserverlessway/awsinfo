@@ -13,7 +13,7 @@ function formatted_date() {
 
 # Loading options
 
-SHORT=wGSfs:e:ti
+SHORT=wGSf:s:e:ti
 LONG=profile:,aws-region,--timestamp,--ingestion-time
 
 AWS_OPTIONS=""
@@ -31,7 +31,8 @@ fi
 eval set -- "$PARSED"
 
 AWS_LOGS_END_TIME=""
-AWS_LOGS_START_TIME=""
+AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
+AWS_LOGS_FILTER=""
 
 # now enjoy the options in order and nicely split until we see --
 while true; do
@@ -46,6 +47,11 @@ while true; do
         ;;
         -s)
             AWS_LOGS_START_TIME=" --start-time $(time_parsing $2) "
+            shift 2
+        ;;
+        -f)
+            echo $@
+            AWS_LOGS_FILTER="$2"
             shift 2
         ;;
         -G)
@@ -129,7 +135,7 @@ while true; do
             OUTPUT_QUERY+=".message"
             echo -e $(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
         fi
-    done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --interleaved --query events[] $AWS_OPTIONS | jq .[] -c)
+    done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --filter-pattern "$AWS_LOGS_FILTER" --interleaved --query events[] $AWS_OPTIONS | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

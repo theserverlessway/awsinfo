@@ -25,12 +25,12 @@ then
     then
         subcommand=$1
         shift
-        bash $DIR/$command/$subcommand.bash $@
+        bash $DIR/$command/$subcommand.bash "$@"
     else
         index_file=$DIR/$command/index.bash
         if [[ -f "$index_file" ]];
         then
-            bash $index_file $@
+            bash $index_file "$@"
         else
             echo "Command not available: $command"
             exit 1

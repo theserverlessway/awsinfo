@@ -104,15 +104,14 @@ BEGINNING=$(before)
 END=$(now)
 
 LOG_GROUPS=$(aws logs describe-log-groups --query "logGroups[?contains(logGroupName,'$1')].[logGroupName]" --output text)
-if [[ $(echo "$LOG_GROUPS" | wc -l) -ge 2 ]]
+if [[ $(echo "$LOG_GROUPS" | grep -c '[^[:space:]]') != 1 ]]
 then
-    echo "Given LogGroup matches multiple groups:"
+    echo "Make sure the LogGroup parameter matches exactly one LogGroup"
     echo "$LOG_GROUPS"
     exit 1
 else
     LOG_GROUP="$LOG_GROUPS"
 fi
-
 
 GROUP_COLOR='\\033[0;32m'
 STREAM_COLOR='\\033[0;36m'

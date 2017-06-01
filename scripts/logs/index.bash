@@ -50,7 +50,6 @@ while true; do
             shift 2
         ;;
         -f)
-            echo $@
             AWS_LOGS_FILTER="$2"
             shift 2
         ;;
@@ -104,7 +103,16 @@ function before() {
 BEGINNING=$(before)
 END=$(now)
 
-LOG_GROUP=$1
+LOG_GROUPS=$(aws logs describe-log-groups --query "logGroups[?contains(logGroupName,'$1')].[logGroupName]" --output text)
+if [[ $(echo "$LOG_GROUPS" | wc -l) -ge 2 ]]
+then
+    echo "Given LogGroup matches multiple groups:"
+    echo "$LOG_GROUPS"
+    exit 1
+else
+    LOG_GROUP="$LOG_GROUPS"
+fi
+
 
 GROUP_COLOR='\\033[0;32m'
 STREAM_COLOR='\\033[0;36m'

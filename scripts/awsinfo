@@ -21,7 +21,7 @@ fi
 
 if [[ -d "$DIR/$command" ]]
 then
-    if [[ "$#" -gt 1 && -f "$DIR/$command/$1.bash" ]]
+    if [[ "$#" -gt 0 && -f "$DIR/$command/$1.bash" ]]
     then
         subcommand=$1
         shift

@@ -5,7 +5,7 @@ set -euo pipefail
 QUERY="logGroups[].[logGroupName]"
 
 if [[ $# -gt 1 ]]; then
-    echo "Plase provide only one argument to match"
+    echo "Please provide only one argument to match"
     exit 1
 fi
 

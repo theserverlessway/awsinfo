@@ -10,39 +10,8 @@ export HOUR=$((MINUTE * 60))
 export DAY=$((HOUR * 24))
 export WEEK=$((DAY * 7))
 
-AWS_OPTIONS=""
-
-function awscli() {
-    aws $@ ${AWS_OPTIONS}
-}
-
-# Parse common AWSCLI arguments so subcommands don't have to deal with them
-args=("$@")
-i="0"
-
-while [[ $i -lt $# ]]
-do
-	current=${args[$i]}
-	case "$current" in
-		--profile)
-			if [[ $(($i+1)) -eq $(($#)) ]]
-			then
-				echo Please provide a profile with the --profile option
-				exit 1
-			else
-				AWS_OPTIONS=" --profile ${args[$i+1]} "
-				unset args[$i]
-				unset args[$(($i+1))]
-				i=$(($i+1))
-			fi
-		;;
-		*)
-		;;
-	esac
-	i=$(($i+1))
-done
-
-set -- ${args[*]}
+# Include Files from other helpers
+source $DIR/helpers/awscli.bash
 
 if [[ "$#" -gt 0 ]]
 then
@@ -53,15 +22,17 @@ else
     exit 1
 fi
 
-if [[ -d "$DIR/$command" ]]
+COMMANDS_DIR=$DIR/commands
+CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command
+if [[ -d "$CURRENT_COMMAND_DIR" ]]
 then
-    if [[ "$#" -gt 0 && -f "$DIR/$command/$1.bash" ]]
+    if [[ "$#" -gt 0 && -f "$CURRENT_COMMAND_DIR/$1.bash" ]]
     then
         subcommand=$1
         shift
-        source $DIR/$command/$subcommand.bash
+        source $CURRENT_COMMAND_DIR/$subcommand.bash
     else
-        index_file=$DIR/$command/index.bash
+        index_file=$CURRENT_COMMAND_DIR/index.bash
         if [[ -f "$index_file" ]];
         then
             source $index_file

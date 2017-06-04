@@ -11,12 +11,11 @@ function formatted_date() {
     date -Isecond --date @$(($1 / 1000))
 }
 
+
 # Loading options
 
 SHORT=wGSf:s:e:ti
-LONG=profile:,aws-region,--timestamp,--ingestion-time
-
-AWS_OPTIONS=""
+LONG=timestamp,ingestion-time
 
 # -temporarily store output to be able to check for errors
 # -activate advanced mode getopt quoting e.g. via “--options”
@@ -50,7 +49,7 @@ while true; do
             shift 2
         ;;
         -f)
-            AWS_LOGS_FILTER="$2"
+            AWS_LOGS_FILTER=" --filter-pattern \"$2\""
             shift 2
         ;;
         -G)
@@ -68,10 +67,6 @@ while true; do
         -t | --timestamp)
             PRINT_TIMESTAMP=y
             shift
-        ;;
-        --profile)
-            AWS_OPTIONS+=" --profile $2 "
-            shift 2
         ;;
         --)
             shift
@@ -103,7 +98,7 @@ function before() {
 BEGINNING=$(before)
 END=$(now)
 
-LOG_GROUPS=$(aws logs describe-log-groups --query "logGroups[?contains(logGroupName,'$1')].[logGroupName]" --output text)
+LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[?contains(logGroupName,'$1')].[logGroupName]" --output text)
 if [[ $(echo "$LOG_GROUPS" | grep -c '[^[:space:]]') != 1 ]]
 then
     echo "Make sure the LogGroup parameter matches exactly one LogGroup"
@@ -142,7 +137,7 @@ while true; do
             OUTPUT_QUERY+=".message"
             echo -e $(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
         fi
-    done < <( aws logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME --filter-pattern "$AWS_LOGS_FILTER" --interleaved --query events[] $AWS_OPTIONS | jq .[] -c)
+    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER --interleaved --query events[] | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

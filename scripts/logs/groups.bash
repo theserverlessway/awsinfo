@@ -13,4 +13,4 @@ if [[ $# == 1 ]]; then
   QUERY="logGroups[?contains(logGroupName,'$1')].[logGroupName]"
 fi
 
-aws logs describe-log-groups --query "$QUERY" --output text
+awscli logs describe-log-groups --query "$QUERY" --output text

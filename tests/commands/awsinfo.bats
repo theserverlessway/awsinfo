@@ -24,3 +24,8 @@ load ../test-helpers/bats-assert/load
     assert_success
     assert_output -p 'Lists all available commands'
 }
+
+@test "no usage of aws cli directly in commands" {
+    run grep -r "aws " scripts/commands
+    assert_failure
+}

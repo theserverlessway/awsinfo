@@ -18,3 +18,9 @@ load ../test-helpers/bats-assert/load
     assert_output -p 'logs'
     assert_output -p 'commands'
 }
+
+@test "print help page" {
+    run awsinfo commands --help
+    assert_success
+    assert_output -p 'Lists all available commands'
+}

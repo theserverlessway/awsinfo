@@ -22,6 +22,8 @@ fi
 # Include Files from other helpers
 source $DIR/helpers/awscli.bash
 
+source $DIR/helpers/arguments.bash
+
 COMMANDS_DIR=$DIR/commands
 CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command
 if [[ -d "$CURRENT_COMMAND_DIR" ]]
@@ -30,12 +32,10 @@ then
     then
         subcommand=$1
         shift
-        source $CURRENT_COMMAND_DIR/$subcommand.bash
     else
-        index_file=$CURRENT_COMMAND_DIR/index.bash
-        if [[ -f "$index_file" ]];
+        if [[ -f "$CURRENT_COMMAND_DIR/index.bash" ]];
         then
-            source $index_file
+            subcommand=index
         else
             echo "Command not available: $command"
             exit 1
@@ -44,4 +44,14 @@ then
 else
     echo "Command not available: $command"
     exit 1
+fi
+
+if [[ -z "$HELP" ]]
+then
+    source $CURRENT_COMMAND_DIR/$subcommand.bash
+else
+    cat $DIR/header.txt
+    echo -e "\n\n"
+    cat $CURRENT_COMMAND_DIR/$subcommand.md
+    echo -e "\n"
 fi

@@ -1,0 +1,3 @@
+Resources:
+  AWSInfoTestLogGroup:
+    Type: "AWS::Logs::LogGroup"

@@ -15,8 +15,8 @@ then
     command=$1
     shift
 else
-    echo "Please provide a command to run"
-    exit 1
+    echo -e "Please choose one of the available commands:\n"
+    command=commands
 fi
 
 # Include Files from other helpers

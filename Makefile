@@ -13,8 +13,8 @@ release:
 test: build
 	./tests/test-helpers/bats/bin/bats tests/commands/**/*.bats
 
-run:
-	docker run -it -v ~/.aws:/root/.aws -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN -e AWS_DEFAULT_REGION -e AWS_DEFAULT_PROFILE -e AWS_CONFIG_FILE $(CONTAINER)
+bash: build
+	docker run --entrypoint bash -it -v ~/.aws:/root/.aws -v `pwd`:/app -w /app -e AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY -e AWS_SESSION_TOKEN -e AWS_DEFAULT_REGION -e AWS_DEFAULT_PROFILE -e AWS_CONFIG_FILE $(CONTAINER):master
 
 prepare:
 	rm -fr $(TEST_HELPERS)

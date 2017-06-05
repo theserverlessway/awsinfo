@@ -44,5 +44,5 @@ then
 		i=$(($i+1))
 	done
 
-	set -- ${args[*]}
+	set -- ${args[@]+"${args[@]}"}
 fi

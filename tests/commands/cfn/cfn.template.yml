@@ -1,0 +1,3 @@
+Resources:
+  CFNTestLogGroup:
+    Type: "AWS::Logs::LogGroup"

@@ -69,6 +69,7 @@ page that is in the repo (and linked below).
 
 ## Available Commands
 
+* [`cfn `](scripts/commands/cfn/index.md)
 * [`commands `](scripts/commands/commands/index.md)
 * [`logs `](scripts/commands/logs/index.md)
 * [`logs groups`](scripts/commands/logs/groups.md)

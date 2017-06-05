@@ -1,6 +1,6 @@
 # AWSINFO
 
-`awsinfo` is a read-only client for AWS written in Bash. It tries to replace the AWS console for getting basic information about your AWS resoures in your CLI.
+`awsinfo` is a read-only client for AWS written in Bash. It tries to replace the AWS console for getting basic information about your AWS resoures in your CLI. No more opening the AWS Console when all you want to know is basic information about your resources.
 
 ## Why a read-only AWS Client
 When we try to get the most out of AWS by building on top of as many AWS services as possible we regularly have to look up information about our resources. From checking the deploment status of a CloudFormation stack to the number of messages in an SQS Queue, the status of a CodeBuild Project or the number of EC2 instances currently running.
@@ -17,7 +17,7 @@ Building it with Bash also means we can use the `awscli` directly which removes 
 
 ## Installation
 
-While you can simply clone the repository and run the `awsinfo.bash` file directly (e.g. by putting it into your `PATH`) the preferred method of installation is going through Docker. This allows tight control over everything that is used in `awsinfo` while making it easy for you to install and use. In case you install `awsinfo` by clonging the repo make sure you have Bash 4 and the `awscli` installed.
+While you can simply clone the repository and run the `awsinfo.bash` file directly (e.g. by putting it into your `PATH`) the preferred method of installation is going through Docker. This allows tight control over everything that is used in `awsinfo` (e.g. Bash Version or other tools that need to be available like gnu time) while making it easy for you to install and use. In case you install `awsinfo` by cloning the repo make sure you have Bash 4 and the `awscli` installed. Some commands might need specific cli tools as well, check the `Dockerfile` for all the tools that are installed.
 
 ### Using Docker directly
 
@@ -43,14 +43,14 @@ whalebrew install flomotlik/awsinfo
 
 ## Update
 
-In case you cloned the repository 
+To update the Docker container run `docker pull flomotlik/awsinfo:latest`
 
 ## Usage
 
-`awsinfo` commands are support two level of commands, for example you can run `awsinfo logs` to print log messages
+`awsinfo` commands support commands and subcommands, for example you can run `awsinfo logs` to print log messages
 or `awsinfo logs groups` to get a list of all log groups in the current account and region.
 
-To see all available commands run `awsinfo commands`
+To see all available commands check out the following list or run `awsinfo commands`.
 
 ## Available Commands
 

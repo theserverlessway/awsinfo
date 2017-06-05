@@ -15,12 +15,11 @@ function formatted_date() {
 # Loading options
 
 SHORT=wGSf:s:e:ti
-LONG=timestamp,ingestion-time
 
 # -temporarily store output to be able to check for errors
 # -activate advanced mode getopt quoting e.g. via “--options”
 # -pass arguments only via   -- "$@"   to separate them correctly
-PARSED=$(getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@")
+PARSED=$(getopt --options $SHORT --name "$0" -- "$@")
 if [[ $? -ne 0 ]]; then
     # e.g. $? == 1
     #  then getopt has complained about wrong arguments to stdout

@@ -51,7 +51,7 @@ then
     source $CURRENT_COMMAND_DIR/$subcommand.bash
 else
     cat $DIR/header.txt
-    echo -e "\n\n"
+    echo -e "\n"
     cat $CURRENT_COMMAND_DIR/$subcommand.md
     echo -e "\n"
 fi

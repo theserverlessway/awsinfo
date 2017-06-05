@@ -29,3 +29,7 @@ load ../test-helpers/bats-assert/load
     run grep -r "aws " scripts/commands
     assert_failure
 }
+
+@test "docs available for every command" {
+    find scripts/commands -name "*.bash" | awk '{sub(".bash",".md",$0); print }' | xargs ls
+}

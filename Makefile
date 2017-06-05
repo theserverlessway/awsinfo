@@ -21,5 +21,8 @@ prepare:
 	mkdir -p $(TEST_HELPERS)
 	git clone https://github.com/sstephenson/bats $(TEST_HELPERS)/bats
 	git clone https://github.com/ztombol/bats-assert.git $(TEST_HELPERS)/bats-assert
-# 	pip install formica-cli -U
-# 	pip install awsie -U
+	pip install formica-cli -U
+	pip install awsie -U
+
+command-docs:
+	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](" $$0 ".md)" }' | sort

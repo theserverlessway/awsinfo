@@ -54,3 +54,6 @@ To see all available commands run `awsinfo commands`
 
 ## Available Commands
 
+* [`commands `](scripts/commands/commands/index.md)
+* [`logs `](scripts/commands/logs/index.md)
+* [`logs groups`](scripts/commands/logs/groups.md)

@@ -64,6 +64,9 @@ or `awsinfo logs groups` to get a list of all log groups in the current account 
 
 To see all available commands check out the following list or run `awsinfo commands`.
 
+You can run any command with `--help` (e.g. `awsinfo logs --help`) to see the same help 
+page that is in the repo (and linked below).
+
 ## Available Commands
 
 * [`commands `](scripts/commands/commands/index.md)

@@ -6,7 +6,7 @@ TEST_HELPERS=tests/test-helpers
 build:
 	docker build -t $(CONTAINER):master .
 
-release:
+release: build
 	docker tag $(CONTAINER):master $(CONTAINER):latest
 	docker push $(CONTAINER):latest
 

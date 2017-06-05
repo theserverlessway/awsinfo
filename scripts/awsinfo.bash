@@ -10,17 +10,17 @@ export HOUR=$((MINUTE * 60))
 export DAY=$((HOUR * 24))
 export WEEK=$((DAY * 7))
 
-# Include Files from other helpers
-source $DIR/helpers/awscli.bash
-
 if [[ "$#" -gt 0 ]]
 then
     command=$1
     shift
 else
-    echo "Please provide the command to run"
+    echo "Please provide a command to run"
     exit 1
 fi
+
+# Include Files from other helpers
+source $DIR/helpers/awscli.bash
 
 COMMANDS_DIR=$DIR/commands
 CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command

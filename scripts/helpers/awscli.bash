@@ -24,6 +24,18 @@ do
 				i=$(($i+1))
 			fi
 		;;
+		--region)
+			if [[ $(($i+1)) -eq $(($#)) ]]
+			then
+				echo Please provide a region with the --region option
+				exit 1
+			else
+				AWS_OPTIONS=" --region ${args[$i+1]} "
+				unset args[$i]
+				unset args[$(($i+1))]
+				i=$(($i+1))
+			fi
+		;;
 		*)
 		;;
 	esac

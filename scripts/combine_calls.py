@@ -25,4 +25,5 @@ for line in sys.stdin.readlines():
         DATA.append(json.loads(line))
 
 formatter(sys.argv[1], DATA, stream=stream)
-print(stream.getvalue())
+output = stream.getvalue()
+if output: print(output)

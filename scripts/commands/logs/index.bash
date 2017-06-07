@@ -78,12 +78,6 @@ while true; do
     esac
 done
 
-# handle non-option arguments
-if [[ $# -ne 1 ]]; then
-    echo "$0: Provide a group to use"
-    exit 4
-fi
-
 declare -A SEEN
 
 function now() {
@@ -97,7 +91,7 @@ function before() {
 BEGINNING=$(before)
 END=$(now)
 
-LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[?contains(logGroupName,'$1')].[logGroupName]" --output text)
+LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $@)].[logGroupName]" --output text)
 if [[ $(echo "$LOG_GROUPS" | grep -c '[^[:space:]]') != 1 ]]
 then
     echo "Make sure the LogGroup parameter matches exactly one LogGroup"

@@ -1,16 +1,18 @@
-# `awslogs logs LOGGROUP`
+# `awslogs logs [substrings]+`
 
-Print log statements from the specified log group. It will use `filter-log-events` from
-the `awscli` to regularly get new log events and print any events that are haven't been
-seen before.
+Print log statements from a log group. It will take all arguments and look for a log group containing
+all of them so you don't have to enter the exact group name, but can just put in a few fragements
+that uniquely identify a log group. E.g. Instead of having to write `/aws/codebuild/msearch-indexer-bulk-build`
+as the full log group name you can use `codebuild index bulk` to uniquely identify the group.
+If multiple log groups match it will fail and print the names of the matching groups.
 
-This command is heavily inspired (or basically copied) by the great [awslogs](https://github.com/jorgebastida/awslogs) 
+It will use `filter-log-events` from the `awscli` to regularly get new log events and print any events that 
+haven't been seen before.
+
+This command is heavily inspired by the great [awslogs](https://github.com/jorgebastida/awslogs) 
 tool by [jorgebastida](https://github.com/jorgebastida). The main difference compared to awslogs (apart from being 
-written in bash and not python) is that it supports new log-streams coming in while logs are being watched.
-
-The Log-Group doesn't have to be an exact match. It will list all available log-groups and
-select one that contains the LogGroup parameter given. If multiple log groups match it will
-fail and print the names of the matching groups.
+written in bash and not python) is that it supports new log-streams coming in while logs are being watched and
+some UX improvements like matching log-groups with substrings.
 
 ## Options:
 

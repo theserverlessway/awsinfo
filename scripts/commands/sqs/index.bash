@@ -4,18 +4,9 @@ set -euo pipefail
 
 echo "Getting data, ... (filter queues for faster results)"
 
-FILTER_QUERY=""
+FILTER_QUERY=$(filter "@" $@)
 
-if [[ $# -gt 1 ]]; then
-    echo "Plase provide only one argument to match your queues"
-    exit 1
-fi
-
-if [[ $# == 1 ]]; then
-  FILTER_QUERY="?contains(@,'$1')"
-fi
-
-queues=$(awscli sqs list-queues --query "QueueUrls[$FILTER_QUERY]" --output text)
+queues=$(awscli sqs list-queues --query "QueueUrls[$FILTER_QUERY]" --output text | sed s/^None//g)
 
 QueueOutput=""
 for queue in $queues
@@ -24,4 +15,4 @@ do
     QueueOutput+="\n"
 done
 
-echo -e $QueueOutput | python $DIR/combine_calls.py get-queue-attributes
+echo -e $QueueOutput | python $DIR/combine_calls.py GetQueueAttributes

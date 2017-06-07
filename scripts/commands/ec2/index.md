@@ -1,5 +1,6 @@
-# `awsinfo ec2 [substring]`
+# `awsinfo ec2 [substrings]+`
 
-List all EC2 instances with their most important data. If `substring` is given it will 
-only print instances where `substring` is part of the Tag `Name` or in the InstanceId, 
-making it easy to limit the instances shown without having to enter the full Name or InstanceId.
+List all EC2 instances with their most important data. 
+
+If `substrings` is given it will only print instances where all `substrings` are part of the Tag `Name` or 
+the InstanceId. This makes it easy to limit the instances shown without having to enter the full Name or InstanceId.

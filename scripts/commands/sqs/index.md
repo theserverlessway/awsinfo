@@ -1,4 +1,4 @@
-# `awsinfo sqs [substring]`
+# `awsinfo sqs [substrings]+`
 
 List all SQS queues and some queue attributes.
-If `substring` is given it will only print log groups that contain `substring`.
+If `substrings` are given it will only print sqs queues that contain all `substrings`.

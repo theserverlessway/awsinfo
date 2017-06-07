@@ -21,14 +21,14 @@ fi
 
 # Include Files from other helpers
 source $DIR/helpers/awscli.bash
-
 source $DIR/helpers/arguments.bash
+source $DIR/helpers/functions.bash
 
 COMMANDS_DIR=$DIR/commands
 CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command
 if [[ -d "$CURRENT_COMMAND_DIR" ]]
 then
-    if [[ "$#" -gt 0 && -f "$CURRENT_COMMAND_DIR/$1.bash" ]]
+    if [[ "$#" -gt 0 && "$1" != "index" && -f "$CURRENT_COMMAND_DIR/$1.bash" ]]
     then
         subcommand=$1
         shift

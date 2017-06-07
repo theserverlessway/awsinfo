@@ -17,10 +17,6 @@ setup(){
   run awsinfo logs groups NotMatching
   assert_output ''
   assert_success
-
-  run awsinfo logs groups one two three
-  assert_failure
-  assert_output -p 'Plase provide one argument to match your log groups with'
 }
 
 teardown(){

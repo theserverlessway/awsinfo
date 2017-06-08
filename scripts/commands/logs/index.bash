@@ -99,6 +99,7 @@ then
     exit 1
 else
     LOG_GROUP="$LOG_GROUPS"
+    echo "Reading logs from $LOG_GROUP"
 fi
 
 GROUP_COLOR='\\033[0;32m'

@@ -17,9 +17,9 @@ AWS_LOGS_FILTER=""
 while getopts "wGSf:s:e:ti" opt; do
     case "$opt" in
         w) WATCH=y ;;
-        e) AWS_LOGS_END_TIME=" --end-time $(time_parsing $2) " ;;
-        s) AWS_LOGS_START_TIME=" --start-time $(time_parsing $2) " ;;
-        f) AWS_LOGS_FILTER=" --filter-pattern \"$2\"" ;;
+        e) AWS_LOGS_END_TIME=" --end-time $(time_parsing $OPTARG) " ;;
+        s) AWS_LOGS_START_TIME=" --start-time $(time_parsing $OPTARG) " ;;
+        f) AWS_LOGS_FILTER=" --filter-pattern \"$OPTARG\"" ;;
         G) DISABLE_PRINT_GROUP=y ;;
         S) DISABLE_PRINT_STREAM=y ;;
         i) PRINT_INGESTION=y ;;

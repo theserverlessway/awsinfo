@@ -1,9 +1,8 @@
-#!/bin/bash
-
-set -euo pipefail
-
 function time_parsing() {
     timestamp=$(date --date "$1" +%s)
+    if [[ "$?" -ne 0 ]]; then
+        exit 1;
+    fi
     echo $((timestamp * 1000))
 }
 
@@ -11,85 +10,25 @@ function formatted_date() {
     date -Isecond --date @$(($1 / 1000))
 }
 
-
-# Loading options
-
-SHORT=wGSf:s:e:ti
-
-# -temporarily store output to be able to check for errors
-# -activate advanced mode getopt quoting e.g. via “--options”
-# -pass arguments only via   -- "$@"   to separate them correctly
-PARSED=$(getopt --options $SHORT --name "$0" -- "$@")
-if [[ $? -ne 0 ]]; then
-    # e.g. $? == 1
-    #  then getopt has complained about wrong arguments to stdout
-    exit 2
-fi
-# use eval with "$PARSED" to properly handle the quoting
-eval set -- "$PARSED"
-
 AWS_LOGS_END_TIME=""
 AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
 AWS_LOGS_FILTER=""
 
-# now enjoy the options in order and nicely split until we see --
-while true; do
-    case "$1" in
-        -w)
-            WATCH=y
-            shift
-        ;;
-        -e)
-            AWS_LOGS_END_TIME=" --end-time $(time_parsing $2) "
-            shift 2
-        ;;
-        -s)
-            AWS_LOGS_START_TIME=" --start-time $(time_parsing $2) "
-            shift 2
-        ;;
-        -f)
-            AWS_LOGS_FILTER=" --filter-pattern \"$2\""
-            shift 2
-        ;;
-        -G)
-            DISABLE_PRINT_GROUP=y
-            shift
-        ;;
-        -S)
-            DISABLE_PRINT_STREAM=y
-            shift
-        ;;
-        -i | --ingestion-time)
-            PRINT_INGESTION=y
-            shift
-        ;;
-        -t | --timestamp)
-            PRINT_TIMESTAMP=y
-            shift
-        ;;
-        --)
-            shift
-            break
-        ;;
-        *)
-            echo "Programming error"
-            exit 3
-        ;;
+while getopts "wGSf:s:e:ti" opt; do
+    case "$opt" in
+        w) WATCH=y ;;
+        e) AWS_LOGS_END_TIME=" --end-time $(time_parsing $2) " ;;
+        s) AWS_LOGS_START_TIME=" --start-time $(time_parsing $2) " ;;
+        f) AWS_LOGS_FILTER=" --filter-pattern \"$2\"" ;;
+        G) DISABLE_PRINT_GROUP=y ;;
+        S) DISABLE_PRINT_STREAM=y ;;
+        i) PRINT_INGESTION=y ;;
+        t) PRINT_TIMESTAMP=y ;;
     esac
 done
+shift $(($OPTIND-1))
 
 declare -A SEEN
-
-function now() {
-    echo $((`date -u +%s` * 1000))
-}
-
-function before() {
-    echo $((`date -u +%s` * 1000 - 15 * $MINUTE))
-}
-
-BEGINNING=$(before)
-END=$(now)
 
 LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $@)].[logGroupName]" --output text)
 if [[ $(echo "$LOG_GROUPS" | grep -c '[^[:space:]]') != 1 ]]

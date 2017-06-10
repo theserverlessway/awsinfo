@@ -18,7 +18,7 @@ setup(){
 
 @test "getting log messages" {
     # Default Logging Setup
-    run awsinfo logs LogGroup
+    run awsinfo logs InfoTestLogGroup
     assert_success
     assert_output -p "TestMessage-1"
     assert_output -p "TestMessage-2"
@@ -27,7 +27,7 @@ setup(){
     assert_output -p "AWSInfoTestLogGroup"
 
     # Without LogStream
-    run awsinfo logs LogGroup -S
+    run awsinfo logs -S InfoTestLogGroup
     assert_success
     assert_output -p "TestMessage"
     assert_output -p "AWSInfoTestLogGroup"
@@ -35,14 +35,17 @@ setup(){
     refute_output -p "$LOG_STREAM_NAME_2"
 
     # Without LogGroup
-    run awsinfo logs LogGroup -G
+    run awsinfo logs -G -S InfoTestLogGroup
     assert_success
-    assert_output -p "TestMessage-1"
-    assert_output -p "$LOG_STREAM_NAME_1"
-    refute_output -p "AWSInfoTestLogGroup"
+    assert_line "TestMessage-1"
+
+    # Checking for log groups test message
+    run awsinfo logs -G -S InfoTestLogGroup
+    assert_success
+    assert_line -n 0 -e "^Reading logs from index-bats-AWSInfoTestLogGroup-.*$"
 
     # Filtering messages
-    run awsinfo logs LogGroup -f "TestMessage-1"
+    run awsinfo logs -f "TestMessage-1" InfoTestLogGroup
     assert_success
     assert_output -p "TestMessage-1"
     assert_output -p "$LOG_STREAM_NAME_1"
@@ -50,7 +53,7 @@ setup(){
     refute_output -p "$LOG_STREAM_NAME_2"
     refute_output -p "TestMessage-2"
 
-    run awsinfo logs LogGroup -e now -s -10minutes
+    run awsinfo logs  -e now -s -10minutes InfoTestLogGroup
     assert_success
     assert_output -p "TestMessage-1"
     assert_output -p "$LOG_STREAM_NAME_1"

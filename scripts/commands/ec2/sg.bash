@@ -21,4 +21,4 @@ if [[ $# -gt 0 ]]; then
     FILTER_QUERY="?$(join "||" $FILTER_NAME $FILTER_ID $FILTER_GROUP_NAME $FILTER_VPC_ID)"
 fi
 
-aws ec2 describe-security-groups --output table --query "SecurityGroups[$FILTER_QUERY].{\"1.Name\":$TAG_NAME,\"2.GroupId\":GroupId,\"3.GroupName\":GroupName,\"4.VpcId\":VpcId,\"5.Description\":Description$PERMISSIONS_QUERY}"
+awscli ec2 describe-security-groups --output table --query "SecurityGroups[$FILTER_QUERY].{\"1.Name\":$TAG_NAME,\"2.GroupId\":GroupId,\"3.GroupName\":GroupName,\"4.VpcId\":VpcId,\"5.Description\":Description$PERMISSIONS_QUERY}"

@@ -11,4 +11,4 @@ if [[ $# -gt 0 ]]; then
     FILTER_QUERY="?$FILTER_NAME||$FILTER_ID"
 fi
 
-aws ec2 describe-key-pairs --output table --query "KeyPairs[$FILTER_QUERY].{\"1.Name\":KeyName,\"2.Fingerprint\":KeyFingerprint}"
+awscli ec2 describe-key-pairs --output table --query "KeyPairs[$FILTER_QUERY].{\"1.Name\":KeyName,\"2.Fingerprint\":KeyFingerprint}"

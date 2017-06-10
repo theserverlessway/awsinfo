@@ -25,6 +25,7 @@ source $DIR/helpers/awscli.bash
 source $DIR/helpers/arguments.bash
 source $DIR/helpers/functions.bash
 source $DIR/helpers/common.bash
+source $DIR/helpers/colors.bash
 
 COMMANDS_DIR=$DIR/commands
 CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command

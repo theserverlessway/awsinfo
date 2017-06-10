@@ -31,21 +31,14 @@ shift $(($OPTIND-1))
 declare -A SEEN
 
 LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $@)].[logGroupName]" --output text)
-if [[ $(echo "$LOG_GROUPS" | grep -c '[^[:space:]]') != 1 ]]
-then
-    echo "Make sure the LogGroup parameter matches exactly one LogGroup"
-    echo "$LOG_GROUPS"
-    exit 1
-else
-    LOG_GROUP="$LOG_GROUPS"
-    echo "Reading logs from $LOG_GROUP"
-fi
+LOG_GROUP=$(select_one LogGroup "$LOG_GROUPS")
+echo "Reading logs from $LOG_GROUP"
 
-GROUP_COLOR='\\033[0;32m'
-STREAM_COLOR='\\033[0;36m'
-TIMESTAMP_COLOR='\\033[0;33m'
-INGESTION_COLOR='\\033[0;34m'
-NC='\\033[0m'
+GROUP_COLOR="\\$GREEN"
+STREAM_COLOR="\\$CYAN"
+TIMESTAMP_COLOR="\\$YELLOW"
+INGESTION_COLOR="\\$BLUE"
+NC="\\$NC"
 
 while true; do
     while read -r event; do

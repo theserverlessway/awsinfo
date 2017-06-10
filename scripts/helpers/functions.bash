@@ -38,3 +38,24 @@ function filter(){
         filter_query "$@"
     fi
 }
+
+echoerr() {
+    echo -e "$@" 1>&2;
+}
+
+echoerrmsg() {
+    echoerr "$RED""$@""$NC"
+}
+
+function select_one(){
+    type=$1
+    OUTPUT="$2"
+    if [[ $(echo "$OUTPUT" | grep -c '[^[:space:]]') != 1 ]]
+    then
+        echoerrmsg "Make sure your arguments match exactly one $type:"
+        echoerr "$OUTPUT"
+        exit 1
+    else
+        echo "$OUTPUT"
+    fi
+}

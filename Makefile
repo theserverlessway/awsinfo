@@ -27,3 +27,10 @@ prepare:
 
 command-docs:
 	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](" $$0 ".md)" }' | sort
+
+LOG_TIMESTAMP=$(shell echo $$(($$(date +%s) * 1000)))
+LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)
+
+put-log-message:
+	aws logs create-log-stream --log-group-name test-log-group --log-stream-name $(LOG_STREAM_NAME)
+	aws logs put-log-events --log-group-name test-log-group --log-stream-name  $(LOG_STREAM_NAME) --log-events timestamp=$(LOG_TIMESTAMP),message=TestMessage-$(LOG_TIMESTAMP)

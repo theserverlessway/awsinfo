@@ -1,4 +1,4 @@
-# `awslogs logs [options] [substrings]+`
+# `awslogs logs [options] [substrings]*`
 
 Print log statements from a log group. It will take all arguments and look for a log group containing
 all of them so you don't have to enter the exact group name, but can just put in a few fragements

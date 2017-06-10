@@ -1,4 +1,4 @@
-# `awsinfo logs groups [substrings]+`
+# `awsinfo logs groups [substrings]*`
 
 Lists all log groups in the current account and region. 
 

@@ -1,4 +1,4 @@
-# `awsinfo ec2 keys [substrings]+`
+# `awsinfo ec2 keys [substrings]*`
 
 List all EC2 key pairs. 
 

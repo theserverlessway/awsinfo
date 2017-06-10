@@ -1,4 +1,4 @@
-# `awsinfo ec2 sg [options] [substrings]+`
+# `awsinfo ec2 sg [options] [substrings]*`
 
 List all Security Groups. 
 

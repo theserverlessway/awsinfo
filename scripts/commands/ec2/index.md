@@ -1,4 +1,4 @@
-# `awsinfo ec2 [substrings]+`
+# `awsinfo ec2 [substrings]*`
 
 List all EC2 instances with their most important data. 
 

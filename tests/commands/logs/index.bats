@@ -35,9 +35,11 @@ setup(){
     refute_output -p "$LOG_STREAM_NAME_2"
 
     # Without LogGroup
-    run awsinfo logs -G -S InfoTestLogGroup
+    run awsinfo logs -G InfoTestLogGroup
     assert_success
-    assert_line "TestMessage-1"
+    refute_line -n 1 -p 'index-bats-AWSInfoTestLogGroup'
+    assert_line -n 1 -p "$LOG_STREAM_NAME_1"
+    assert_line -n 1 -p "TestMessage-1"
 
     # Checking for log groups test message
     run awsinfo logs -G -S InfoTestLogGroup

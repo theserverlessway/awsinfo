@@ -31,8 +31,8 @@ shift $(($OPTIND-1))
 declare -A SEEN
 
 LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $@)].[logGroupName]" --output text)
-LOG_GROUP=$(select_one LogGroup "$LOG_GROUPS")
-echo "Reading logs from $LOG_GROUP"
+select_one LogGroup "$LOG_GROUPS"
+LOG_GROUP=$SELECTED
 
 GROUP_COLOR="\\$GREEN"
 STREAM_COLOR="\\$CYAN"

@@ -7,6 +7,9 @@ TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 build:
 	docker build -t $(CONTAINER):master .
 
+build-no-cache:
+	docker build --no-cache -t $(CONTAINER):master .
+
 release: build
 	docker tag $(CONTAINER):master $(CONTAINER):latest
 	docker push $(CONTAINER):latest

@@ -1,6 +1,6 @@
 FROM python:alpine
 
-RUN apk add bash coreutils jq --update
+RUN apk --no-cache add bash coreutils jq
 RUN pip install awscli
 
 COPY scripts /awsinfo

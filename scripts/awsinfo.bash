@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+if [[ -v AWSINFO_DEBUG ]]
+then
+    set -x
+fi
 
 DIR="$(dirname "$(readlink -f "$0")")"
 

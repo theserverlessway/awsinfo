@@ -1,0 +1,1 @@
+awscli sns list-topics --output table --query "Topics[$(filter TopicArn $@)].{\"1.Arn\":TopicArn}"

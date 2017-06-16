@@ -1,7 +1,3 @@
-#!/bin/bash
-
-set -euo pipefail
-
 echo "Getting data, ... (filter queues for faster results)"
 
 FILTER_QUERY=$(filter "@" $@)

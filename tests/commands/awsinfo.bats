@@ -39,6 +39,15 @@ load ../test-helpers/bats-assert/load
     assert_failure
 }
 
+@test "no set, pipefail or shebang in commands" {
+    run grep -r "pipefail" scripts/commands
+    assert_failure
+    run grep -r "^#\!" scripts/commands
+    assert_failure
+    run grep -r "^set " scripts/commands
+    assert_failure
+}
+
 @test "docs available for every command" {
     find scripts/commands -name "*.bash" | awk '{sub(".bash",".md",$0); print }' | xargs ls
 }

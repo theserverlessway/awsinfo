@@ -1,7 +1,3 @@
-#!/bin/bash
-
-set -euo pipefail
-
 FILTER_QUERY=""
 
 if [[ $# -gt 0 ]]; then

@@ -44,7 +44,7 @@ setup(){
     # Checking for log groups test message
     run awsinfo logs -G -S InfoTestLogGroup
     assert_success
-    assert_line -n 0 -e "^Reading logs from index-bats-AWSInfoTestLogGroup-.*$"
+    assert_line -n 0 -e "^.*Selected LogGroup index-bats-AWSInfoTestLogGroup-.*$"
 
     # Filtering messages
     run awsinfo logs -f "TestMessage-1" InfoTestLogGroup

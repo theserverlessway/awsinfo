@@ -88,4 +88,6 @@ page that is in the repo (and linked below).
 * [`iam users`](scripts/commands/iam/users.md)
 * [`logs `](scripts/commands/logs/index.md)
 * [`logs groups`](scripts/commands/logs/groups.md)
+* [`me `](scripts/commands/me/index.md)
+* [`orgs `](scripts/commands/orgs/index.md)
 * [`sqs `](scripts/commands/sqs/index.md)

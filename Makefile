@@ -14,7 +14,7 @@ release: build
 	docker tag $(CONTAINER):master $(CONTAINER):latest
 	docker push $(CONTAINER):latest
 
-test: build
+test: build-no-cache
 	./tests/test-helpers/bats/bin/bats $(TESTFILES)
 
 bash: build
@@ -37,3 +37,12 @@ LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)
 put-log-message:
 	aws logs create-log-stream --log-group-name test-log-group --log-stream-name $(LOG_STREAM_NAME)
 	aws logs put-log-events --log-group-name test-log-group --log-stream-name  $(LOG_STREAM_NAME) --log-events timestamp=$(LOG_TIMESTAMP),message=TestMessage-$(LOG_TIMESTAMP)
+
+FORMICA_STACK=awsinfo-integration-user
+create-integration-user:
+	cd tests && formica new --stack $(FORMICA_STACK) --capabilities CAPABILITY_IAM
+	formica deploy --stack $(FORMICA_STACK)
+
+update-integration-user:
+	cd tests && formica change --stack $(FORMICA_STACK) --capabilities CAPABILITY_IAM
+	formica deploy --stack $(FORMICA_STACK)

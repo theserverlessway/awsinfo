@@ -1,0 +1,16 @@
+Resources:
+  AwsinfoIntegrationTestUser:
+    Type: "AWS::IAM::User"
+    Properties:
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/PowerUserAccess
+  AwsinfoIntegrationTestUserKey:
+    Type: "AWS::IAM::AccessKey"
+    Properties:
+      UserName: !Ref AwsinfoIntegrationTestUser
+
+#Outputs:
+#  AwsAccessKeyId:
+#    Value: !Ref AwsinfoIntegrationTestUserKey
+#  AwsSecretAccessKey:
+#    Value: !GetAtt AwsinfoIntegrationTestUserKey.SecretAccessKey

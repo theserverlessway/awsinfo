@@ -26,6 +26,7 @@ prepare:
 	git clone https://github.com/sstephenson/bats $(TEST_HELPERS)/bats
 	git clone https://github.com/ztombol/bats-assert.git $(TEST_HELPERS)/bats-assert
 	pip install formica-cli -U
+	pip install awscli -U
 	pip install awsie -U
 
 command-docs:

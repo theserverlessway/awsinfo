@@ -1,0 +1,1 @@
+awscli sts get-caller-identity --output table --query "{\"1.AccountId\":Account,\"2.Arn\":Arn,\"3.UserId\":UserId}"

@@ -1,3 +1,3 @@
 function awscli() {
-    aws $@ ${AWS_OPTIONS}
+    aws "$@" "${AWS_OPTIONS}"
 }

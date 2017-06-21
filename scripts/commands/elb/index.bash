@@ -11,4 +11,4 @@ if [[ $# -gt 0 ]]; then
     FILTER_QUERY="?$(join "||" $FILTER_NAME $FILTER_VPC $FILTER_SUBNET $FILTER_AZ $FILTER_INSTANCE)"
 fi
 
-aws elb describe-load-balancers --query "LoadBalancerDescriptions[$FILTER_QUERY]" --output table
+awscli elb describe-load-balancers --query "LoadBalancerDescriptions[$FILTER_QUERY]" --output table

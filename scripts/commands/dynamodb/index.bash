@@ -1,0 +1,1 @@
+awscli dynamodb list-tables --output table --query "TableNames[$(filter @ $@)]"

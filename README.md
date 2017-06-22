@@ -79,6 +79,8 @@ page that is in the repo (and linked below).
 * [`cfn resources`](scripts/commands/cfn/resources.md)
 * [`cloudwatch alarms`](scripts/commands/cloudwatch/alarms.md)
 * [`commands `](scripts/commands/commands/index.md)
+* [`dynamodb `](scripts/commands/dynamodb/index.md)
+* [`dynamodb table`](scripts/commands/dynamodb/table.md)
 * [`ec2 `](scripts/commands/ec2/index.md)
 * [`ec2 keys`](scripts/commands/ec2/keys.md)
 * [`ec2 sg`](scripts/commands/ec2/sg.md)

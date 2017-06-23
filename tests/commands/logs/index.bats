@@ -1,8 +1,8 @@
 load ../../awsinfo
 load ../../test-helpers/bats-assert/load
 
-LOG_STREAM_NAME_1=test-log-stream-$RANDOM
-LOG_STREAM_NAME_2=test-log-stream-$RANDOM
+LOG_STREAM_NAME_1=test-log-stream-1
+LOG_STREAM_NAME_2=test-log-stream-2
 
 LOG_MESSAGE_TIMESTAMP=$(($(date -u +%s)*1000))
 

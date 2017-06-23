@@ -69,6 +69,7 @@ page that is in the repo (and linked below).
 
 ## Available Commands
 
+* [`acm `](scripts/commands/acm/index.md)
 * [`cfn `](scripts/commands/cfn/index.md)
 * [`cfn change-sets`](scripts/commands/cfn/change-sets.md)
 * [`cfn events`](scripts/commands/cfn/events.md)
@@ -96,6 +97,8 @@ page that is in the repo (and linked below).
 * [`logs groups`](scripts/commands/logs/groups.md)
 * [`me `](scripts/commands/me/index.md)
 * [`orgs `](scripts/commands/orgs/index.md)
+* [`route53 `](scripts/commands/route53/index.md)
+* [`route53 records`](scripts/commands/route53/records.md)
 * [`sns `](scripts/commands/sns/index.md)
 * [`sns subscriptions`](scripts/commands/sns/subscriptions.md)
 * [`sqs `](scripts/commands/sqs/index.md)

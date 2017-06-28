@@ -72,5 +72,3 @@ while true; do
         exit 0
     fi
 done
-
-trap "trap - SIGTERM && kill---$$" SIGINT SIGTERM EXIT

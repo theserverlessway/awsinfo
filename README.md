@@ -17,7 +17,7 @@
 ## Why a read-only AWS Client
 When we try to get the most out of AWS by building on top of as many AWS services as possible we regularly have to look up information about our resources. From checking the deploment status of a CloudFormation stack to the number of messages in an SQS Queue, the status of a CodeBuild Project or the number of EC2 instances currently running.
 
-Looking up this information often requires us to go through the AWS Console as the CLI tooling that AWS provides is a great interface to their API, but hard to use for getting an overview on deployed resources quickly. `awsinfo` provides you with default views, similar to the AWS Console, for various (and growing) AWS services so you can get the most important information. While `awsinfo` provides you with some access to deeper information on specific services, for the most part once you want to dig really deep other tools like the `awscli` or `aws-shell` are great for exploring all the details. 
+Looking up this information often requires us to go through the AWS Console as the CLI tooling that AWS provides is a great interface to their API, but hard to use for getting an overview on deployed resources quickly. `awsinfo` provides you with default views, similar to the AWS Console, for various (and growing) AWS services so you can get the most important information. While `awsinfo` provides you with some access to deeper information on specific services, for the most part once you want to dig really deep other tools like the `awscli` or `aws-shell` are great for exploring all the details.
 
 ## Why Bash
 
@@ -48,8 +48,8 @@ alias awsinfo='docker run -it -v ~/.aws:/root/.aws -e AWS_ACCESS_KEY_ID -e AWS_S
 ### Whalebrew
 
 If you're using [Whalebrew](https://github.com/bfirsh/whalebrew)(Which I highly recommend you doing) simply run the following to install:
- 
- ```bash
+
+```bash
 whalebrew install flomotlik/awsinfo
 ```
 
@@ -64,7 +64,7 @@ or `awsinfo logs groups` to get a list of all log groups in the current account 
 
 To see all available commands check out the following list or run `awsinfo commands`.
 
-You can run any command with `--help` (e.g. `awsinfo logs --help`) to see the same help 
+You can run any command with `--help` (e.g. `awsinfo logs --help`) to see the same help
 page that is in the repo (and linked below).
 
 ## Available Commands
@@ -78,6 +78,7 @@ page that is in the repo (and linked below).
 * [`cfn outputs`](scripts/commands/cfn/outputs.md)
 * [`cfn policy`](scripts/commands/cfn/policy.md)
 * [`cfn resources`](scripts/commands/cfn/resources.md)
+* [`cloudfront `](scripts/commands/cloudfront/index.md)
 * [`cloudwatch alarms`](scripts/commands/cloudwatch/alarms.md)
 * [`commands `](scripts/commands/commands/index.md)
 * [`dynamodb `](scripts/commands/dynamodb/index.md)
@@ -93,6 +94,8 @@ page that is in the repo (and linked below).
 * [`iam roles`](scripts/commands/iam/roles.md)
 * [`iam user`](scripts/commands/iam/user.md)
 * [`iam users`](scripts/commands/iam/users.md)
+* [`kms `](scripts/commands/kms/index.md)
+* [`kms aliases`](scripts/commands/kms/aliases.md)
 * [`logs `](scripts/commands/logs/index.md)
 * [`logs groups`](scripts/commands/logs/groups.md)
 * [`me `](scripts/commands/me/index.md)

@@ -1,6 +1,16 @@
 #!/bin/bash
 
-set -euo pipefail
+function control_c {
+    echo -e "\nAwsinfo interrupted, waiting for subprocesses to finish..."
+    wait
+    exit 1
+}
+
+trap control_c SIGINT
+trap control_c SIGTERM
+trap control_c INT
+
+set -eumo pipefail
 
 if [[ -v AWSINFO_DEBUG ]]
 then
@@ -8,12 +18,6 @@ then
 fi
 
 DIR="$(dirname "$(readlink -f "$0")")"
-
-export SECOND=1000
-export MINUTE=$((SECOND * 60))
-export HOUR=$((MINUTE * 60))
-export DAY=$((HOUR * 24))
-export WEEK=$((DAY * 7))
 
 if [[ "$#" -gt 0 ]]
 then

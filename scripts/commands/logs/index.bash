@@ -16,12 +16,15 @@ AWS_LOGS_FILTER=""
 
 while getopts "wGSf:s:e:ti" opt; do
     case "$opt" in
-        w) WATCH=y ;;
-        e) AWS_LOGS_END_TIME=" --end-time $(time_parsing $OPTARG) " ;;
+        w) WATCH='FALSE' ;;
+        e)
+            AWS_LOGS_END_TIME=" --end-time $(time_parsing $OPTARG) "
+            WATCH='FALSE'
+            ;;
         s) AWS_LOGS_START_TIME=" --start-time $(time_parsing $OPTARG) " ;;
         f) AWS_LOGS_FILTER=" --filter-pattern \"$OPTARG\"" ;;
         G) DISABLE_PRINT_GROUP=y ;;
-        S) DISABLE_PRINT_STREAM=y ;;
+        S) SHOW_PRINT_STREAM=y ;;
         i) PRINT_INGESTION=y ;;
         t) PRINT_TIMESTAMP=y ;;
     esac
@@ -51,7 +54,7 @@ while true; do
             if [[ ! -v DISABLE_PRINT_GROUP ]]; then
                 OUTPUT_QUERY+="\"$GROUP_COLOR$LOG_GROUP$NC\",";
             fi
-            if [[ ! -v DISABLE_PRINT_STREAM ]]; then
+            if [[ -v SHOW_PRINT_STREAM ]]; then
                 OUTPUT_QUERY+="\"$STREAM_COLOR\"+.logStreamName+\"$NC\",";
             fi
             if [[ -v PRINT_TIMESTAMP ]]; then
@@ -61,14 +64,14 @@ while true; do
                 OUTPUT_QUERY+="\"$INGESTION_COLOR\"+((.ingestionTime/1000)|todate)+\"$NC\",";
             fi
             OUTPUT_QUERY+=".message"
-            echo -e $(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)
+            echo -e "$(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)"
         fi
     done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER --interleaved --query events[] | jq .[] -c)
 
     if [[ -v WATCH ]]
     then
-        sleep 2
-    else
         exit 0
+    else
+        sleep 2
     fi
 done

@@ -1,18 +1,19 @@
 .PHONY: build
 
-CONTAINER=flomotlik/awsinfo
+CONTAINER_NAME=flomotlik/awsinfo
+CONTAINER=$(CONTAINER_NAME):dev
 TEST_HELPERS=tests/test-helpers
 TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 
 build:
-	docker build -t $(CONTAINER):master .
+	docker build -t $(CONTAINER) .
 
 build-no-cache:
-	docker build --no-cache -t $(CONTAINER):master .
+	docker build --no-cache -t $(CONTAINER) .
 
 release: build
-	docker tag $(CONTAINER):master $(CONTAINER):latest
-	docker push $(CONTAINER):latest
+	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
+	docker push $(CONTAINER_NAME):latest
 
 test: build-no-cache
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)

@@ -48,12 +48,12 @@ then
         then
             subcommand=index
         else
-            echo "Command not available: $command"
+            echo "Command not available: $command $1"
             exit 1
         fi
     fi
 else
-    echo "Command not available: $command"
+    echo "Service not supported: $command"
     exit 1
 fi
 

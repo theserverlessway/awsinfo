@@ -32,6 +32,7 @@ fi
 source $DIR/helpers/awscli.bash
 source $DIR/helpers/arguments.bash
 source $DIR/helpers/functions.bash
+source $DIR/helpers/filters.bash
 source $DIR/helpers/common.bash
 source $DIR/helpers/colors.bash
 

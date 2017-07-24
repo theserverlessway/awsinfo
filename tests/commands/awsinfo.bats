@@ -51,3 +51,7 @@ load ../test-helpers/bats-assert/load
 @test "docs available for every command" {
     find scripts/commands -name "*.bash" | awk '{sub(".bash",".md",$0); print }' | xargs ls
 }
+
+@test "All commands listed in README" {
+    find scripts/commands -name "*.md" | xargs -I {} grep "{}" ./README.md
+}

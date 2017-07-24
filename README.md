@@ -86,7 +86,7 @@ page that is in the repo (and linked below).
 * [`dynamodb table`](scripts/commands/dynamodb/table.md)
 * [`ec2 `](scripts/commands/ec2/index.md)
 * [`ec2 keys`](scripts/commands/ec2/keys.md)
-* [`ec2 sg`](scripts/commands/ec2/sg.md)
+* [`ec2 security-groups`](scripts/commands/ec2/security-groups.md)
 * [`ec2 subnets`](scripts/commands/ec2/subnets.md)
 * [`ecs `](scripts/commands/ecs/index.md)
 * [`elb `](scripts/commands/elb/index.md)

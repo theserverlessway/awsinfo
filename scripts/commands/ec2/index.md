@@ -1,6 +1,12 @@
-# `awsinfo ec2 [substrings]*`
+# `awsinfo ec2 [filters]*`
 
-List all EC2 instances with their most important data. 
+List all EC2 instances
 
-If `substrings` is given it will only print instances where all `substrings` are part of the Tag `Name` or 
-the InstanceId. This makes it easy to limit the instances shown without having to enter the full Name or InstanceId.
+## Filter matches against
+
+* Name
+* Id
+* Type
+* State
+* AvailabilityZone
+* SecurityGroups

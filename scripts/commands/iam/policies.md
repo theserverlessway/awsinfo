@@ -1,5 +1,5 @@
-# `awsinfo iam groups [substrings]*`
+# `awsinfo iam policies [substrings]*`
 
-Lists all IAM groups in the current account and region. 
+Lists all IAM policies in the current account and region. 
 
-If `substrings`is given it will only print iam groups that contain all `substrings` in the `Name` or `Id`.
+If `substrings`is given it will only print iam policies that contain all `substrings` in the `Name` or `Id`.

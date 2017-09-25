@@ -29,3 +29,29 @@ function select_one(){
     echosuccess "Selected $type $ONE"
     eval SELECTED=$ONE
 }
+
+function multi_arg_verification(){
+  if ! grep -q ".* -- \?.*" <<< "'$*'";
+  then
+      echo "Filters for multiple resources need to be in format: first filter -- [optional second filter]"
+      exit 1
+  fi
+}
+
+function split_args(){
+  multi_arg_verification "$@"
+  FIRST_ARGS=()
+  while test ${#} -gt 0
+  do
+    if [[ "$1" == '--' ]]
+    then
+      shift
+      break
+    else
+      FIRST_ARGS+=("$1")
+      shift
+    fi
+  done
+  eval "FIRST_RESOURCE='${FIRST_ARGS[@]}'"
+  eval "SECOND_RESOURCE='$@'"
+}

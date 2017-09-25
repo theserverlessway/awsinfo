@@ -12,13 +12,13 @@ stack_name(){
     basename $BATS_TEST_FILENAME-$STACKPOSTFIX | tr '.' '-'
 }
 deploy_stack() {
-    export FORMICA_STACK=$(stack_name)
+    FORMICA_STACK=$(stack_name)
     echo "Creating Stack $FORMICA_STACK"
-    cd $BATS_TEST_DIRNAME && formica new && formica deploy
+    cd $BATS_TEST_DIRNAME && formica new -s $FORMICA_STACK && formica deploy -s $FORMICA_STACK
 }
 
 remove_stack() {
-    export FORMICA_STACK=$(stack_name)
+    FORMICA_STACK=$(stack_name)
     echo "Removing Stack $FORMICA_STACK"
-    cd $BATS_TEST_DIRNAME && formica remove
+    cd $BATS_TEST_DIRNAME && formica remove -s $FORMICA_STACK
 }

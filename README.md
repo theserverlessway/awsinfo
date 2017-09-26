@@ -78,6 +78,7 @@ page that is in the repo (and linked below).
 * [`cfn outputs`](scripts/commands/cfn/outputs.md)
 * [`cfn policy`](scripts/commands/cfn/policy.md)
 * [`cfn resources`](scripts/commands/cfn/resources.md)
+* [`cfn template`](scripts/commands/cfn/template.md)
 * [`cloudfront `](scripts/commands/cloudfront/index.md)
 * [`cloudfront origins`](scripts/commands/cloudfront/origins.md)
 * [`cloudwatch alarms`](scripts/commands/cloudwatch/alarms.md)

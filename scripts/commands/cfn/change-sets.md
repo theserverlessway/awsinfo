@@ -1,4 +1,8 @@
-# `awsinfo cfn change-sets [substrings]*`
+# `awsinfo cfn change-sets [filters]*`
 
-List and describe all CloudFormation ChangeSets for a specific Stack including the changes they will perform. 
-It will select the Stack that contains all supplied substrings.
+List the ChangeSets for the specified CloudFormation stack. Select the
+CloudFormation stack by specifying filters.
+
+## Filter matches against
+
+* Stack Name

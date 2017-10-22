@@ -9,6 +9,8 @@ then
         echo Service "$1" is not supported
     fi
 else
+    echo "Run  'awsinfo commands SERVICE' to see a list of all available commands for the SERVICE"
+    echo "e.g. 'awsinfo commands route53'"
     echosuccess Supported Services:
     ls $DIR/commands | sort | sed 's/^/  /'
 fi

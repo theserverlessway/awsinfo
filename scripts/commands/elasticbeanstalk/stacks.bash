@@ -1,0 +1,1 @@
+awscli elasticbeanstalk list-available-solution-stacks --output table --query "SolutionStacks[$(filter '@' $@)]"

@@ -1,6 +1,6 @@
 # `awsinfo elasticbeanstalk events [filters]*`
 
-Events of a selected ElasticBeanstalk Environment
+List Events of a selected ElasticBeanstalk Environment.
 
 ## Filter matches against
 

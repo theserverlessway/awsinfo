@@ -6,11 +6,11 @@ select_one Environment "$ENVIRONMENTS"
 FILTER_QUERY=""
 
 if [[ $# -gt 0 ]]; then
-    FILTER_INSTANCE_ID+=$(filter_query "InstanceId" "$SECOND_RESOURCE")
-    FILTER_AZ+=$(filter_query "AvailabilityZone" "$SECOND_RESOURCE")
-    FILTER_VERSION+=$(filter_query "Deployment.VersionLabel" "$SECOND_RESOURCE")
-    FILTER_HEALTH+=$(filter_query "HealthStatus" "$SECOND_RESOURCE")
-    FILTER_COLOR+=$(filter_query "Color" "$SECOND_RESOURCE")
+    FILTER_INSTANCE_ID+=$(filter_query "InstanceId" $SECOND_RESOURCE)
+    FILTER_AZ+=$(filter_query "AvailabilityZone" $SECOND_RESOURCE)
+    FILTER_VERSION+=$(filter_query "Deployment.VersionLabel" $SECOND_RESOURCE)
+    FILTER_HEALTH+=$(filter_query "HealthStatus" $SECOND_RESOURCE)
+    FILTER_COLOR+=$(filter_query "Color" $SECOND_RESOURCE)
 
 
     FILTER_QUERY="?$(join "||" $FILTER_INSTANCE_ID $FILTER_AZ $FILTER_VERSION $FILTER_HEALTH $FILTER_COLOR)"

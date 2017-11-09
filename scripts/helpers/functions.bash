@@ -39,8 +39,8 @@ function multi_arg_verification(){
 }
 
 function split_args(){
-  multi_arg_verification "$@"
-  FIRST_ARGS=()
+  # multi_arg_verification "$@"
+  FIRST_ARGS=('')
   while test ${#} -gt 0
   do
     if [[ "$1" == '--' ]]

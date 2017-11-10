@@ -1,10 +1,10 @@
 function join {
     joiner=$1
     shift
-    OUTPUT="$1"
-    shift
+    OUTPUT=""
     if [[ $# -gt 0 ]]
     then
+        OUTPUT="$1"
         for var in $@
         do
             OUTPUT+=$joiner
@@ -27,7 +27,7 @@ function filter_query(){
         done
         echo "$(join '&&' ${FILTERS[@]})"
     else
-        echo ""
+        echo "true==true"
     fi
 }
 

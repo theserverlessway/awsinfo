@@ -66,7 +66,7 @@ while true; do
             OUTPUT_QUERY+=".message"
             echo -e "$(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)"
         fi
-    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER --interleaved --query events[] | jq .[] -c)
+    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER --interleaved --query events[] --output json | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

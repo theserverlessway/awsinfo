@@ -1,3 +1,5 @@
 Resources:
-  CFNTestLogGroup:
+  FirstLogGroup:
+    Type: "AWS::Logs::LogGroup"
+  SecondLogGroup:
     Type: "AWS::Logs::LogGroup"

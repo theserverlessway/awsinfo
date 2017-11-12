@@ -5,6 +5,7 @@ function join {
     if [[ $# -gt 0 ]]
     then
         OUTPUT="$1"
+        shift
         for var in $@
         do
             OUTPUT+=$joiner
@@ -37,4 +38,20 @@ function filter(){
         echo -n "?"
         filter_query "$@"
     fi
+}
+
+function auto_filter(){
+  if [[ $# -gt 1 ]]
+  then
+    split_args "$@"
+    if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
+    then
+      FILTERS=()
+      for param in $FIRST_RESOURCE
+      do
+        FILTERS+=($(filter_query $param $SECOND_RESOURCE))
+      done
+      echo ?$(join "||" ${FILTERS[@]})
+    fi
+  fi
 }

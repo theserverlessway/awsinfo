@@ -1,0 +1,44 @@
+Resources:
+  EBApplication:
+    Properties:
+      Description: ElasticBeanstalk Application
+    Type: AWS::ElasticBeanstalk::Application
+  EBApplicationEnvironment:
+    Properties:
+      ApplicationName: !Ref EBApplication
+      SolutionStackName: 64bit Amazon Linux 2017.03 v2.7.4 running Docker 17.03.2-ce
+      OptionSettings:
+        - Namespace: aws:elasticbeanstalk:healthreporting:system
+          OptionName: SystemType
+          Value: enhanced
+        # - Namespace: aws:autoscaling:launchconfiguration
+        #   OptionName: InstanceType
+        #   Value: m4.xlarge
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value: !Ref EBWebInstanceProfile
+    Type: AWS::ElasticBeanstalk::Environment
+
+  EBWebRole:
+    Type: "AWS::IAM::Role"
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService
+      Path: "/"
+
+  EBWebInstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Roles:
+        - !Ref EBWebRole

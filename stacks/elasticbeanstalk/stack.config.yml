@@ -1,0 +1,3 @@
+stack: awsinfo-elasticbeanstalk
+capabilities:
+  - CAPABILITY_IAM

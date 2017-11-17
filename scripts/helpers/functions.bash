@@ -30,16 +30,7 @@ function select_one(){
     eval SELECTED=$ONE
 }
 
-function multi_arg_verification(){
-  if ! grep -q ".* -- \?.*" <<< "'$*'";
-  then
-      echo "Filters for multiple resources need to be in format: first filter -- [optional second filter]"
-      exit 1
-  fi
-}
-
 function split_args(){
-  # multi_arg_verification "$@"
   FIRST_ARGS=('')
   while test ${#} -gt 0
   do
@@ -52,6 +43,6 @@ function split_args(){
       shift
     fi
   done
-  eval "FIRST_RESOURCE='${FIRST_ARGS[@]}'"
-  eval "SECOND_RESOURCE='$@'"
+  eval 'FIRST_RESOURCE="${FIRST_ARGS[@]}"'
+  eval 'SECOND_RESOURCE="$@"'
 }

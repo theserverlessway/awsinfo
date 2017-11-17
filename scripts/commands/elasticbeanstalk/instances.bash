@@ -1,6 +1,6 @@
 split_args "$@"
 
-ENVIRONMENTS=$(awscli elasticbeanstalk describe-environments --output text --query "sort_by(Environments,&EnvironmentName)[$(filter EnvironmentName $FIRST_RESOURCE)].[EnvironmentName]")
+ENVIRONMENTS=$(awscli elasticbeanstalk describe-environments --output text --query "sort_by(Environments,&EnvironmentName)[$(auto_filter EnvironmentName -- $FIRST_RESOURCE)].[EnvironmentName]")
 select_one Environment "$ENVIRONMENTS"
 
 FILTER_QUERY=""
@@ -17,7 +17,7 @@ if [[ $# -gt 0 ]]; then
 fi
 
 awscli elasticbeanstalk describe-instances-health --environment-name $SELECTED --attribute-names All --output table --query  \
-  "InstanceHealthList[$FILTER_QUERY]. \
+  "InstanceHealthList[$(auto_filter InstanceId AvailabilityZone Deployment.VersionLabel HealthStatus Color -- $SECOND_RESOURCE)]. \
   {\"1.InstanceId\":InstanceId, \
    \"2.Health\":HealthStatus, \
    \"3.Color\":Color, \

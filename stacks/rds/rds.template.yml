@@ -1,0 +1,25 @@
+Resources:
+  RDSCluster:
+    Type: AWS::RDS::DBCluster
+    Properties:
+      MasterUsername: user
+      MasterUserPassword: password
+      Engine: aurora
+
+  RDSDBInstance1:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: aurora
+      PubliclyAccessible: 'false'
+      DBInstanceClass: db.r4.large
+      DBClusterIdentifier:
+        Ref: RDSCluster
+
+  RDSDBInstance2:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      Engine: aurora
+      PubliclyAccessible: 'false'
+      DBInstanceClass: db.r4.large
+      DBClusterIdentifier:
+        Ref: RDSCluster

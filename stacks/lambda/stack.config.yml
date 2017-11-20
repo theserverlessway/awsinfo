@@ -1,0 +1,3 @@
+stack: awsinfo-lambda
+capabilities:
+  - CAPABILITY_IAM

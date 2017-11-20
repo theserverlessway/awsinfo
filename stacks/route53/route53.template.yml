@@ -1,0 +1,33 @@
+Resources:
+  TestHostedZone2:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      Name: awsinfo2.dev
+  TestHostedZone:
+    Type: "AWS::Route53::HostedZone"
+    Properties:
+      Name: awsinfo.dev
+  TestRecordSetGroup:
+    Properties:
+      HostedZoneId: !Ref TestHostedZone
+      RecordSets:
+      - Name: group1.awsinfo.dev
+        ResourceRecords:
+        - cname1.somedomain.com
+        TTL: 43200
+        Type: CNAME
+      - Name: group2.awsinfo.dev
+        ResourceRecords:
+        - cname2.somedomain.com
+        TTL: 43200
+        Type: CNAME
+    Type: AWS::Route53::RecordSetGroup
+  TestRecordSet:
+    Properties:
+      HostedZoneId: !Ref TestHostedZone
+      Name: single1.awsinfo.dev
+      ResourceRecords:
+        - cname3.somedomain.com
+      TTL: 43200
+      Type: CNAME
+    Type: AWS::Route53::RecordSet

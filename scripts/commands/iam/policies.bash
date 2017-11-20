@@ -1,10 +1,1 @@
-FILTER_QUERY=""
-
-if [[ $# -gt 0 ]]; then
-    FILTER_NAME+=$(filter_query "PolicyName" $@)
-    FILTER_ID+=$(filter_query "PolicyId" $@)
-
-    FILTER_QUERY="?$(join "||" $FILTER_NAME $FILTER_ID)"
-fi
-
-awscli iam list-policies --scope Local --output table --query "Policies[$FILTER_QUERY].{\"1.Name\":PolicyName,\"2.Id\":PolicyId,\"3.AttachedTo\":AttachmentCount\"4.Arn\":Arn}"
+awscli iam list-policies --scope Local --output table --query "Policies[$(auto_filter PolicyName PolicyId Path -- $@)].{\"1.Name\":PolicyName,\"2.Id\":PolicyId,\"3.AttachedTo\":AttachmentCount,\"4.Path\":Path,\"5.Arn\":Arn}"

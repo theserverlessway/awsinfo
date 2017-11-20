@@ -1,0 +1,168 @@
+Resources:
+
+# Users
+
+  TestUser1:
+    Properties:
+      Groups:
+      - !Ref TestGroup1
+      - !Ref TestGroup2
+      Path: /test/1/
+      Policies:
+      - PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Deny"
+              Action: "*"
+              Resource: "*"
+        PolicyName: TestUser1
+    Type: AWS::IAM::User
+
+  TestUser2:
+    Properties:
+      Path: /test/2/
+      Policies:
+      - PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Deny"
+              Action: "*"
+              Resource: "*"
+        PolicyName: TestUser2
+    Type: AWS::IAM::User
+
+# User1Access Key
+
+  TestUser1AccessKeys:
+    Type: "AWS::IAM::AccessKey"
+    Properties:
+      UserName: !Ref TestUser1
+
+# User to Group Additions
+
+  TestUser2Group1Addition:
+    Properties:
+      GroupName: !Ref TestGroup1
+      Users:
+      - !Ref TestUser2
+    Type: AWS::IAM::UserToGroupAddition
+
+# Groups
+
+  TestGroup1:
+    Properties:
+      Path: /test/1/
+      Policies:
+      - PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+          -
+            Effect: "Deny"
+            Action: "*"
+            Resource: "*"
+        PolicyName: TestGroup1
+    Type: AWS::IAM::Group
+
+  TestGroup2:
+    Properties:
+      Path: /test/2/
+      Policies:
+      - PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Deny"
+              Action: "*"
+              Resource: "*"
+        PolicyName: TestGroup2
+    Type: AWS::IAM::Group
+
+# Policies
+
+  TestPolicy1:
+    Properties:
+      Groups:
+      - !Ref TestGroup2
+      PolicyName: TestPolicy1
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Deny"
+            Action: "*"
+            Resource: "*"
+      Roles:
+      - !Ref TestRole1
+      Users:
+      - !Ref TestUser1
+    Type: AWS::IAM::Policy
+
+  TestManagedPolicy1:
+    Type: "AWS::IAM::ManagedPolicy"
+    Properties:
+      Path: "/test/1"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Deny"
+            Action: "*"
+            Resource: "*"
+
+    TestManagedPolicy2:
+    Type: "AWS::IAM::ManagedPolicy"
+    Properties:
+      Path: "/test/2"
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Deny"
+            Action: "*"
+            Resource: "*"
+
+
+# Roles
+
+  TestRole1:
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          -
+            Effect: "Allow"
+            Principal:
+              Service:
+                - "ec2.amazonaws.com"
+            Action:
+              - "sts:AssumeRole"
+      Path: /test/1/
+      Policies:
+      - PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            -
+              Effect: "Deny"
+              Action: "*"
+              Resource: "*"
+        PolicyName: TestRole1
+    Type: AWS::IAM::Role
+
+  TestInstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      Path: /test/1/
+      Roles:
+        - !Ref TestRole1
+
+Outputs:
+  User1AccessKeyId:
+    Value: !Ref TestUser1AccessKeys
+    Export:
+      Name: !Sub ${AWS::StackName}:access-key-id
+  User1SecretAccessKey:
+    Value: !GetAtt TestUser1AccessKeys.SecretAccessKey
+    Export:
+      Name: !Sub ${AWS::StackName}:secret-access-key

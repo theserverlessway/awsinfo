@@ -1,0 +1,1 @@
+awscli iam get-account-summary --query "SummaryMap" --output table | grep -v "Quota"

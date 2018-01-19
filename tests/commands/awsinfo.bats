@@ -10,6 +10,11 @@ load ../test-helpers/bats-assert/load
     assert_output -p '  commands'
 }
 
+@test "print version of container" {
+    run awsinfo version
+    assert_success
+}
+
 @test "print all available services" {
     run awsinfo commands
     assert_success

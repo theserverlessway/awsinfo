@@ -4,12 +4,14 @@ CONTAINER_NAME=flomotlik/awsinfo
 CONTAINER=$(CONTAINER_NAME):dev
 TEST_HELPERS=tests/test-helpers
 TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
+GIT_COMMIT=$(shell git rev-parse HEAD)
+DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 build:
-	docker build -t $(CONTAINER) .
+	docker build --build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
 
 build-no-cache:
-	docker build --no-cache -t $(CONTAINER) .
+	docker build --no-cache --build-arg AWSINFO_VERSION="$(GIT_COMMIT)-$(DATE)" -t $(CONTAINER) .
 
 install: build
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest

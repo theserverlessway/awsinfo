@@ -1,0 +1,1 @@
+echo $AWSINFO_VERSION

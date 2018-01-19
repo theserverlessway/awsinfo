@@ -11,8 +11,10 @@ build:
 build-no-cache:
 	docker build --no-cache -t $(CONTAINER) .
 
-release: build
+install: build
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
+
+release: install
 	docker push $(CONTAINER_NAME):latest
 
 test: build-no-cache

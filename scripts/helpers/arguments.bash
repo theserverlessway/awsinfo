@@ -17,7 +17,7 @@ then
 					echo Please provide a profile with the --profile option
 					exit 1
 				else
-					AWS_OPTIONS=" --profile ${args[$i+1]} "
+					AWS_OPTIONS+=" --profile ${args[$i+1]} "
 					unset args[$i]
 					unset args[$(($i+1))]
 					i=$(($i+1))
@@ -29,7 +29,7 @@ then
 					echo Please provide a region with the --region option
 					exit 1
 				else
-					AWS_OPTIONS=" --region ${args[$i+1]} "
+					AWS_OPTIONS+=" --region ${args[$i+1]} "
 					unset args[$i]
 					unset args[$(($i+1))]
 					i=$(($i+1))

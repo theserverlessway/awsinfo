@@ -1,7 +1,12 @@
-# `awsinfo elb [substrings]*`
+# `awsinfo elb [filters]*`
 
-Lists all Elastic Load Balancers. 
+Show an overview on all ElasticLoadbalancers (V2)
 
-If `substrings`is given it will only print Load Balancers that contain all `substrings` in the `LoadBalancerName`, 
-`VPCId`, `Subnets`, `AvailabilityZones` or `InstanceId` giving you a very simple way to view only the ELBs with 
-the specific characteristics you're interseted in.
+## Filter matches against
+
+* LoadBalancerName
+* VpcId
+* Scheme
+* Availability Zones
+* SubnetIds
+* Security Groups

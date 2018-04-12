@@ -1,8 +1,12 @@
-# `awsinfo assume [organisation-filters]+ -- [RoleName]`
+# `awsinfo assume [-d DurationInHours] [organisation-filters]+ -- [RoleName]`
 
 `awsinfo assume` will assume the `ROLE_NAME` (or OrganizationAccountAccessRole by default)
 for the filtered organisation account and print Environment Variables you can directly export
 into your environment so you can work as the assumed role.
+
+You need to be able to list Organisation accounts to use this command, if thats not possible
+check out `assume role` for a command that lets you specify the account id and role options directly
+and has MFA support.
 
 ## Organisations Filter matches against
 

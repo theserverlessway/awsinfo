@@ -1,0 +1,4 @@
+stack: awsinfo-test-account
+region: eu-central-1
+capabilities:
+  - CAPABILITY_IAM

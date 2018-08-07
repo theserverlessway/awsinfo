@@ -51,7 +51,17 @@ setup(){
     assert_line -n 0 -e "^.*Selected LogGroup $(stack_name)-AWSInfoTestLogGroup-.*$"
 
     # Filtering messages
-    run awsinfo logs -w -S -f "TestMessage-1" InfoTestLogGroup $(stack_name)
+    run awsinfo logs -w -S -f "\"TestMessage-1\"" InfoTestLogGroup $(stack_name)
+    assert_success
+    echo "$output"
+    assert_output -p "TestMessage-1"
+    assert_output -p "$LOG_STREAM_NAME_1"
+
+    refute_output -p "$LOG_STREAM_NAME_2"
+    refute_output -p "TestMessage-2"
+
+    # Filtering messages with multiple options
+    run awsinfo logs -w -S -f "TestMessage 1" InfoTestLogGroup $(stack_name)
     assert_success
     echo "$output"
     assert_output -p "TestMessage-1"

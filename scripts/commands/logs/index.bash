@@ -12,6 +12,7 @@ function formatted_date() {
 
 AWS_LOGS_END_TIME=""
 AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
+AWS_LOGS_FILTER_OPTION=""
 AWS_LOGS_FILTER=""
 
 while getopts "wGSf:s:e:ti" opt; do
@@ -22,7 +23,10 @@ while getopts "wGSf:s:e:ti" opt; do
             WATCH='FALSE'
             ;;
         s) AWS_LOGS_START_TIME=" --start-time $(time_parsing $OPTARG) " ;;
-        f) AWS_LOGS_FILTER=" --filter-pattern \"$OPTARG\"" ;;
+        f)
+          AWS_LOGS_FILTER_OPTION="$OPTARG"
+          AWS_LOGS_FILTER="--filter-pattern"
+          ;;
         G) DISABLE_PRINT_GROUP=y ;;
         S) SHOW_PRINT_STREAM=y ;;
         i) PRINT_INGESTION=y ;;
@@ -66,7 +70,7 @@ while true; do
             OUTPUT_QUERY+=".message"
             echo -e "$(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)"
         fi
-    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER --interleaved --query events[] --output json | jq .[] -c)
+    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --interleaved --query events[] --output json | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

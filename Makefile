@@ -52,3 +52,14 @@ create-integration-user:
 update-integration-user:
 	cd tests && formica change --stack $(FORMICA_STACK) --capabilities CAPABILITY_IAM
 	formica deploy --stack $(FORMICA_STACK)
+
+COMMAND=index
+COMMANDS_DIR=scripts/commands
+
+
+new:
+ifndef SERVICE
+		$(error SERVICE is not set)
+endif
+	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).bash
+	cp $(COMMANDS_DIR)/cfn/resources.md $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).md

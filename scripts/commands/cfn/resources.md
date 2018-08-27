@@ -1,3 +1,13 @@
-# `awsinfo cfn resources [substrings]*`
+# `awsinfo cfn resources [stack-filter]* -- [resource-filter]*`
 
-List all Resources for the specified stack. It will select the Stack that contains all supplied substrings.
+List all Resources for the specified stack
+
+## First filter matches against
+
+* StackName
+
+## Second filter matches against
+
+* LogicalResourceId
+* PhysicalResourceId
+* ResourceType

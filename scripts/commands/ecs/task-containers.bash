@@ -5,7 +5,7 @@ select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-TASKS=$(aws ecs list-tasks --output text --cluster $SELECTED --query taskArns[$(auto_filter @ -- $SECOND_RESOURCE)].[@])
+TASKS=$(awscli ecs list-tasks --output text --cluster $SELECTED --query taskArns[$(auto_filter @ -- $SECOND_RESOURCE)].[@])
 select_one Task "$TASKS"
 
 OUTPUT=$(awscli ecs describe-tasks --tasks $SELECTED --cluster $CLUSTER --query "tasks[].containers" |  sed "s/arn.*\///g")

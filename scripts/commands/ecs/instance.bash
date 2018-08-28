@@ -18,7 +18,7 @@ select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-INSTANCES=$(aws ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter @ -- $SECOND_RESOURCE)].[@]")
+INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter @ -- $SECOND_RESOURCE)].[@]")
 
 select_one Instance "$INSTANCES"
 

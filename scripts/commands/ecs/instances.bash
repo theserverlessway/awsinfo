@@ -16,7 +16,7 @@ split_args "$@"
 CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter @ -- $FIRST_RESOURCE)].[@]")
 select_one Cluster "$CLUSTERS"
 
-INSTANCES=$(aws ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query containerInstanceArns)
+INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query containerInstanceArns)
 
 FILTER=$(auto_filter containerInstanceArn ec2InstanceId status "to_string(agentConnected)" "attributes[].value|[0]||''" -- $SECOND_RESOURCE)
 

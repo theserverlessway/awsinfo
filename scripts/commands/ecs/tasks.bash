@@ -3,7 +3,7 @@ split_args "$@"
 CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter @ -- $FIRST_RESOURCE)].[@]")
 select_one Cluster "$CLUSTERS"
 
-TASKS=$(aws ecs list-tasks --output text --cluster $SELECTED --query taskArns)
+TASKS=$(awscli ecs list-tasks --output text --cluster $SELECTED --query taskArns)
 
 FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType -- $SECOND_RESOURCE)
 

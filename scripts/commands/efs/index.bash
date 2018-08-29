@@ -3,7 +3,8 @@ awscli efs describe-file-systems --output table \
     \"1.Id\":FileSystemId, \
     \"2.Name\":Name, \
     \"3.State\":LifeCycleState, \
-    \"4.MountTargets\":NumberOfMountTargets, \
-    \"5.PerformanceMode\":PerformanceMode, \
-    \"6.Encrypted\":to_string(Encrypted), \
-    \"7.ThroughputMode\":ThroughputMode}"
+    \"4.SizeInBytes\":SizeInBytes.Value, \
+    \"5.MountTargets\":NumberOfMountTargets, \
+    \"6.PerformanceMode\":PerformanceMode, \
+    \"7.Encrypted\":to_string(Encrypted), \
+    \"8.ThroughputMode\":ThroughputMode}"

@@ -61,5 +61,6 @@ new:
 ifndef SERVICE
 		$(error SERVICE is not set)
 endif
+	mkdir -p $(COMMANDS_DIR)/$(SERVICE)
 	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).bash
 	cp $(COMMANDS_DIR)/cfn/resources.md $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).md

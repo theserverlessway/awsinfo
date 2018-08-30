@@ -1,6 +1,10 @@
-# `awsinfo ecs tasks [cluster-filter]* -- [task-filter]*`
+# `awsinfo ecs tasks [-s] [cluster-filter]* -- [task-filter]*`
 
 List all running tasks for a Cluster.
+
+## Options
+
+* `-s`: List stopped tasks
 
 ## First filter matches against
 

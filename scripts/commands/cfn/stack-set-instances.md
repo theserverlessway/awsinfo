@@ -10,3 +10,5 @@ Describe Instances for a CloudFormation StackSet
 
 * Account
 * Region
+* StackId
+* Status

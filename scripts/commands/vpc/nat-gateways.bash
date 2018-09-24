@@ -1,4 +1,4 @@
-aws ec2 describe-nat-gateways --output table \
+awscli ec2 describe-nat-gateways --output table \
   --query "NatGateways[$(auto_filter NatGatewayId State SubnetId VpcId -- $@)].{ \
     \"1.Id\":NatGatewayId, \
     \"2.State\":State, \

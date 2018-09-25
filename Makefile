@@ -13,7 +13,7 @@ build:
 build-no-cache:
 	docker build --no-cache --build-arg AWSINFO_VERSION="$(GIT_COMMIT)-$(DATE)" -t $(CONTAINER) .
 
-install: build
+install: build-no-cache
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
 
 release: install

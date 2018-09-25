@@ -1,4 +1,5 @@
 load ../awsinfo
+load ../test-helpers/bats-support/load
 load ../test-helpers/bats-assert/load
 
 @test "print serviecs if no service specified" {

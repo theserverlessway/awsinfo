@@ -1,5 +1,4 @@
 load ../../awsinfo
-load ../../test-helpers/bats-assert/load
 
 setup(){
   deploy_stack
@@ -12,10 +11,6 @@ setup(){
 
   run awsinfo logs groups InfoTestLogGroup
   assert_output -p AWSInfoTestLogGroup
-  assert_success
-
-  run awsinfo logs groups NotMatching
-  assert_output ''
   assert_success
 }
 

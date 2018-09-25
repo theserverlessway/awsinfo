@@ -1,4 +1,5 @@
 load ../../awsinfo
+load ../../test-helpers/bats-support/load
 load ../../test-helpers/bats-assert/load
 
 LOG_STREAM_NAME_1=test-log-stream-1

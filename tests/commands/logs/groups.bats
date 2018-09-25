@@ -1,4 +1,6 @@
 load ../../awsinfo
+load ../../test-helpers/bats-support/load
+load ../../test-helpers/bats-assert/load
 
 setup(){
   deploy_stack

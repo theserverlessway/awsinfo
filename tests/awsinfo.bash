@@ -1,6 +1,3 @@
-load ../../test-helpers/bats-support/load
-load ../../test-helpers/bats-assert/load
-
 awsinfo() {
     run command -v docker
     if [[ $status == 0 ]];

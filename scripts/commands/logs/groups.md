@@ -1,5 +1,7 @@
-# `awsinfo logs groups [substrings]*`
+# `awsinfo logs groups [filter]*`
 
-Lists all log groups in the current account and region. 
+Lists all log groups in the current account and region.
 
-If `substrings`is given it will only print log groups that contain all `substrings`.
+## Filter matches against
+
+* Log Group Name

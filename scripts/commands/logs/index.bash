@@ -15,7 +15,10 @@ AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
 AWS_LOGS_FILTER_OPTION=""
 AWS_LOGS_FILTER=""
 
-while getopts "wGSf:s:e:ti" opt; do
+AWS_LOGS_STREAM_PREFIX=""
+AWS_LOGS_STREAM_PREFIX_OPTION=""
+
+while getopts "wGSf:s:e:tip:" opt; do
     case "$opt" in
         w) WATCH='FALSE' ;;
         e)
@@ -26,6 +29,10 @@ while getopts "wGSf:s:e:ti" opt; do
         f)
           AWS_LOGS_FILTER_OPTION="$OPTARG"
           AWS_LOGS_FILTER="--filter-pattern"
+          ;;
+        p)
+          AWS_LOGS_STREAM_PREFIX="$OPTARG"
+          AWS_LOGS_STREAM_PREFIX_OPTION="--log-stream-name-prefix"
           ;;
         G) DISABLE_PRINT_GROUP=y ;;
         S) SHOW_PRINT_STREAM=y ;;
@@ -70,7 +77,7 @@ while true; do
             OUTPUT_QUERY+=".message"
             echo -e "$(echo "$event" | jq ". | [$OUTPUT_QUERY] | join(\" \")" -c -r)"
         fi
-    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --interleaved --query events[] --output json | jq .[] -c)
+    done < <( awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --interleaved --query events[] --output json | jq .[] -c)
 
     if [[ -v WATCH ]]
     then

@@ -1,3 +1,1 @@
-QUERY="logGroups[$(filter logGroupName $@)].[logGroupName]"
-
-awscli logs describe-log-groups --query "$QUERY" --output text
+awscli logs describe-log-groups --query "logGroups[$(auto_filter logGroupName -- $@)].[logGroupName]" --output table

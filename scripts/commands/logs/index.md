@@ -21,6 +21,7 @@ some UX improvements like matching log-groups with substrings.
 
 * `-G`: Remove the log group name from the output
 * `-S`: Add the stream name to the log output
+* `-p`: Set a log stream prefix so only log stream with that prefix are read from
 * `-f`: Filter log events you want to see.
         See [Filter Patter Syntax](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
 * `-s`: Start time to search from. Uses Gnu Date which supports a complex date syntax. Automatically converts to UTC.

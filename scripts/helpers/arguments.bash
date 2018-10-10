@@ -1,5 +1,6 @@
 AWS_OPTIONS=""
 HELP=""
+SOURCE=""
 
 if [[ "$#" -gt 0 ]]
 then
@@ -35,9 +36,12 @@ then
 					i=$(($i+1))
 				fi
 			;;
-            --help)
-                HELP="TRUE"
-            ;;
+      --help)
+          HELP="TRUE"
+      ;;
+      --source)
+          SOURCE="TRUE"
+      ;;
 			*)
 			;;
 		esac

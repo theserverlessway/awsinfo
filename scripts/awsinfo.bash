@@ -58,12 +58,25 @@ else
     exit 1
 fi
 
-if [[ -z "$HELP" ]]
+function print_file(){
+  file=$1
+  cat $DIR/header.txt
+  echo -e "\n"
+  cat $file | sed 's/awscli/aws/g'
+  echo -e "\n"
+}
+
+if [[ ! -z "$HELP" ]]
+then
+  print_file $CURRENT_COMMAND_DIR/$subcommand.md
+fi
+
+if [[ ! -z "$SOURCE" ]]
+then
+  print_file $CURRENT_COMMAND_DIR/$subcommand.bash
+fi
+
+if [[ -z "$HELP" && -z "$SOURCE" ]]
 then
     source $CURRENT_COMMAND_DIR/$subcommand.bash
-else
-    cat $DIR/header.txt
-    echo -e "\n"
-    cat $CURRENT_COMMAND_DIR/$subcommand.md
-    echo -e "\n"
 fi

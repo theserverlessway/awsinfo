@@ -6,4 +6,4 @@ awscli rds describe-db-instances --output table --query "DBInstances[$(auto_filt
     \"5.AZ\":AvailabilityZone, \
     \"6.Public\":PubliclyAccessible, \
     \"7.Cluster\": DBClusterIdentifier, \
-    \"8.Endpoint\":join(':',[Endpoint.Address, to_string(Endpoint.Port)])}"
+    \"8.Endpoint\":join(':',[Endpoint.Address||'', to_string(Endpoint.Port||'')])}"

@@ -2,6 +2,10 @@ echoerr() {
     echo -e "$@" 1>&2;
 }
 
+echoinfomsg() {
+    echoerr "$BLUE""$@""$NC"
+}
+
 echoerrmsg() {
     echoerr "$RED""$@""$NC"
 }
@@ -16,7 +20,7 @@ function select_one(){
     if [[ -z "$OUTPUT" ]]
     then
         echoerrmsg "Found no matching $type with supplied arguments"
-        exit 1
+        exit 0
     else
         COUNT=$(grep -c '[^[:space:]]' <<< "$OUTPUT")
         if [[ $COUNT -gt 1 ]]

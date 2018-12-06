@@ -1,6 +1,7 @@
 AWS_OPTIONS=""
 HELP=""
 SOURCE=""
+VERBOSE=""
 
 if [[ "$#" -gt 0 ]]
 then
@@ -41,6 +42,10 @@ then
       ;;
       --source)
           SOURCE="TRUE"
+      ;;
+      --verbose)
+          VERBOSE="TRUE"
+          unset args[$i]
       ;;
 			*)
 			;;

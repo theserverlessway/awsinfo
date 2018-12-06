@@ -3,9 +3,9 @@ FROM python:alpine
 RUN apk --no-cache add bash coreutils jq make
 RUN pip install awscli
 
-COPY scripts /awsinfo
+COPY scripts /awsinfo/scripts
 
-RUN ln -s /awsinfo/awsinfo.bash /usr/local/bin/awsinfo
+RUN ln -s /awsinfo/scripts/awsinfo.bash /usr/local/bin/awsinfo
 
 ENTRYPOINT ["awsinfo"]
 

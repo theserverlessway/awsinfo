@@ -3,7 +3,7 @@
 function control_c {
     echo -e "\nAwsinfo interrupted, waiting for subprocesses to finish..."
     wait
-    exit 1
+    exit 0
 }
 
 trap control_c SIGINT

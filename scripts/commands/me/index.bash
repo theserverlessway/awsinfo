@@ -1,1 +1,5 @@
-awscli sts get-caller-identity --output table --query "{\"1.AccountId\":Account,\"2.Arn\":Arn,\"3.UserId\":UserId}"
+CALLER_IDENTITY=$(awscli sts get-caller-identity --output json --query "{\"1.AccountId\":Account,\"3.Arn\":Arn,\"4.UserId\":UserId}")
+
+ALIAS=$(awscli iam list-account-aliases --output json --query "{\"2.AccountAlias\":AccountAliases[0]||''}")
+
+echo -e "$CALLER_IDENTITY\n$ALIAS" | jq -cs add | python $DIR/combine_calls.py AccountDetails

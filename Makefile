@@ -49,14 +49,14 @@ update-integration-user:
 	cd tests && formica change --stack $(FORMICA_STACK) --capabilities CAPABILITY_IAM
 	formica deploy --stack $(FORMICA_STACK)
 
-COMMAND=index
+Command=index
 COMMANDS_DIR=scripts/commands
 
 
 new:
-ifndef SERVICE
-		$(error SERVICE is not set)
+ifndef Service
+		$(error Service is not set)
 endif
-	mkdir -p $(COMMANDS_DIR)/$(SERVICE)
-	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).bash
-	cp $(COMMANDS_DIR)/cfn/resources.md $(COMMANDS_DIR)/$(SERVICE)/$(COMMAND).md
+	mkdir -p $(COMMANDS_DIR)/$(Service)
+	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(Service)/$(Command).bash
+	cp $(COMMANDS_DIR)/cfn/resources.md $(COMMANDS_DIR)/$(Service)/$(Command).md

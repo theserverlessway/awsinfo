@@ -1,6 +1,6 @@
 # `awsinfo ecs service [cluster-filter]* -- [service-filter]*`
 
-List all ECS services in a cluster
+Describe an ECS Service from a cluster.
 
 ## First filter matches against
 

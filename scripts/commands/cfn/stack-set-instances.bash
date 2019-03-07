@@ -18,4 +18,4 @@ OUTPUT=$(awscli cloudformation list-stack-instances --max-results 100 --stack-se
   \"4.Status\":Status,
   \"4.StatusReason\":StatusReason}" |   sed "s/arn.*stack\/\(.*\)\/.*\"/\1\"/g")
 
-echo -e $OUTPUT | python $DIR/combine_calls.py ListStackInstances
+echo -e $OUTPUT | python3 $DIR/combine_calls.py ListStackInstances

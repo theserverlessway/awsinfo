@@ -29,7 +29,7 @@ then
       \"7.Containers\":length(containers),
       \"8.Group\":group,
       \"9.LaunchType\":launchType}" |  sed "s/arn.*\///g")
-  echo -e $OUTPUT | python $DIR/combine_calls.py DescribeTasks
+  echo -e $OUTPUT | python3 $DIR/combine_calls.py DescribeTasks
 else
   echo "No Tasks Found"
 fi

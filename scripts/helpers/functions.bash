@@ -50,3 +50,11 @@ function split_args(){
   eval 'FIRST_RESOURCE="${FIRST_ARGS[@]}"'
   eval 'SECOND_RESOURCE="$@"'
 }
+
+function print_table(){
+  jq -crs add | python3 $DIR/combine_calls.py $1
+}
+
+function print_table_excluding(){
+  jq -Mcr "del($1)" | print_table $2
+}

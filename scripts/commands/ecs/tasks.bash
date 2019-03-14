@@ -18,7 +18,7 @@ FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus g
 
 if [[ ! -z "$TASKS" ]]
 then
-  OUTPUT=$(awscli ecs describe-tasks --tasks $TASKS --cluster $SELECTED \
+  awscli ecs describe-tasks --tasks $TASKS --cluster $SELECTED \
     --query "tasks[$FILTER].{ \
       \"1.Task\":taskArn, \
       \"2.Definition\":taskDefinitionArn, \
@@ -28,8 +28,7 @@ then
       \"6.Memory\":memory
       \"7.Containers\":length(containers),
       \"8.Group\":group,
-      \"9.LaunchType\":launchType}" |  sed "s/arn.*\///g")
-  echo -e $OUTPUT | python3 $DIR/combine_calls.py DescribeTasks
+      \"9.LaunchType\":launchType}" |  sed "s/arn.*\///g" | print_table DescribeTasks
 else
   echo "No Tasks Found"
 fi

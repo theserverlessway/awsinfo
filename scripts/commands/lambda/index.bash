@@ -1,1 +1,1 @@
-awscli lambda list-functions --output table --query "Functions[$(auto_filter FunctionName Runtime 'to_string(MemorySize)' 'to_string(Timeout)' -- $@)].{\"1.Name\":FunctionName,\"2.Runtime\":Runtime,\"3.Timeout\":Timeout,\"4.MemorySize\":MemorySize,\"5.ARN\":FunctionArn}"
+awscli lambda list-functions --output table --query "Functions[$(auto_filter FunctionName Runtime 'to_string(MemorySize)' 'to_string(Timeout)' -- $@)].{\"1.Name\":FunctionName,\"2.Runtime\":Runtime,\"3.Timeout\":Timeout,\"4.MemorySize\":MemorySize,\"5.Handler\":Handler,\"6.ARN\":FunctionArn}"

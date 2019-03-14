@@ -11,4 +11,4 @@ do
     QueueOutput+="\n"
 done
 
-echo -e $QueueOutput | python3 $DIR/combine_calls.py GetQueueAttributes
+echo -e $QueueOutput | print_table GetQueueAttributes

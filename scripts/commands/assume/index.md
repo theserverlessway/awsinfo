@@ -1,4 +1,4 @@
-# `awsinfo assume [-d DurationInHours] [organisation-filters]+ -- [RoleName]`
+# `awsinfo assume [-d DurationInHours] [-m WithMFADevice] [organisation-filters]+ -- [RoleName]`
 
 `awsinfo assume` will assume the `ROLE_NAME` (or OrganizationAccountAccessRole by default)
 for the filtered organisation account and print Environment Variables you can directly export
@@ -62,3 +62,7 @@ eval $(awsinfo sts assume 12345678987654321 OrganizationAccountAccessRole --prof
 export AWS_ACCESS_KEY_ID=REDACTED_KEY AWS_SECRET_ACCESS_KEY=REDACTED_SECRET AWS_SESSION_TOKEN="REDACTED_TOKEN"
 awsinfo me
 ```
+
+Through the `-d` parameter you can set the duration the assumed credentials are valid.
+
+If you specify `-m` the command will build the MFA device arn out of your account and username and use it for assuming a role. It will also ask for your MFA Token.

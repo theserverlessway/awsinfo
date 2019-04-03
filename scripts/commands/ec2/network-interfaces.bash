@@ -1,10 +1,12 @@
-FILTER=$(auto_filter AvailabilityZone Description NetworkInterfaceId RequesterId SubnetId VpcId PrivateIpAddress PrivateDnsName "join('', Groups[].GroupId)" "$TAG_NAME" -- $@)
+FILTER=$(auto_filter AvailabilityZone Description NetworkInterfaceId RequesterId SubnetId VpcId PrivateIpAddress PrivateDnsName RequesterId "join('',Groups[].GroupId)" "$TAG_NAME" -- $@)
 
 awscli ec2 describe-network-interfaces --output table \
   --query "NetworkInterfaces[$FILTER].{ \
-    \"1.Name\":$TAG_NAME, \
-    \"2.Id\":NetworkInterfaceId, \
-    \"3.Subnet\":SubnetId, \
-    \"4.VPC\":VpcId, \
-    \"4.AZ\":AvailabilityZone, \
-    \"5.SecurityGroups\":join(', ', Groups[].GroupId)}"
+    \"1.Name\":$TAG_NAME,\
+    \"2.Id\":NetworkInterfaceId,\
+    \"3.IP\":PrivateIpAddress,\
+    \"4.Requester\":RequesterId,\
+    \"5.Subnet\":SubnetId,\
+    \"6.VPC\":VpcId,\
+    \"7.AZ\":AvailabilityZone,\
+    \"8.SecurityGroups\":join(', ',Groups[].GroupId)}"

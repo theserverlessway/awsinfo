@@ -71,7 +71,6 @@ OUTPUT_QUERY+=".message"
 
 while true; do
     OUTPUT_STORE=""
-    COUNTER=0
     EVENTS=$(awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --interleaved --query events[] --output json | jq ".[] | [$OUTPUT_QUERY] | join(\" \") " -cr)
 
     if [[ ! -z "$EVENTS" ]]
@@ -81,7 +80,6 @@ while true; do
           if [[ ! -n "$eventId" || ! -v SEEN["$eventId"] ]]
           then
               SEEN[$eventId]=
-              COUNTER=$((COUNTER + 1))
               OUTPUT_STORE+="$message\n"
           fi
       done <<< "$EVENTS"

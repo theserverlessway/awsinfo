@@ -5,7 +5,8 @@ Show the details of the specified policy for a role. Filters before `--` are use
 ## First Filter matches against
 
 * Role Name
+* Role Id
 
 ## Second Filter matches against
 
-* Role Name
+* Policy Name

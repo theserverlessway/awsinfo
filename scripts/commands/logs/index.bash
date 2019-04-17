@@ -97,6 +97,8 @@ while true; do
         exit 0
     else
         sleep 2
+        # Limit the starting time after first run so we're not loading lots of events. We can't set it to now
+        # as otherwise if events are ingested late they might not be picked up
         AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
     fi
 done

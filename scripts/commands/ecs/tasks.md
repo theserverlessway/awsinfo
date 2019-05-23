@@ -1,6 +1,6 @@
 # `awsinfo ecs tasks [-s] [cluster-filter]* -- [task-filter]*`
 
-List all running tasks for a Cluster.
+List all running tasks for a Cluster sorted by Task Definition name and CreatedAt Timestamp.
 
 ## Options
 

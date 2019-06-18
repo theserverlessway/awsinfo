@@ -77,7 +77,7 @@ while true; do
     then
       while read event; do
           IFS=';' read -r eventId message <<< "$event"
-          if [[ -n "$eventId" && ! -v SEEN["$eventId"] ]]
+          if [[ -n "$eventId" && ! -v SEEN["$eventId"] && ! -z "$message" ]]
           then
               SEEN[$eventId]=
               OUTPUT_STORE+="$message\n"

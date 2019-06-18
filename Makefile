@@ -1,6 +1,7 @@
 .PHONY: build
 
-CONTAINER_NAME=flomotlik/awsinfo
+OLD_CONTAINER_NAME=flomotlik/awsinfo
+CONTAINER_NAME=theserverlessway/awsinfo
 CONTAINER=$(CONTAINER_NAME):dev
 TEST_HELPERS=tests/test-helpers
 TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
@@ -18,6 +19,8 @@ install: build-no-cache
 
 release: install
 	docker push $(CONTAINER_NAME):latest
+	docker tag $(CONTAINER_NAME):latest $(OLD_CONTAINER_NAME):latest
+	docker push $(OLD_CONTAINER_NAME):latest
 
 test: build-no-cache
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)

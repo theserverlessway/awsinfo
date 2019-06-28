@@ -34,7 +34,7 @@ prepare:
 	pip install awsie -U
 
 command-docs:
-	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](https://github.com/flomotlik/awsinfo/blob/master/" $$0 ".md)" }' | sort | pbcopy
+	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](https://github.com/flomotlik/awsinfo/blob/master/" $$0 ".md)" }' | sort
 
 LOG_TIMESTAMP=$(shell echo $$(($$(date +%s) * 1000)))
 LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)
@@ -59,6 +59,7 @@ COMMANDS_DIR=scripts/commands
 new:
 ifndef Service
 		$(error Service is not set)
+
 endif
 	mkdir -p $(COMMANDS_DIR)/$(Service)
 	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(Service)/$(Command).bash

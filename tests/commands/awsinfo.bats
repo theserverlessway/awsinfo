@@ -57,3 +57,10 @@ load ../test-helpers/bats-assert/load
 @test "docs available for every command" {
     find scripts/commands -name "*.bash" | awk '{sub(".bash",".md",$0); print }' | xargs ls
 }
+
+@test "commands in _index.md up to date" {
+    COMMANDS=$(make command-docs)
+    FOUND=$(grep -oFe "$COMMANDS" docs/_index.md)
+    ! grep -vFe "$FOUND"  <<< "$COMMANDS"
+}
+

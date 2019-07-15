@@ -59,8 +59,12 @@ load ../test-helpers/bats-assert/load
 }
 
 @test "commands in _index.md up to date" {
-    COMMANDS=$(make command-docs)
-    FOUND=$(grep -oFe "$COMMANDS" docs/_index.md)
-    ! grep -vFe "$FOUND"  <<< "$COMMANDS"
+  find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print file[n-1] " " file[n] }' | sort | while read command; do
+  if ! grep -F "$command" docs/_index.md > /dev/null;
+  then
+    echo "Command $command not found in the documentation"
+    exit 1
+  fi
+done
 }
 

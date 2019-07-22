@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 function control_c {
     echo -e "\nAwsinfo interrupted, waiting for subprocesses to finish..."

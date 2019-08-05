@@ -71,7 +71,7 @@ OUTPUT_QUERY+=".message"
 
 while true; do
     OUTPUT_STORE=""
-    EVENTS=$(awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --interleaved --query events[] --output json | jq ".[] | [$OUTPUT_QUERY] | join(\" \") " -cr)
+    EVENTS=$(awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --query events[] --output json | jq ".[] | [$OUTPUT_QUERY] | join(\" \") " -cr)
 
     if [[ ! -z "$EVENTS" ]]
     then
@@ -92,11 +92,14 @@ while true; do
 
     if [[ -v WATCH ]]
     then
-        exit 0
+        break
     else
         sleep 2
         # Limit the starting time after first run so we're not loading lots of events. We can't set it to now
-        # as otherwise if events are ingested late they might not be picked up
-        AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
+        # as otherwise if events are ingested late they might not be picked up.
+        # Disabled for now as setting it to a large value is an issue when setting a Starting Time of < 10 minutes
+        # as it will first print events with the starting date, but then add new ones fromt eh now longer ago starting time.
+        # Needs to be addressed with a better fix in the future
+        # AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
     fi
 done

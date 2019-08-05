@@ -24,9 +24,8 @@ some UX improvements like matching log-groups with substrings.
 * `-p`: Set a log stream prefix so only log stream with that prefix are read from
 * `-f`: Filter log events you want to see.
         See [Filter Patter Syntax](http://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/FilterAndPatternSyntax.html)
-* `-s`: Start time to search from. Uses Gnu Date which supports a complex date syntax. Automatically converts to UTC.
-        (e.g. "now", "-5minutes", "-3days", "Monday", "15:30", "2017-01-01T06:30").
-        The current implementation doesn't allow for whitespace in the dates.
+* `-s`: Start time to search from. Uses [Gnu Date](https://www.gnu.org/software/coreutils/manual/html_node/Options-for-date.html#Options-for-date) which supports a complex date syntax. Automatically converts to UTC.
+        (e.g. "now", "-5minutes", "-3days", "Monday", "15:30", "2017-01-01T06:30"). The current implementation doesn't allow for whitespace in the dates.
 * `-e`: End time to search to. Same syntax as start time before. Will disable log watching (implicit -w argument)
 * `-t`: Print timestamp for log message
 * `-i`: Print ingestion time for log message

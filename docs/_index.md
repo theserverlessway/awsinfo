@@ -133,6 +133,7 @@ Following is a list of all available commands and links to their source document
 * [`ecs task`](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/ecs/task.md)
 * [`ecs tasks`](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/ecs/tasks.md)
 * [`efs `](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/efs/index.md)
+* [`efs file-system`](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/efs/file-system.md)
 * [`efs mount-targets`](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/efs/mount-targets.md)
 * [`efs security-groups`](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/efs/security-groups.md)
 * [`elasticbeanstalk `](https://github.com/flomotlik/awsinfo/blob/master/scripts/commands/elasticbeanstalk/index.md)

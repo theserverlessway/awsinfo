@@ -5,7 +5,7 @@ weight: 200
 disable_pagination: true
 ---
 
-{{< vimeo 236898402 >}}
+{{< vimeo 358865451 >}}
 
 `awsinfo` is a read-only client for AWS written in Bash. It tries to replace the AWS console for getting basic information about your AWS resoures in your CLI. No more opening the AWS Console when all you want to know is basic information about your resources.
 

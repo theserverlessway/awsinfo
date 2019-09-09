@@ -16,7 +16,7 @@ then
     set -x
 fi
 
-DIR="$(dirname "$(readlink -f "$0")")"
+DIR="$(dirname "$(readlink -n "$0" || echo "$0")")"
 
 if [[ "$#" -gt 0 ]]
 then

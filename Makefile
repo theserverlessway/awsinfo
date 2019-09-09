@@ -34,7 +34,7 @@ prepare:
 	pip install awsie -U
 
 command-docs:
-	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](https://github.com/flomotlik/awsinfo/blob/master/" $$0 ".md)" }' | sort
+	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](https://github.com/theserverlessway/awsinfo/blob/master/" $$0 ".md)" }' | sort
 
 LOG_TIMESTAMP=$(shell echo $$(($$(date +%s) * 1000)))
 LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)

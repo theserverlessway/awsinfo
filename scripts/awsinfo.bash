@@ -16,7 +16,12 @@ then
     set -x
 fi
 
-DIR="$(dirname "$(readlink -n "$0" || echo "$0")")"
+READLINK_COMMAND='readlink'
+if command -v greadlink > /dev/null; then
+  READLINK_COMMAND='greadlink'
+fi
+
+DIR="$(dirname "$($READLINK_COMMAND -f "$0" || echo "$0")")"
 
 if [[ "$#" -gt 0 ]]
 then

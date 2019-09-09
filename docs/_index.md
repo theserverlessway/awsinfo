@@ -28,7 +28,7 @@ You can run AWSInfo either directly as a script or install through Docker.
 
 ## Use directly as a script
 
-On OSX you need to make sure that you have the GNU coreutils installed, specifically `greadlink` and `gdate`. You can install them for example with `brew install coreutils`. On Linux this will just work.
+On OSX you need to make sure that you have a recent version of Bash (>4) and the GNU coreutils installed, specifically `greadlink` and `gdate`. You can install them for example with `brew install bash coreutils`. On Linux this should just work.
 
 After that clone the Repository and either softlink the `scripts/awsinfo.bash` script or put it in your Path. You can then directly execute the script as it automatically detects the path it was cloned into. For updates just pull from the Repository.
 

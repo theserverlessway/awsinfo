@@ -32,6 +32,8 @@ On OSX you need to make sure that you have a recent version of Bash (>4) and the
 
 After that clone the Repository and either softlink the `scripts/awsinfo.bash` script or put it in your Path. You can then directly execute the script as it automatically detects the path it was cloned into. For updates just pull from the Repository.
 
+On Linux or Windows Subsystem for Linux, you might want to clone the repo to `/usr/local/bin/awsinfo.git` or `$HOME/bin/awsinfo.git` and then `cd /usr/local/bin && ln -s awsinfo.git/scripts/awsinfo.bash awsinfo` or `cd $HOME/bin && ln -s awsinfo.git/scripts/awsinfo.bash awsinfo`.
+
 ### Using Docker directly
 
 You can use the following command to use the `awsinfo` Docker container with pure Docker. It will automatically download it and run the container for you with any Arguments you append at the end. It makes the `~/.aws` folder accessible as a Volume as well as forwarding all `awscli` default environment variables.

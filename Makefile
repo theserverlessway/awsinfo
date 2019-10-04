@@ -25,7 +25,7 @@ release: install
 	docker tag $(CONTAINER_NAME):latest $(OLD_CONTAINER_NAME):latest
 	docker push $(OLD_CONTAINER_NAME):latest
 
-test: build
+test: build-no-cache
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)
 
 shell: build

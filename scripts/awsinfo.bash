@@ -22,6 +22,7 @@ if command -v greadlink > /dev/null; then
 fi
 
 DIR="$(dirname "$($READLINK_COMMAND -f "$0" || echo "$0")")"
+AWSINFO_BASE_DIR=$(dirname $DIR)
 
 if [[ "$#" -gt 0 ]]
 then

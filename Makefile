@@ -8,11 +8,14 @@ TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 GIT_COMMIT=$(shell git rev-parse HEAD)
 DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
+BUILD_ARGS=--build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
+
+
 build:
-	docker build --build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
+	docker build $(BUILD_ARGS)
 
 build-no-cache:
-	docker build --no-cache --build-arg AWSINFO_VERSION="$(GIT_COMMIT)-$(DATE)" -t $(CONTAINER) .
+	docker build --no-cache $(BUILD_ARGS)
 
 install: build-no-cache
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
@@ -22,7 +25,7 @@ release: install
 	docker tag $(CONTAINER_NAME):latest $(OLD_CONTAINER_NAME):latest
 	docker push $(OLD_CONTAINER_NAME):latest
 
-test: build-no-cache
+test: build
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)
 
 shell: build

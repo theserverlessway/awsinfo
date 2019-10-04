@@ -9,7 +9,7 @@ awsinfo() {
 }
 
 stack_name(){
-    basename awsinfo-integration-$BATS_TEST_FILENAME-$STACKPOSTFIX | tr '.' '-'
+    basename awsinfoit-$BATS_TEST_FILENAME-$STACKPOSTFIX | tr '.' '-'
 }
 deploy_stack() {
     FORMICA_STACK=$(stack_name)

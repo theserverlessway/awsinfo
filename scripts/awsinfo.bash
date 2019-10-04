@@ -54,7 +54,7 @@ then
         then
             subcommand=index
         else
-            echo "Command not available: $command $1"
+            echo "Command not available: $command ${1:-}"
             exit 1
         fi
     fi

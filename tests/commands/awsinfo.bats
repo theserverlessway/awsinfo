@@ -34,6 +34,18 @@ load ../test-helpers/bats-assert/load
     assert_line -p '  cfn events'
 }
 
+@test "correct output for missing command" {
+    run awsinfo awsinfo testcommand
+    assert_failure
+    assert_line -p 'Command not available: awsinfo testcommand'
+}
+
+@test "correct output for missing service" {
+    run awsinfo somecommand
+    assert_failure
+    assert_line -p 'Service not supported: somecommand'
+}
+
 @test "print help page" {
     run awsinfo commands --help
     assert_success

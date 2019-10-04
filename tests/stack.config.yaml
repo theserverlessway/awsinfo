@@ -1,4 +1,4 @@
-stack: awsinfo-test-account
+stack: awsinfo-integration-user
 region: eu-central-1
 capabilities:
   - CAPABILITY_IAM

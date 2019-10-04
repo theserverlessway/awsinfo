@@ -1,0 +1,29 @@
+Resources:
+  AwsinfoIntegrationTestUser:
+    Type: "AWS::IAM::User"
+    Properties:
+      PermissionsBoundary: !Sub arn:aws:iam::${AWS::AccountId}:policy/CreatedIdentitiesPermissionsBoundary
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/ReadOnlyAccess
+      Policies:
+        - PolicyName: AWSInfo-integration
+          PolicyDocument:
+            Statement:
+              - Sid: CloudWatchLogsAccess
+                Effect: Allow
+                Action:
+                  - 'logs:*'
+                Resource:
+                  - !Sub 'arn:aws:logs:${AWS::Region}:${AWS::AccountId}:log-group:awsinfoit-*'
+              - Sid: CloudFormationAccess
+                Effect: Allow
+                Action:
+                  - 'cloudformation:*'
+                Resource:
+                  - !Sub arn:aws:cloudformation:${AWS::Region}:${AWS::AccountId}:stack/awsinfoit-*
+              - Sid: CloudFormationDescribeStacks
+                Effect: Allow
+                Action:
+                  - 'cloudformation:DescribeStacks'
+                Resource:
+                  - '*'

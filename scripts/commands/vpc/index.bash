@@ -1,4 +1,4 @@
-FILTER=$(auto_filter VpcId "$TAG_NAME" IsDefault -- $@)
+FILTER=$(auto_filter VpcId "$TAG_NAME" "to_string(IsDefault)" -- $@)
 awscli ec2 describe-vpcs --output table --query "Vpcs[$FILTER].{ \
   \"1.Name\":$TAG_NAME, \
   \"2.Id\": VpcId, \

@@ -11,6 +11,8 @@ jobs:
       with:
         python-version: 3.7
     - run: make prepare
+    # Create empty command dir for later missing command testing
+    - run: mkdir scripts/commands/awsinfo
     - run: make test
       env:
         AWS_DEFAULT_REGION: eu-central-1

@@ -35,11 +35,9 @@ load ../test-helpers/bats-assert/load
 }
 
 @test "correct output for missing command" {
-    mkdir -p scripts/commands/awsinfo
     run awsinfo awsinfo testcommand
     assert_failure
     assert_line -p 'Command not available: awsinfo testcommand'
-    rm -fr scripts/commands/awsinfo
 }
 
 @test "correct output for missing service" {

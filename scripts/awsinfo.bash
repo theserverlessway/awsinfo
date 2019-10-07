@@ -22,6 +22,7 @@ if command -v greadlink > /dev/null; then
 fi
 
 DIR="$(dirname "$($READLINK_COMMAND -f "$0" || echo "$0")")"
+AWSINFO_BASE_DIR=$(dirname $DIR)
 
 if [[ "$#" -gt 0 ]]
 then
@@ -53,7 +54,7 @@ then
         then
             subcommand=index
         else
-            echo "Command not available: $command $1"
+            echo "Command not available: $command ${1:-}"
             exit 1
         fi
     fi

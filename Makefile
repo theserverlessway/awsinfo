@@ -8,11 +8,14 @@ TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 GIT_COMMIT=$(shell git rev-parse HEAD)
 DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
+BUILD_ARGS=--build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
+
+
 build:
-	docker build --build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
+	docker build $(BUILD_ARGS)
 
 build-no-cache:
-	docker build --no-cache --build-arg AWSINFO_VERSION="$(GIT_COMMIT)-$(DATE)" -t $(CONTAINER) .
+	docker build --no-cache $(BUILD_ARGS)
 
 install: build-no-cache
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
@@ -34,7 +37,7 @@ prepare:
 	pip install awsie -U
 
 command-docs:
-	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] "`](https://github.com/theserverlessway/awsinfo/blob/master/" $$0 ".md)" }' | sort
+	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] " `](https://github.com/theserverlessway/awsinfo/blob/master/" $$0 ".md)" }' | sort | sed "s/[[:space:]]\+\`/\`/g"
 
 LOG_TIMESTAMP=$(shell echo $$(($$(date +%s) * 1000)))
 LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)

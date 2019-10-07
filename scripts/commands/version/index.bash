@@ -1,1 +1,1 @@
-echo $AWSINFO_VERSION
+echo ${AWSINFO_VERSION:-$(git --work-tree=$AWSINFO_BASE_DIR --git-dir=$AWSINFO_BASE_DIR/.git show -s --format=%H-%cI HEAD)}

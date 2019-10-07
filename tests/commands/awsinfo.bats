@@ -34,6 +34,18 @@ load ../test-helpers/bats-assert/load
     assert_line -p '  cfn events'
 }
 
+@test "correct output for missing command" {
+    run awsinfo awsinfo testcommand
+    assert_failure
+    assert_line -p 'Command not available: awsinfo testcommand'
+}
+
+@test "correct output for missing service" {
+    run awsinfo somecommand
+    assert_failure
+    assert_line -p 'Service not supported: somecommand'
+}
+
 @test "print help page" {
     run awsinfo commands --help
     assert_success
@@ -60,7 +72,7 @@ load ../test-helpers/bats-assert/load
 
 @test "commands in _index.md up to date" {
   find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print file[n-1] " " file[n] }' | sort | while read command; do
-  if ! grep -F "$command" docs/_index.md > /dev/null;
+  if ! grep -F "$command\`" docs/_index.md > /dev/null;
   then
     echo "Command $command not found in the documentation"
     exit 1

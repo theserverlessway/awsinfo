@@ -1,6 +1,6 @@
-# `awsinfo vpc subnets [filters]*`
+# `awsinfo vpc subnet [filters]*`
 
-List all EC2 subnets
+Describe a VPC Subnet
 
 ## Filter matches against
 

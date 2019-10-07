@@ -35,9 +35,11 @@ load ../test-helpers/bats-assert/load
 }
 
 @test "correct output for missing command" {
+    mkdir -p scripts/commands/awsinfo
     run awsinfo awsinfo testcommand
     assert_failure
     assert_line -p 'Command not available: awsinfo testcommand'
+    rm -fr scripts/commands/awsinfo
 }
 
 @test "correct output for missing service" {
@@ -72,7 +74,7 @@ load ../test-helpers/bats-assert/load
 
 @test "commands in _index.md up to date" {
   find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print file[n-1] " " file[n] }' | sort | while read command; do
-  if ! grep -F "$command" docs/_index.md > /dev/null;
+  if ! grep -F "$command\`" docs/_index.md > /dev/null;
   then
     echo "Command $command not found in the documentation"
     exit 1

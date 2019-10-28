@@ -57,13 +57,17 @@ update-integration-user:
 
 Command=index
 COMMANDS_DIR=scripts/commands
+EXAMPLE_DIR=scripts/command_example
 
+SERVICE=${shell }
+
+create:
+	@read -p "Enter the Service Name: " SERVICE_NAME; \
+	if [ -z "$$SERVICE_NAME" ]; then echo "You need to set the Service Name"; exit 1; fi; \
+	read -p "Enter the Command Name [index]: " COMMAND_NAME_INPUT; \
+	COMMAND_NAME=$${COMMAND_NAME_INPUT:-index}; \
+	mkdir -p $(COMMANDS_DIR)/$$SERVICE_NAME && cp $(EXAMPLE_DIR)/command.bash $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.bash && cp $(EXAMPLE_DIR)/command.md $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.md
 
 new:
-ifndef Service
-		$(error Service is not set)
 
-endif
-	mkdir -p $(COMMANDS_DIR)/$(Service)
-	cp $(COMMANDS_DIR)/cfn/resources.bash $(COMMANDS_DIR)/$(Service)/$(Command).bash
-	cp $(COMMANDS_DIR)/cfn/resources.md $(COMMANDS_DIR)/$(Service)/$(Command).md
+

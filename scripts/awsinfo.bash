@@ -40,6 +40,7 @@ source $DIR/helpers/functions.bash
 source $DIR/helpers/filters.bash
 source $DIR/helpers/common.bash
 source $DIR/helpers/colors.bash
+source $DIR/helpers/date.bash
 
 COMMANDS_DIR=$DIR/commands
 CURRENT_COMMAND_DIR=$COMMANDS_DIR/$command

@@ -1,5 +1,5 @@
-START_DATE=$(date +%Y-%m-01)
-END_DATE=$(date --date="$START_DATE +1 month" +%Y-%m-%d)
+START_DATE=$(awsinfo_date +%Y-%m-01)
+END_DATE=$(awsinfo_date --date="$START_DATE +1 month" +%Y-%m-%d)
 
 awscli ce get-cost-and-usage --time-period Start=$START_DATE,End=$END_DATE --granularity MONTHLY --metrics BLENDED_COST UNBLENDED_COST AMORTIZED_COST NET_AMORTIZED_COST NET_UNBLENDED_COST USAGE_QUANTITY NORMALIZED_USAGE_AMOUNT --output table --query "ResultsByTime[0].Total.[
     {\"1.Name\":'AmortizedCost',\"2.Amount\":AmortizedCost.Amount,\"3.Unit\":AmortizedCost.Unit},

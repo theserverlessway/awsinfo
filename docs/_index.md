@@ -119,6 +119,7 @@ Following is a list of all available commands and links to their source document
 * [`cognito users`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/cognito/users.md)
 * [`commands`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/commands/index.md)
 * [`complete`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/complete/index.md)
+* [`costs`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/costs/index.md)
 * [`credentials`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/credentials/index.md)
 * [`dynamodb`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/dynamodb/index.md)
 * [`dynamodb table`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/dynamodb/table.md)

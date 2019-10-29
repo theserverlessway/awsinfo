@@ -1,9 +1,5 @@
 function time_parsing() {
-    DATE_COMMAND='date'
-    if command -v gdate > /dev/null; then
-      DATE_COMMAND='gdate'
-    fi
-    timestamp=$($DATE_COMMAND --date "$1" +%s)
+    timestamp=$(awsinfo_date --date "$1" +%s)
     if [[ "$?" -ne 0 ]]; then
         exit 1;
     fi

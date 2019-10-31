@@ -34,6 +34,11 @@ After that clone the Repository and either softlink the `scripts/awsinfo.bash` s
 
 On Linux or Windows Subsystem for Linux, you might want to clone the repo to `/usr/local/bin/awsinfo.git` or `$HOME/bin/awsinfo.git` and then `cd /usr/local/bin && ln -s awsinfo.git/scripts/awsinfo.bash awsinfo` or `cd $HOME/bin && ln -s awsinfo.git/scripts/awsinfo.bash awsinfo`.
 
+AWSInfo needs the following tools installed on your system:
+
+* [awscli](https://docs.aws.amazon.com/de_de/cli/latest/userguide/cli-chap-install.html)
+* [jq](https://stedolan.github.io/jq/)
+
 ### Using Docker directly
 
 You can use the following command to use the `awsinfo` Docker container with pure Docker. It will automatically download it and run the container for you with any Arguments you append at the end. It makes the `~/.aws` folder accessible as a Volume as well as forwarding all `awscli` default environment variables.

@@ -1,6 +1,6 @@
 # `awsinfo ec2 [filters]*`
 
-List all EC2 instances
+List all EC2 instances. Use `-t` to show terminated instances.
 
 ## Filter matches against
 

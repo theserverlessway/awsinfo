@@ -1,9 +1,12 @@
-# `awsinfo ssm [parameter-filter]*`
+# `awsinfo ssm [filters]+`
 
-List all SSM Parameters.
+List all SSM Managed Instances.
 
 ## Filter matches against
 
-* Name
-* LastModifiedUser
-* Type
+* InstanceId 
+* PlatformType 
+* PlatformName 
+* PlatformVersion 
+* AgentVersion 
+* PingStatus

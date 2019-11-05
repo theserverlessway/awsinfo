@@ -1,5 +1,7 @@
- awscli ssm describe-parameters --output table --query "sort_by(Parameters,&Name)[$(auto_filter Name LastModifiedUser Type -- $@)].{
-  \"1.Name\":Name,
-  \"2.Type\":Type,
-  \"3.Version\":Version,
-  \"4.LastModifiedUser\":LastModifiedUser}"
+awscli ssm describe-instance-information --output table --query "InstanceInformationList[$(auto_filter InstanceId PlatformType PlatformName PlatformVersion AgentVersion PingStatus -- $@)].{
+  \"1.Id\":InstanceId,
+  \"2.Ping Status/LastPing\":join(':',[PingStatus,LastPingDateTime]),
+  \"3.AgentVersion/Latest\":join('/',[AgentVersion,to_string(IsLatestVersion)]),
+  \"4.Platform\":join('/',[PlatformType,PlatformName,PlatformVersion]),
+  \"5.ResourceType\":ResourceType,
+  \"6.IPAddress\":IPAddress}"

@@ -40,9 +40,31 @@ shift $(($OPTIND-1))
 
 declare -A SEEN
 
-LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $@)].[logGroupName]" --output text)
+split_args "$@"
+
+LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $FIRST_RESOURCE)].[logGroupName]" --output text)
 select_one LogGroup "$LOG_GROUPS"
 LOG_GROUP=$SELECTED
+
+LOG_STREAMS_FILTER=""
+
+if [[ $SECOND_RESOURCE =~ .*[a-zA-Z0-9]+.* ]]
+then
+  LOG_STREAMS=$(awscli logs describe-log-streams --log-group-name $SELECTED --query "logStreams[$(auto_filter logStreamName -- $SECOND_RESOURCE)].logStreamName" --output text)
+  if [[ ! -z "$LOG_STREAMS" ]]
+  then
+    LOG_STREAMS_FILTER="--log-stream-names $LOG_STREAMS"
+    echosuccess "Selected LogStreams:"
+    for stream in $LOG_STREAMS
+     do
+       echoinfomsg "  $stream"
+     done
+  else
+    echoerr "No Log Streams matching filters found"
+  fi
+fi
+
+
 
 GROUP_COLOR=$GREEN
 STREAM_COLOR=$CYAN
@@ -67,7 +89,7 @@ OUTPUT_QUERY+=".message"
 
 while true; do
     OUTPUT_STORE=""
-    EVENTS=$(awscli logs filter-log-events --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --query events[] --output json | jq ".[] | [$OUTPUT_QUERY] | join(\" \") " -cr)
+    EVENTS=$(awscli logs filter-log-events $LOG_STREAMS_FILTER --log-group-name $LOG_GROUP $AWS_LOGS_STREAM_PREFIX_OPTION $AWS_LOGS_STREAM_PREFIX $AWS_LOGS_START_TIME $AWS_LOGS_END_TIME $AWS_LOGS_FILTER "$AWS_LOGS_FILTER_OPTION" --query events[] --output json | jq ".[] | [$OUTPUT_QUERY] | join(\" \") " -cr)
 
     if [[ ! -z "$EVENTS" ]]
     then

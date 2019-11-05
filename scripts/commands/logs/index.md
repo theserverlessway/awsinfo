@@ -1,10 +1,8 @@
-# `awslogs logs [options] [substrings]*`
+# `awslogs logs [options] [log-group-filters]* -- [log-stream-filters]*`
 
-Print log statements from a log group. It will take all arguments and look for a log group containing
-all of them so you don't have to enter the exact group name, but can just put in a few fragements
-that uniquely identify a log group. E.g. Instead of having to write `/aws/codebuild/msearch-indexer-bulk-build`
+Print log statements from a log group. The `log-group=filters` will be used to identify the LogGroup to load from, the `log-stream-filters` will be used to limit to specific LogStreams. Text Fragments that uniquely identify a LogGroup and LogStream are enough, e.g. Instead of having to write `/aws/codebuild/msearch-indexer-bulk-build`
 as the full log group name you can use `codebuild index bulk` to uniquely identify the group.
-If multiple log groups match it will fail and print the names of the matching groups.
+If multiple log groups match it will print the matching groups and select the first.
 
 It will use `filter-log-events` from the `awscli` to regularly get new log events and print any events that
 haven't been seen before.

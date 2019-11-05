@@ -16,12 +16,15 @@ then
     set -x
 fi
 
-READLINK_COMMAND='readlink'
-if command -v greadlink > /dev/null; then
-  READLINK_COMMAND='greadlink'
-fi
+function awsinfo_readlink() {
+  if command -v greadlink > /dev/null; then
+    greadlink "$@"
+  else
+    readlink "$@"
+  fi
+}
 
-DIR="$(dirname "$($READLINK_COMMAND -f "$0" || echo "$0")")"
+DIR="$(dirname "$(awsinfo_readlink -f "$0" || echo "$0")")"
 AWSINFO_BASE_DIR=$(dirname $DIR)
 
 if [[ "$#" -gt 0 ]]

@@ -5,3 +5,4 @@ function awsinfo_date() {
     date "$@"
   fi
 }
+

@@ -217,6 +217,7 @@ Following is a list of all available commands and links to their source document
 * [`ssm`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/index.md)
 * [`ssm parameter`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/parameter.md)
 * [`ssm parameters`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/parameters.md)
+* [`ssm session`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/session.md)
 * [`version`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/version/index.md)
 * [`vpc`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/index.md)
 * [`vpc endpoints`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/endpoints.md)

@@ -1,6 +1,5 @@
 FROM amazonlinux:latest
-RUN amazon-linux-extras install -y python3
-RUN yum install -y groff less mailcap jq make bash coreutils
+RUN yum install -y groff less mailcap jq make bash coreutils python3
 
 ADD https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm session-manager-plugin.rpm
 RUN yum install -y session-manager-plugin.rpm

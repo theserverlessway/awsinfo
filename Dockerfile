@@ -1,7 +1,13 @@
-FROM python:alpine
+FROM amazonlinux:latest
+RUN amazon-linux-extras install -y python3
+RUN yum install -y groff less mailcap jq make bash coreutils
 
-RUN apk --no-cache add bash coreutils jq make
-RUN pip install awscli
+ADD https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm session-manager-plugin.rpm
+RUN yum install -y session-manager-plugin.rpm
+RUN rm session-manager-plugin.rpm
+RUN yum clean all
+
+RUN pip3 install awscli
 
 COPY scripts /awsinfo/scripts
 

@@ -27,12 +27,10 @@ then
       \"1.Arn\":containerInstanceArn, \
       \"2.InstanceId\":ec2InstanceId, \
       \"3.Status\":status, \
-      \"4.AgentConnected\":agentConnected, \
-      \"5.Running/Pending\":join('/', [to_string(runningTasksCount), to_string(pendingTasksCount)]),\
-      \"6.AgentConnected\":agentConnected,
-      \"7.CPU available\":join(' of ', [to_string(remainingResources[?name=='CPU'].integerValue|[0]), to_string(registeredResources[?name=='CPU'].integerValue|[0])]), \
-      \"8.Memory available\":join(' of ', [to_string(remainingResources[?name=='MEMORY'].integerValue|[0]), to_string(registeredResources[?name=='MEMORY'].integerValue|[0])]), \
-      \"9.AgentVersion\":versionInfo.agentVersion}"
+      \"4.Running/Pending\":join('/', [to_string(runningTasksCount), to_string(pendingTasksCount)]),\
+      \"5.CPU available\":join(' of ', [to_string(remainingResources[?name=='CPU'].integerValue|[0]), to_string(registeredResources[?name=='CPU'].integerValue|[0])]), \
+      \"6.Memory available\":join(' of ', [to_string(remainingResources[?name=='MEMORY'].integerValue|[0]), to_string(registeredResources[?name=='MEMORY'].integerValue|[0])]), \
+      \"7.Agent Version/Connected\":join('/',[versionInfo.agentVersion, to_string(agentConnected)])}"
 else
   echo "No Instances Found"
 fi

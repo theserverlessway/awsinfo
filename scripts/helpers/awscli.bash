@@ -6,3 +6,5 @@ function awscli() {
     fi
     aws "$@" ${AWS_OPTIONS}
 }
+
+export -f awscli

@@ -2,17 +2,25 @@ echoerr() {
     echo -e "$@" 1>&2;
 }
 
+export -f echoerr
+
 echoinfomsg() {
     echoerr "$BLUE""$@""$NC"
 }
+
+export -f echoinfomsg
 
 echoerrmsg() {
     echoerr "$RED""$@""$NC"
 }
 
+export -f echoerrmsg
+
 echosuccess() {
     echo -e "$GREEN""$@""$NC"
 }
+
+export -f echosuccess
 
 function select_one(){
     type=$1

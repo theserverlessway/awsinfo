@@ -1,0 +1,1 @@
+awscli iam get-account-password-policy --output table --query PasswordPolicy

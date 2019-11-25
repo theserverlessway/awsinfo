@@ -1,7 +1,7 @@
 split_args "$@"
 
 USERS=$(awscli iam list-users --output text --query "Users[$(auto_filter UserName UserId Path -- $FIRST_RESOURCE )].[UserName]")
-select_one Role "$USERS"
+select_one User "$USERS"
 
 USER=$SELECTED
 

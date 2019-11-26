@@ -1,4 +1,4 @@
-awscli ssm describe-parameters --output table --query "sort_by(Parameters,&Name)[$(auto_filter auto_filter Name LastModifiedUser Type -- $@)].{
+awscli ssm describe-parameters --output table --query "sort_by(Parameters,&Name)[$(auto_filter Name LastModifiedUser Type -- $@)].{
   \"1.Name\":Name,
   \"2.Type\":Type,
   \"3.Version\":Version,

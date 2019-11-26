@@ -23,7 +23,7 @@ function filter_query(){
         declare -A FILTERS
         while [[ $# -gt 0 ]]
         do
-            FILTERS[$#]="contains($item,'$1')"
+            FILTERS[$#]="contains(to_string($item),'$1')"
             shift
         done
         echo "$(join '&&' ${FILTERS[@]})"

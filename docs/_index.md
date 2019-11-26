@@ -136,6 +136,7 @@ Following is a list of all available commands and links to their source document
 * [`ecs instance`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/instance.md)
 * [`ecs instances`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/instances.md)
 * [`ecs service`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/service.md)
+* [`ecs service-events`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/service-events.md)
 * [`ecs services`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/services.md)
 * [`ecs task`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/task.md)
 * [`ecs task-definition`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/task-definition.md)

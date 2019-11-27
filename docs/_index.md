@@ -229,6 +229,8 @@ Following is a list of all available commands and links to their source document
 * [`vpc endpoints`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/endpoints.md)
 * [`vpc endpoints-available`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/endpoints-available.md)
 * [`vpc nat-gateways`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/nat-gateways.md)
+* [`vpc network-acl`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/network-acl.md)
+* [`vpc network-acls`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/network-acls.md)
 * [`vpc network-interface`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/network-interface.md)
 * [`vpc network-interfaces`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/network-interfaces.md)
 * [`vpc route-table`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/vpc/route-table.md)

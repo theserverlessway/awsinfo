@@ -221,6 +221,7 @@ Following is a list of all available commands and links to their source document
 * [`sns subscriptions`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/sns/subscriptions.md)
 * [`sqs`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/sqs/index.md)
 * [`ssm`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/index.md)
+* [`ssm instance-associations`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/instance-associations.md)
 * [`ssm parameter`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/parameter.md)
 * [`ssm parameters`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/parameters.md)
 * [`ssm session`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ssm/session.md)

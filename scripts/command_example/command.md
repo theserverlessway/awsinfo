@@ -11,3 +11,12 @@ Give an overview description of the command here
 
 * Attribute1 
 * Attribute2
+
+# `awsinfo SERVICE COMMAND [filters]+`
+
+Give an overview description of the command here
+
+## Filter matches against
+
+* Attribute1
+* Attribute2

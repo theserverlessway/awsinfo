@@ -32,4 +32,6 @@ then
   TOKEN_CODE="--token-code $TOKEN"
 fi
 
-awscli sts assume-role --role-arn arn:aws:iam::$SELECTED:role/$ROLE ${SERIAL_NUMBER:-} ${TOKEN_CODE:-} ${MAX_DURATION:-} --role-session-name $ACCOUNT_ID-$ROLE-$USERNAME-$RANDOM --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=" + .AccessKeyId + " AWS_SECRET_ACCESS_KEY=" + .SecretAccessKey + " AWS_SESSION_TOKEN=\"" + .SessionToken + "\" AWS_TOKEN_EXPIRATION=" + .Expiration'
+SESSION_NAME=$(cut -c -64 <<< "$ACCOUNT_ID-$ROLE-$USERNAME")
+
+awscli sts assume-role --role-arn arn:aws:iam::$SELECTED:role/$ROLE ${SERIAL_NUMBER:-} ${TOKEN_CODE:-} ${MAX_DURATION:-} --role-session-name $SESSION_NAME --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=" + .AccessKeyId + " AWS_SECRET_ACCESS_KEY=" + .SecretAccessKey + " AWS_SESSION_TOKEN=\"" + .SessionToken + "\" AWS_TOKEN_EXPIRATION=" + .Expiration'

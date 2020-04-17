@@ -86,6 +86,11 @@ Following is a list of all available commands and links to their source document
 ### Commands
 
 * [`acm`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/acm/index.md)
+* [`appautoscaling`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/index.md)
+* [`appautoscaling policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/policies.md)
+* [`appautoscaling policy`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/policy.md)
+* [`appautoscaling schedules`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/schedules.md)
+* [`appautoscaling targets`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/targets.md)
 * [`appsync`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appsync/index.md)
 * [`appsync datasources`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appsync/datasources.md)
 * [`appsync resolvers`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appsync/resolvers.md)

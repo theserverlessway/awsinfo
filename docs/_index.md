@@ -86,6 +86,7 @@ Following is a list of all available commands and links to their source document
 ### Commands
 
 * [`acm`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/acm/index.md)
+* [`acm certificate`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/acm/certificate.md)
 * [`appautoscaling`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/index.md)
 * [`appautoscaling policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/policies.md)
 * [`appautoscaling policy`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/appautoscaling/policy.md)
@@ -141,6 +142,7 @@ Following is a list of all available commands and links to their source document
 * [`dynamodb`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/dynamodb/index.md)
 * [`dynamodb table`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/dynamodb/table.md)
 * [`ec2`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ec2/index.md)
+* [`ec2 instance`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ec2/instance.md)
 * [`ec2 keys`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ec2/keys.md)
 * [`ecr`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecr/index.md)
 * [`ecr images`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecr/images.md)

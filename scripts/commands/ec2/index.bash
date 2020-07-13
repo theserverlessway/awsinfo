@@ -1,11 +1,4 @@
-EC2_FILTER="--filter Name=instance-state-name,Values=pending,running"
-
-while getopts "t" opt; do
-    case "$opt" in
-        t) EC2_FILTER="";;
-    esac
-done
-shift $(($OPTIND-1))
+source $CURRENT_COMMAND_DIR/terminated-instances.sh
 
 SECURITY_GROUPS="NetworkInterfaces|length(@)"
 FILTER=$(auto_filter "$TAG_NAME" InstanceId InstanceType State.Name Placement.AvailabilityZone "$SECURITY_GROUPS" PublicIpAddress PrivateIpAddress -- $@)

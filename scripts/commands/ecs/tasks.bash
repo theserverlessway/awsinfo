@@ -23,7 +23,7 @@ then
       \"1.Task\":taskArn, \
       \"2.Definition\":taskDefinitionArn, \
       \"3.Instance\":containerInstanceArn, \
-      \"4.Status\":lastStatus,
+      \"4.Status/Health\":join('/',[lastStatus,healthStatus]),
       \"5.CreatedAt\":createdAt,
       \"6.CPU/Memory\":join('/', [cpu , memory]),
       \"7.Containers\":length(containers),

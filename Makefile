@@ -15,7 +15,7 @@ build:
 	docker build $(BUILD_ARGS)
 
 build-no-cache:
-	docker build --no-cache $(BUILD_ARGS)
+	docker build --pull --no-cache $(BUILD_ARGS)
 
 install: build-no-cache
 	docker tag $(CONTAINER) $(CONTAINER_NAME):latest

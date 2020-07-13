@@ -1,22 +1,12 @@
-# `awsinfo SERVICE COMMAND [first-filters]+ -- [second-filters]*`
+# `awsinfo ec2 instance [filters]*`
 
-Give an overview description of the command here
-
-## First Filter matches against
-
-* Attribute1 
-* Attribute2
-
-## Second Filter matches against
-
-* Attribute1 
-* Attribute2
-
-# `awsinfo SERVICE COMMAND [filters]+`
-
-Give an overview description of the command here
+List all EC2 instances. Use `-t` to show terminated instances.
 
 ## Filter matches against
 
-* Attribute1
-* Attribute2
+* Name
+* Id
+* Type
+* State
+* AvailabilityZone
+* SecurityGroups

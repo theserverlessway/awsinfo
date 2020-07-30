@@ -181,6 +181,8 @@ Following is a list of all available commands and links to their source document
 * [`events`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/events/index.md)
 * [`events targets`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/events/targets.md)
 * [`iam`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/index.md)
+* [`iam attached-group-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/attached-group-policies.md)
+* [`iam attached-role-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/attached-role-policies.md)
 * [`iam attached-user-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/attached-user-policies.md)
 * [`iam aws-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/aws-policies.md)
 * [`iam group-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/group-policies.md)

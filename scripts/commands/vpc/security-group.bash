@@ -8,4 +8,4 @@ FILTER=$(auto_filter "$TAG_NAME" GroupId GroupName VpcId -- $@)
 SECURITY_GROUPS=$(awscli ec2 describe-security-groups --output text --query "SecurityGroups[$FILTER].[GroupId]")
 select_one SecurityGroup "$SECURITY_GROUPS"
 
-awscli ec2 describe-security-groups --group-id $SELECTED --output table --query "SecurityGroups[].{\"1.Name\":$TAG_NAME,\"2.GroupId\":GroupId,\"3.GroupName\":GroupName,\"4.VpcId\":VpcId,\"5.Description\":Description$PERMISSIONS_QUERY}"
+awscli ec2 describe-security-groups --group-id $SELECTED --output table --query "SecurityGroups[0]"

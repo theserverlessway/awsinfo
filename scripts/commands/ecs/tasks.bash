@@ -19,7 +19,7 @@ FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus g
 if [[ ! -z "$TASKS" ]]
 then
   awscli ecs describe-tasks --tasks $TASKS --cluster $SELECTED \
-    --query "reverse(sort_by(tasks,&join('-',[taskDefinitionArn,createdAt])))[$FILTER].{ \
+    --query "reverse(sort_by(tasks,&join('-',[taskDefinitionArn,to_string(createdAt)])))[$FILTER].{ \
       \"1.Task\":taskArn, \
       \"2.Definition\":taskDefinitionArn, \
       \"3.Instance\":containerInstanceArn, \

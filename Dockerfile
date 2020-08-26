@@ -1,12 +1,16 @@
-FROM amazonlinux:latest
-RUN yum install -y groff less mailcap jq make bash coreutils python3
+FROM python:latest
+RUN apt-get update
+RUN apt-get install -y groff less jq make bash coreutils python3 curl
 
-ADD https://s3.amazonaws.com/session-manager-downloads/plugin/latest/linux_64bit/session-manager-plugin.rpm session-manager-plugin.rpm
-RUN yum install -y session-manager-plugin.rpm
-RUN rm session-manager-plugin.rpm
-RUN yum clean all
+ADD "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" "session-manager-plugin.deb"
+RUN dpkg -i session-manager-plugin.deb
+RUN rm session-manager-plugin.deb
 
 RUN pip3 install awscli
+
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install
 
 COPY scripts /awsinfo/scripts
 

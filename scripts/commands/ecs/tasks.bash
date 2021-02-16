@@ -1,18 +1,31 @@
 TASK_STATUS=""
+TASK_FAMILY=""
+TASK_NAME=""
 
-while getopts "s" opt; do
+while getopts "sf:n:" opt; do
     case "$opt" in
         s) TASK_STATUS="--desired-status STOPPED" ;;
+        f) TASK_FAMILY="--family $OPTARG" ;;
+        n) TASK_NAME="--service-name $OPTARG" ;;
     esac
 done
-shift $(($OPTIND-1))
+
+let "CURRENTOPT=$OPTIND-1"
+# To allow awsinfo ecs tasks -- TASK_FILTER without providing cluster arguments this is necessary
+# to check if `--` is used. getopts will jump over `--` by default
+if [[ "${@:$CURRENTOPT:1}" == "--" ]]
+then
+  OPTIND=$OPTIND-1
+fi
+
+shift "$(($OPTIND-1))"
 
 split_args "$@"
 
 CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter @ -- $FIRST_RESOURCE)].[@]")
 select_one Cluster "$CLUSTERS"
 
-TASKS=$(awscli ecs list-tasks --output text --cluster $SELECTED $TASK_STATUS --query taskArns)
+TASKS=$(awscli ecs list-tasks --output text --max-items 100 $TASK_FAMILY $TASK_NAME --cluster $SELECTED $TASK_STATUS --query taskArns | sed "s/None//g")
 
 FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType -- $SECOND_RESOURCE)
 

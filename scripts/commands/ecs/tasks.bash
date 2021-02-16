@@ -10,10 +10,9 @@ while getopts "sf:n:" opt; do
     esac
 done
 
-let "CURRENTOPT=$OPTIND-1"
 # To allow awsinfo ecs tasks -- TASK_FILTER without providing cluster arguments this is necessary
 # to check if `--` is used. getopts will jump over `--` by default
-if [[ "${@:$CURRENTOPT:1}" == "--" ]]
+if [[ "${@:$OPTIND-1:1}" == "--" ]]
 then
   OPTIND=$OPTIND-1
 fi

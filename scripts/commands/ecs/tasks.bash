@@ -1,12 +1,14 @@
 TASK_STATUS=""
 TASK_FAMILY=""
 TASK_NAME=""
+SORT_BY="&to_string(createdAt)"
 
-while getopts "sf:n:" opt; do
+while getopts "dsf:n:" opt; do
     case "$opt" in
         s) TASK_STATUS="--desired-status STOPPED" ;;
         f) TASK_FAMILY="--family $OPTARG" ;;
         n) TASK_NAME="--service-name $OPTARG" ;;
+        g) SORT_BY="&join('-',[taskDefinitionArn,to_string(createdAt)])"
     esac
 done
 
@@ -31,7 +33,7 @@ FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus g
 if [[ ! -z "$TASKS" ]]
 then
   awscli ecs describe-tasks --tasks $TASKS --cluster $SELECTED \
-    --query "reverse(sort_by(tasks,&join('-',[taskDefinitionArn,to_string(createdAt)])))[$FILTER].{ \
+    --query "reverse(sort_by(tasks,$SORT_BY))[$FILTER].{ \
       \"1.Task\":taskArn, \
       \"2.Definition\":taskDefinitionArn, \
       \"3.Instance\":containerInstanceArn, \

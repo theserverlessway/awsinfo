@@ -1,4 +1,5 @@
-FILTER=$(auto_filter LoadBalancerName VpcId Scheme "join('',AvailabilityZones[].ZoneName)" "join('',AvailabilityZones[].SubnetId)" "join('',SecurityGroups||[''])" -- $@)
+source $CURRENT_COMMAND_DIR/loadbalancer_filter.sh
+FILTER=$(create_filter $@)
 
 awscli elbv2 describe-load-balancers --output table --query "LoadBalancers[$FILTER].{
   \"1.LoadBalancerName\":LoadBalancerName,

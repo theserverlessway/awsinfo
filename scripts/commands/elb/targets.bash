@@ -1,6 +1,7 @@
 split_args "$@"
 
-FILTER=$(auto_filter LoadBalancerName VpcId Scheme "join('',AvailabilityZones[].ZoneName)" "join('',AvailabilityZones[].SubnetId)" "join('',SecurityGroups||[''])" -- $FIRST_RESOURCE)
+source $CURRENT_COMMAND_DIR/loadbalancer_filter.sh
+FILTER=$(create_filter $FIRST_RESOURCE)
 
 LOAD_BALANCERS=$(awscli elbv2 describe-load-balancers --output text --query "LoadBalancers[$FILTER].[LoadBalancerArn]")
 select_one LoadBalancer "$LOAD_BALANCERS"

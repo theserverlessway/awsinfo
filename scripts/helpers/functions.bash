@@ -39,7 +39,7 @@ function select_one(){
     fi
     ONE=$(head -n 1 <<< "$OUTPUT")
     echosuccess "Selected $type $ONE"
-    eval SELECTED=$ONE
+    eval "SELECTED='$ONE'"
 }
 
 function split_args(){

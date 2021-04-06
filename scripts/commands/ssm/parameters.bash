@@ -1,4 +1,12 @@
-awscli ssm describe-parameters --output table --query "sort_by(Parameters,&Name)[$(auto_filter Name LastModifiedUser Type -- $@)].{
+FILTER=""
+while getopts "f:" opt; do
+  case "$opt" in
+  f) FILTER="--parameter-filters Key=Name,Option=Contains,Values=$OPTARG" ;;
+  esac
+done
+shift $(($OPTIND - 1))
+
+awscli ssm describe-parameters $FILTER --output table --query "sort_by(Parameters,&Name)[$(auto_filter Name LastModifiedUser Type -- $@)].{
   \"1.Name\":Name,
   \"2.Type\":Type,
   \"3.Version\":Version,

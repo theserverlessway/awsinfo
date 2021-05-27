@@ -3,12 +3,12 @@ TASK_FAMILY=""
 TASK_NAME=""
 SORT_BY="&to_string(createdAt)"
 
-while getopts "dsf:n:" opt; do
+while getopts "gsf:n:" opt; do
   case "$opt" in
+  g) SORT_BY="&join('-',[taskDefinitionArn,to_string(createdAt)])" ;;
   s) TASK_STATUS="--desired-status STOPPED" ;;
   f) TASK_FAMILY="$OPTARG" ;;
   n) TASK_NAME="--service-name $OPTARG" ;;
-  g) SORT_BY="&join('-',[taskDefinitionArn,to_string(createdAt)])" ;;
   esac
 done
 
@@ -23,7 +23,7 @@ shift "$(($OPTIND - 1))"
 split_args "$@"
 
 if [[ ! -z "$TASK_FAMILY" ]]; then
-  FAMILIES=$(awscli ecs list-task-definition-families --output text --query "families[$(auto_filter @ -- $TASK_FAMILY)].[@]")
+  FAMILIES=$(awscli ecs list-task-definition-families --output text --query "families[$(auto_filter @ -- $TASK_FAMILY)].[@]" | sort)
   select_one Family "$FAMILIES"
   TASK_FAMILY="--family $SELECTED"
 fi
@@ -32,16 +32,18 @@ CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_fi
 select_one Cluster "$CLUSTERS"
 
 TASKS=$(awscli ecs list-tasks --output text $TASK_FAMILY $TASK_NAME --cluster $SELECTED $TASK_STATUS --query taskArns | sed "s/None//g")
+FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType -- $SECOND_RESOURCE)
 
-if [[ "$(wc -w <<<"$TASKS")" -gt "100" ]]; then
-  echo Too many tasks to show, use -f to limit to specific task family
+FILTERED_TASKS=$(echo $TASKS | xargs -n 99 $AWSINFO_BASE_DIR/scripts/helpers/awscli.sh ecs describe-tasks --cluster $SELECTED \
+  --query "tasks[$FILTER].[taskArn]" --output text --tasks)
+
+if [[ "$(wc -w <<<"$FILTERED_TASKS")" -gt "100" ]]; then
+  echo Too many tasks to show, use filters to limit the number of tasks to 100
   exit 1
 fi
 
-FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType -- $SECOND_RESOURCE)
-
 if [[ ! -z "$TASKS" ]]; then
-  awscli ecs describe-tasks --tasks $TASKS --cluster $SELECTED \
+  awscli ecs describe-tasks --cluster $SELECTED \
     --query "reverse(sort_by(tasks,$SORT_BY))[$FILTER].{ \
       \"1.Task\":taskArn, \
       \"2.Definition\":taskDefinitionArn, \
@@ -51,7 +53,7 @@ if [[ ! -z "$TASKS" ]]; then
       \"6.CPU/Memory\":join('/', [cpu , memory]),
       \"7.Containers\":length(containers),
       \"8.Group\":group,
-      \"9.LaunchType\":launchType}" | sed "s/arn.*\///g" | print_table DescribeTasks
+      \"9.LaunchType\":launchType}" --tasks $FILTERED_TASKS | sed "s/arn.*\///g" | print_table DescribeTasks
 else
   echo "No Tasks Found"
 fi

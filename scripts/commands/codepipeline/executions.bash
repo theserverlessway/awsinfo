@@ -7,6 +7,6 @@ FILTER=$(auto_filter pipelineExecutionId status "join('',sourceRevisions[].revis
 
 awscli codepipeline list-pipeline-executions --pipeline-name "$SELECTED" --output table --query "pipelineExecutionSummaries[$FILTER].{
   \"1.ExecutionId\":pipelineExecutionId,
-  \"2.RevisionId\":join(', ',sourceRevisions[].revisionId||[]),
-  \"3.Statis\":status,
+  \"2.RevisionId\":join(', ',sourceRevisions[].revisionId||['']),
+  \"3.Status\":status,
   \"4.StartTime\":startTime}"

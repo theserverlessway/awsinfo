@@ -5,3 +5,4 @@ Describe an ACM Certificate with all details.
 ## Filter matches against
 
 * DomainName
+* CertificateArn

@@ -107,6 +107,8 @@ Following is a list of all available commands and links to their source document
 * [`batch compute-environments`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/batch/compute-environments.md)
 * [`batch job-queues`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/batch/job-queues.md)
 * [`batch jobs`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/batch/jobs.md)
+* [`budgets`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/budgets/index.md)
+* [`budgets budget`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/budgets/budget.md)
 * [`cfn`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/cfn/index.md)
 * [`cfn change-set`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/cfn/change-set.md)
 * [`cfn change-sets`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/cfn/change-sets.md)

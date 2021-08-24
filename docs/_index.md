@@ -229,6 +229,7 @@ Following is a list of all available commands and links to their source document
 * [`rds cluster`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/rds/cluster.md)
 * [`rds clusters`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/rds/clusters.md)
 * [`rds engine-versions`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/rds/engine-versions.md)
+* [`rds events`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/rds/events.md)
 * [`rds instance`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/rds/instance.md)
 * [`route53`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/route53/index.md)
 * [`route53 records`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/route53/records.md)

@@ -42,7 +42,7 @@ if [[ "$(wc -w <<<"$FILTERED_TASKS")" -gt "100" ]]; then
   exit 1
 fi
 
-if [[ ! -z "$TASKS" ]]; then
+if [[ ! -z "$FILTERED_TASKS" ]]; then
   awscli ecs describe-tasks --cluster $SELECTED \
     --query "reverse(sort_by(tasks,$SORT_BY))[$FILTER].{ \
       \"1.Task\":taskArn, \

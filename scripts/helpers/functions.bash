@@ -60,7 +60,7 @@ function split_args(){
 }
 
 function print_table(){
-  jq -crs add | python3 $DIR/combine_calls.py $1
+  jq -crs | python3 $DIR/combine_calls.py $1
 }
 
 function print_table_excluding(){

@@ -2,4 +2,4 @@ CALLER_IDENTITY=$(awscli sts get-caller-identity --output json --query "{\"1.Acc
 
 ALIAS=$(awscli iam list-account-aliases --output json --query "{\"2.AccountAlias\":AccountAliases[0]||''}")
 
-echo -e "$CALLER_IDENTITY\n$ALIAS" | print_table AccountDetails
+echo -e "$CALLER_IDENTITY\n$ALIAS" | jq -crs add | print_table AccountDetails

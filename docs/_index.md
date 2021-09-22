@@ -190,6 +190,8 @@ Following is a list of all available commands and links to their source document
 * [`es domain`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/es/domain.md)
 * [`events`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/events/index.md)
 * [`events targets`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/events/targets.md)
+* [`firehose`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/firehose/index.md)
+* [`firehose stream`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/firehose/stream.md)
 * [`iam`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/index.md)
 * [`iam attached-group-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/attached-group-policies.md)
 * [`iam attached-role-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/attached-role-policies.md)

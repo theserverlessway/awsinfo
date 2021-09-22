@@ -39,6 +39,9 @@ prepare:
 command-docs:
 	@find scripts/commands -name "*.bash" | awk '{sub(/\.bash/, "", $$0); n=split($$0,file,"/"); sub(/index/, "", file[n]); print "* [`" file[n-1] " " file[n] " `](https://github.com/theserverlessway/awsinfo/blob/master/" $$0 ".md)" }' | sort | sed "s/[[:space:]]\+\`/\`/g"
 
+command-docs-container: build
+	docker run -it --entrypoint make -v `pwd`:/awsinfo -w /awsinfo $(CONTAINER) command-docs
+
 LOG_TIMESTAMP=$(shell echo $$(($$(date +%s) * 1000)))
 LOG_STREAM_NAME=test-log-stream-$(LOG_TIMESTAMP)
 
@@ -67,7 +70,3 @@ create:
 	read -p "Enter the Command Name [index]: " COMMAND_NAME_INPUT; \
 	COMMAND_NAME=$${COMMAND_NAME_INPUT:-index}; \
 	mkdir -p $(COMMANDS_DIR)/$$SERVICE_NAME && cp $(EXAMPLE_DIR)/command.bash $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.bash && cp $(EXAMPLE_DIR)/command.md $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.md
-
-new:
-
-

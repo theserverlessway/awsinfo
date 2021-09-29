@@ -34,9 +34,9 @@ select_one Cluster "$CLUSTERS"
 TASKS=$(awscli ecs list-tasks --output text $TASK_FAMILY $TASK_NAME --cluster $SELECTED $TASK_STATUS --query taskArns | sed "s/None//g")
 FILTER=$(auto_filter taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- $SECOND_RESOURCE)
 
-FILTERED_TASKS=$(echo $TASKS | xargs -n 99 bash -c "awscli ecs describe-tasks --cluster $SELECTED --query \"tasks[$FILTER].taskArn\" --output text --tasks \$@")
+FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster $SELECTED --query \"tasks[$FILTER].taskArn\" --output text --tasks \$@")
 
 QUERY=""
 
-echo "$FILTERED_TASKS" | xargs -n 99 bash -c "awscli ecs describe-tasks --query \"reverse(sort_by(tasks,$SORT_BY))[].{\\\"1.Task\\\":taskArn,\\\"2.Definition\\\":taskDefinitionArn,\\\"3.Instance\\\":containerInstanceArn,\\\"4.Status/Health\\\":join('/',[lastStatus,healthStatus]),
-        \\\"5.CreatedAt\\\":createdAt,\\\"6.CPU/Memory\\\":join('/', [cpu , memory]),\\\"7.Containers\\\":length(containers),\\\"8.Group\\\":group,\\\"9.CapacityProvider\\\":capacityProviderName}\" --cluster $SELECTED --tasks \$@" | sed "s/arn.*\///g" | print_table DescribeTasks
+echo "$FILTERED_TASKS" | xargs -tn 99 bash -c "awscli ecs describe-tasks --query \"reverse(sort_by(tasks,$SORT_BY))[].{\\\"1.Task\\\":taskArn,\\\"2.Definition\\\":taskDefinitionArn,\\\"3.Instance\\\":containerInstanceArn,\\\"4.Status/Health\\\":join('/',[lastStatus,healthStatus]),
+        \\\"5.CreatedAt\\\":createdAt,\\\"6.CPU/Memory\\\":join('/', [cpu , memory]),\\\"7.Containers\\\":length(containers),\\\"8.Group\\\":group,\\\"9.CapacityProvider\\\":capacityProviderName}\" --cluster $SELECTED --tasks \$0 \$@" | sed "s/arn.*\///g" | print_table DescribeTasks

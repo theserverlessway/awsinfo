@@ -44,13 +44,14 @@ then
           SOURCE="TRUE"
       ;;
       --verbose)
-          VERBOSE="TRUE"
+          export VERBOSE="TRUE"
           unset args[$i]
       ;;
 			*)
 			;;
 		esac
 		i=$(($i+1))
+		export AWS_OPTIONS
 	done
 
 	set -- ${args[@]+"${args[@]}"}

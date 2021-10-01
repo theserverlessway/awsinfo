@@ -2,6 +2,11 @@
 
 Give an overview description of the command here
 
+## Options
+
+* `-s`: Some
+* `-f`: Option
+
 ## First Filter matches against
 
 * Attribute1 

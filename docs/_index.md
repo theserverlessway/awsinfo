@@ -241,6 +241,7 @@ Following is a list of all available commands and links to their source document
 * [`s3 lifecycle`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/lifecycle.md)
 * [`s3 location`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/location.md)
 * [`s3 notifications`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/notifications.md)
+* [`s3 objects`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/objects.md)
 * [`s3 policy`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/policy.md)
 * [`s3 website`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/website.md)
 * [`secretsmanager`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/secretsmanager/index.md)

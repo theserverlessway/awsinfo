@@ -12,4 +12,11 @@ Describe a task.
 
 ## Second filter matches against
 
-* Task Id
+* Task Arn
+* TaskDefinitionArn
+* ContainerInstanceArn
+* LastStatus
+* Group
+* Cpu
+* Memory
+* LaunchType

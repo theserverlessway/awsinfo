@@ -55,3 +55,16 @@ function auto_filter(){
     fi
   fi
 }
+
+function auto_filter_joined(){
+  if [[ $# -gt 1 ]]
+  then
+    split_args "$@"
+    if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
+    then
+      FILTERS=()
+      FILTER_STRING="join('',[$(join ',' $FIRST_RESOURCE)])"
+      echo ?$(filter_query $FILTER_STRING $SECOND_RESOURCE)
+    fi
+  fi
+}

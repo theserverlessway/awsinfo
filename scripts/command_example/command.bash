@@ -1,6 +1,21 @@
+# Example of a Simple Command
+
+awscli cloudformation describe-stacks --output table --query "sort_by(Stacks,&StackName)[$(auto_filter StackName -- $@)].{
+  \"1.Name\":StackName,
+  \"2.Status\":StackStatus,
+  \"3.RoleARN\": RoleARN,
+  \"4.CreationTime\":CreationTime,
+  \"5.LastUpdated\":LastUpdatedTime}"
+
+# Example of a Simple Listing, Filtering and Command
+
+STACK_LISTING=$(awscli cloudformation describe-stacks --output text --query "sort_by(Stacks,&StackName)[$(auto_filter StackName -- $@)].[StackName]")
+select_one Stack "$STACK_LISTING"
+
+awscli cloudformation describe-stacks --stack-name $SELECTED --output table
+
 # Example of Two Step Filtering
 # Here we want to get all details for a specific ChangeSet.
-
 
 # At first we're splitting the incoming arguments to provide two separate filters, e.g. `awsinfo cfn change-set xyz -- abc`.
 

@@ -1,4 +1,4 @@
-# `awsinfo cfn [filters]*`
+# `awsinfo cloudformation [filters]*`
 
 List all CloudFormation stacks
 

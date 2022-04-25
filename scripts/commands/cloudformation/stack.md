@@ -1,4 +1,4 @@
-# `awsinfo cfn stack [stack-filter]`
+# `awsinfo cloudformation stack [stack-filter]`
 
 Describe a Stack and its details
 

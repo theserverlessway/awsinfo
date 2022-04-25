@@ -1,4 +1,4 @@
-# `awsinfo cfn stack-set [filters]*`
+# `awsinfo cloudformation stack-set [filters]*`
 
 Describe a CloudFormation StackSet
 

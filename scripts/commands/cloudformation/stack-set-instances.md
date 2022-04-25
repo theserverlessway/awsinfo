@@ -1,4 +1,4 @@
-# `awsinfo cfn stack-set-instances [-a ACCOUNT_ID] [-r REGION] [stack-set-filter]* -- [instances-filters]*`
+# `awsinfo cloudformation stack-set-instances [-a ACCOUNT_ID] [-r REGION] [stack-set-filter]* -- [instances-filters]*`
 
 Describe Instances for a CloudFormation StackSet.
 If you have more than 100 StackSet Instances use `-a`

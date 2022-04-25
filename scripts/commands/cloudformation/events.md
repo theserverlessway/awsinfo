@@ -1,4 +1,4 @@
-# `awsinfo cfn events [substrings]*`
+# `awsinfo cloudformation events [substrings]*`
 
 List the last 50 CloudFormation Events for a specific Stack. It will select the Stack that 
 contains all supplied substrings. For long status messages it might break up the table and

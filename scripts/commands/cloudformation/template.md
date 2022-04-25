@@ -1,4 +1,4 @@
-# `awsinfo cfn template [filters]*`
+# `awsinfo cloudformation template [filters]*`
 
 Print the CloudFormation template for a stack
 

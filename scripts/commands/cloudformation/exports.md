@@ -1,4 +1,4 @@
-# `awsinfo cfn exports [substrings]*`
+# `awsinfo cloudformation exports [substrings]*`
 
 List all CloudFormation exports, with their `Name`, and `Value`.
 If `substrings` are given it will only print exports that contain all `substrings` either

@@ -1,4 +1,4 @@
-# `awsinfo cfn stack-sets [filters]*`
+# `awsinfo cloudformation stack-sets [filters]*`
 
 List all active CloudFormation StackSets
 

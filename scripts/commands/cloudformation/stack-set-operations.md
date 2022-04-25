@@ -1,4 +1,4 @@
-# `awsinfo cfn stack-set-operations [stack-set-filter]* -- [operations-filters]`
+# `awsinfo cloudformation stack-set-operations [stack-set-filter]* -- [operations-filters]`
 
 Describe Operations for a CloudFormation StackSet
 

@@ -1,4 +1,4 @@
-# `awsinfo cfn resources [stack-filter]* -- [resource-filter]*`
+# `awsinfo cloudformation resources [stack-filter]* -- [resource-filter]*`
 
 List all Resources for the specified stack
 

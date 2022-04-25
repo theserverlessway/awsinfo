@@ -1,6 +1,6 @@
 split_args "$@"
 
-POLICIES=$(awscli iam list-policies --output text --query "Policies[$(auto_filter PolicyName PolicyId Path -- $FIRST_RESOURCE)].[Arn]")
+POLICIES=$(awscli iam list-policies --output text --query "Policies[$(auto_filter PolicyName PolicyId Path Arn -- $FIRST_RESOURCE)].[Arn]")
 select_one Policy "$POLICIES"
 
 POLICY=$SELECTED

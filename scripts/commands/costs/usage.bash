@@ -7,4 +7,4 @@ SERVICES=$(awscli ce get-cost-and-usage --time-period Start=$START_DATE,End=$END
 
 select_one Service "$SERVICES"
 
-awscli ce get-cost-and-usage --time-period Start=$START_DATE,End=$END_DATE --granularity MONTHLY --filter "{\"Dimensions\":{\"Key\": \"SERVICE\", \"Values\":[\"$SELECTED\"]}}" --group-by Type=DIMENSION,Key=USAGE_TYPE --metrics UNBLENDED_COST  --query "ResultsByTime[0].Groups[].{\"1.Service\": join('',Keys),\"2.Costs\":join(' ',[Metrics.UnblendedCost.Amount,Metrics.UnblendedCost.Unit])}" --output table
+awscli ce get-cost-and-usage --time-period Start=$START_DATE,End=$END_DATE --granularity MONTHLY --filter "{\"Dimensions\":{\"Key\": \"SERVICE\", \"Values\":[\"$SELECTED\"]}}" --group-by Type=DIMENSION,Key=USAGE_TYPE --metrics UNBLENDED_COST  --query "ResultsByTime[0].reverse(sort_by(Groups,&to_number(Metrics.UnblendedCost.Amount)))[].{\"1.Service\": join('',Keys),\"2.Costs\":join(' ',[Metrics.UnblendedCost.Amount,Metrics.UnblendedCost.Unit])}" --output table

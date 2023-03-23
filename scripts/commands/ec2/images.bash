@@ -1,4 +1,4 @@
-OWNER=""
+OWNER="--owners $(awscli sts get-caller-identity --query Account --output text)"
 
 while getopts "o:" opt; do
   case "$opt" in
@@ -11,4 +11,5 @@ awscli ec2 describe-images $OWNER --filter "Name=name,Values=*$@*" --output tabl
   \"1.Name\":Name,
   \"2.ImageId\":ImageId,
   \"3.PlatformDetails\":PlatformDetails,
-  \"4.Architecture\":Architecture}"
+  \"4.Architecture\":Architecture,
+  \"5.State\":State}"

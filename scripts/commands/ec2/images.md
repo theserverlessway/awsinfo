@@ -7,4 +7,4 @@ For example `awsinfo ec2 images -o amazon 'amzn2-ami-hvm*2021*86*ebs'` will look
 
 ## Options
 
-* `-o`: Owner of the images, e.g. `amazon` or your Account Id
+* `-o`: Owner of the images, e.g. `amazon` or your Account Id. By default set to Account Id

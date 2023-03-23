@@ -16,7 +16,7 @@ To filter elements AWSInfo uses the `--query` option from the AWSClI extensively
 In the following example we have a list of CloudFormation Stacks.
 
 ```
-○ → awsinfo cfn
+○ → awsinfo cloudformation
 ----------------------------------------------------------------------------------------------------
 |                                          DescribeStacks                                          |
 +---------------------+------------------+----------------------------+----------------------------+
@@ -31,7 +31,7 @@ In the following example we have a list of CloudFormation Stacks.
 Now what if we only want to see stacks that contain `tslw`. At the same time we're lazy so we don't even want to type all of `tslw` and just type something that is unique.
 
 ```
-○ → awsinfo cfn ts
+○ → awsinfo cloudformation ts
 ----------------------------------------------------------------------------------------------------
 |                                          DescribeStacks                                          |
 +---------------------+------------------+----------------------------+----------------------------+
@@ -45,7 +45,7 @@ Now what if we only want to see stacks that contain `tslw`. At the same time we'
 AWSInfo checks if the filters you've entered (yes it supports multiple filter terms) are in the Name field. Only Stacks that have all terms in the Name will be shown. So if we want to limit to infrastructure stacks only we could simply do the following:
 
 ```
-○ → awsinfo cfn ts in
+○ → awsinfo cloudformation ts in
 ----------------------------------------------------------------------------------------------------
 |                                          DescribeStacks                                          |
 +---------------------+------------------+----------------------------+----------------------------+
@@ -62,7 +62,7 @@ The filtering mechanism makes it very easy and fast to get the exact resource yo
 Often you want to select one resource and show its subresources. An example would be a listing all the resources created for a CloudFormation stack. You simply provide filters in the same way as above and AWSInfo will at first get a list of the CloudFormation stacks, filter them with your parameters to get one stack (or select the first if multiple are found) and then select all the created resources for that stack.
 
 ```
-○ → awsinfo cfn resources tsl
+○ → awsinfo cloudformation resources tsl
 Selected Stack tslw-infrastructure
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 |                                                                                                      ListStackResources                                                                                                       |
@@ -97,7 +97,7 @@ Many different commands allow you to split filters for the first and second reso
 For CloudFormation stack resources AWSInfo matches against the LogicalId, PhysicalId and the Type. And because the match just has to be unique we don't even have to write out `RecordSet` but can simply write `Rec Set` or any other unique combination.
 
 ```
-○ → awsinfo-dev cfn resources tsl -- Rec Set
+○ → awsinfo-dev cloudformation resources tsl -- Rec Set
 Selected Stack tslw-infrastructure
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 |                                                                ListStackResources                                                                |

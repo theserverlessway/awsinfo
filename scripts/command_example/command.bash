@@ -17,7 +17,7 @@ awscli cloudformation describe-stacks --stack-name $SELECTED --output table
 # Example of Two Step Filtering
 # Here we want to get all details for a specific ChangeSet.
 
-# At first we're splitting the incoming arguments to provide two separate filters, e.g. `awsinfo cfn change-set xyz -- abc`.
+# At first we're splitting the incoming arguments to provide two separate filters, e.g. `awsinfo cloudformation change-set xyz -- abc`.
 
 split_args "$@"
 

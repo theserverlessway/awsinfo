@@ -6,7 +6,7 @@ load ../test-helpers/bats-assert/load
     run awsinfo
     assert_success
     assert_output -p 'Please choose one of the available commands'
-    assert_output -p '  cfn'
+    assert_output -p '  cloudformation'
     assert_output -p '  logs'
     assert_output -p '  commands'
 }
@@ -20,18 +20,18 @@ load ../test-helpers/bats-assert/load
     run awsinfo commands
     assert_success
     assert_output -p 'Supported Services'
-    assert_output -p '  cfn'
+    assert_output -p '  cloudformation'
     assert_output -p '  logs'
     assert_output -p '  commands'
 }
 
 @test "print all commands for a service" {
-    run awsinfo commands cfn
+    run awsinfo commands cloudformation
     assert_success
     assert_line -p 'Available Commands:'
-    assert_line -p '  cfn'
-    assert_line -p '  cfn change-sets'
-    assert_line -p '  cfn events'
+    assert_line -p '  cloudformation'
+    assert_line -p '  cloudformation change-sets'
+    assert_line -p '  cloudformation events'
 }
 
 @test "correct output for missing command" {

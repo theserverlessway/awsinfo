@@ -13,7 +13,7 @@ All the following examples are part of the [`example command`](scripts/command_e
 There are typically 3 kinds of commands
 
 1. Listing of Resources with some Filters, e.g. CloudFormation list-stacks
-2. Listing a sub-resource, e.g. all Resources in a CloudFormation Stack. There you need to first select the main resources (the CFN Stack in this case) and then select the resources to show. This will also involve two levels of filtering.
+2. Listing a sub-resource, e.g. all Resources in a CloudFormation Stack. There you need to first select the main resources (the cloudformation Stack in this case) and then select the resources to show. This will also involve two levels of filtering.
 3. Showing a specific resource with all its configuration, e.g. a VPC Subnet. This can potentially also involve a two step process where you have to select the main resource first, then the sub-resource that you want to show in full.
 
 ## AWSInfo and the AWS CLI
@@ -33,9 +33,9 @@ AWSInfo is built on top of the AWS CLI to make it easy to take commands used in 
  
  ### Filter Argument Splitting
  
- AWSInfo supports two levels of filtering, for example if you want to select all Resources in a CloudFormation Stack  named `production` that have Lambda in their name or as a type for the you would use something like `awsinfo cfn resources prod -- Lambda`. 
+ AWSInfo supports two levels of filtering, for example if you want to select all Resources in a CloudFormation Stack  named `production` that have Lambda in their name or as a type for the you would use something like `awsinfo cloudformation resources prod -- Lambda`. 
  
- Using `prod` here shows the power of filtering as its a substring matching, so if the filter string is part of the name (or other specified attributes of a resource) it will select all matching resources. In this specific case it would also only select the first one found in the sorted match list to then get the resources of the Stack. For those resources again only those that have Lambda in their name or type would be shown. in this case we only used one filter per resource, but we can use more, e.g. `awsinfo cfn resources pr od -- Lam bda` should match the same resources. There is no limit on how many filter terms you can have.
+ Using `prod` here shows the power of filtering as its a substring matching, so if the filter string is part of the name (or other specified attributes of a resource) it will select all matching resources. In this specific case it would also only select the first one found in the sorted match list to then get the resources of the Stack. For those resources again only those that have Lambda in their name or type would be shown. in this case we only used one filter per resource, but we can use more, e.g. `awsinfo cloudformation resources pr od -- Lam bda` should match the same resources. There is no limit on how many filter terms you can have.
  
  To make it easy in the script to differentiate between both filter arguments we have the `split_args` function. It will take all arguments and split them with everything before `--` going into a `$FIRST_RESOURCE` environment variable. All terms following `--` will be put into the `$SECOND_RESOURCE` environment variable.
  

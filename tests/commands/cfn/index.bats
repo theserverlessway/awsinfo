@@ -7,31 +7,31 @@ setup(){
 }
 
 @test "List all stacks and resources with with and without stack match parameter and subresource filtering" {
-  run awsinfo cfn
+  run awsinfo cloudformation
   assert_output -p index-bats-$STACKPOSTFIX
   assert_output -p CREATE_COMPLETE
   assert_success
 
-  run awsinfo cfn index-bats $STACKPOSTFIX
+  run awsinfo cloudformation index-bats $STACKPOSTFIX
   assert_output -p index-bats
   assert_output -p CREATE_COMPLETE
   assert_success
 
-  run awsinfo cfn resources index bats $STACKPOSTFIX
-  assert_output -p index-bats
-  assert_output -p CREATE_COMPLETE
-  assert_output -p FirstLogGroup
-  assert_output -p SecondLogGroup
-  assert_success
-
-  run awsinfo cfn resources index bats $STACKPOSTFIX --
+  run awsinfo cloudformation resources index bats $STACKPOSTFIX
   assert_output -p index-bats
   assert_output -p CREATE_COMPLETE
   assert_output -p FirstLogGroup
   assert_output -p SecondLogGroup
   assert_success
 
-  run awsinfo cfn resources index bats $STACKPOSTFIX -- Second Log Group
+  run awsinfo cloudformation resources index bats $STACKPOSTFIX --
+  assert_output -p index-bats
+  assert_output -p CREATE_COMPLETE
+  assert_output -p FirstLogGroup
+  assert_output -p SecondLogGroup
+  assert_success
+
+  run awsinfo cloudformation resources index bats $STACKPOSTFIX -- Second Log Group
   assert_output -p index-bats
   assert_output -p CREATE_COMPLETE
   refute_output -p FirstLogGroup

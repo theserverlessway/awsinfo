@@ -232,6 +232,7 @@ Following is a list of all available commands and links to their source document
 * [`lambda`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/lambda/index.md)
 * [`lambda code`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/lambda/code.md)
 * [`lambda function`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/lambda/function.md)
+* [`lambda versions`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/lambda/versions.md)
 * [`logs`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/logs/index.md)
 * [`logs export-tasks`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/logs/export-tasks.md)
 * [`logs groups`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/logs/groups.md)

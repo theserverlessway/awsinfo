@@ -249,6 +249,7 @@ Following is a list of all available commands and links to their source document
 * [`route53 records`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/route53/records.md)
 * [`s3`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/index.md)
 * [`s3 acl`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/acl.md)
+* [`s3 content`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/content.md)
 * [`s3 encryption`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/encryption.md)
 * [`s3 lifecycle`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/lifecycle.md)
 * [`s3 location`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/s3/location.md)

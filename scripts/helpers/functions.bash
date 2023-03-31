@@ -17,7 +17,7 @@ echoerrmsg() {
 export -f echoerrmsg
 
 echosuccess() {
-    echo -e "$GREEN""$@""$NC"
+    echo -e "$GREEN""$@""$NC" 1>&2;
 }
 
 export -f echosuccess

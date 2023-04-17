@@ -98,14 +98,9 @@ while true; do
           if [[ -n "$eventId" && ! -v SEEN["$eventId"] && ! -z "$message" ]]
           then
               SEEN[$eventId]=
-              OUTPUT_STORE+="$message\n"
+              printf "%s\n" "$message"
           fi
       done <<< "$EVENTS"
-    fi
-
-    if [[ ! -z "$OUTPUT_STORE" ]]
-    then
-      echo -ne "$OUTPUT_STORE"
     fi
 
     if [[ -v WATCH ]]

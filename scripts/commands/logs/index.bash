@@ -34,6 +34,7 @@ while getopts "wGSf:s:e:tip:" opt; do
         S) SHOW_PRINT_STREAM=y ;;
         i) PRINT_INGESTION=y ;;
         t) PRINT_TIMESTAMP=y ;;
+        *) echo "Unsupported Flag" && exit 1
     esac
 done
 shift $(($OPTIND-1))
@@ -50,7 +51,7 @@ LOG_STREAMS_FILTER=""
 
 if [[ $SECOND_RESOURCE =~ .*[a-zA-Z0-9]+.* ]]
 then
-  LOG_STREAMS=$(awscli logs describe-log-streams --log-group-name $SELECTED --query "logStreams[$(auto_filter logStreamName -- $SECOND_RESOURCE)].logStreamName" --output text)
+  LOG_STREAMS=$(awscli logs describe-log-streams --log-group-name "$SELECTED" --query "logStreams[$(auto_filter logStreamName -- $SECOND_RESOURCE)].logStreamName" --output text)
   if [[ ! -z "$LOG_STREAMS" ]]
   then
     LOG_STREAMS_FILTER="--log-stream-names $LOG_STREAMS"
@@ -100,7 +101,7 @@ while true; do
               SEEN[$eventId]=
               printf "%s\n" "$message"
           fi
-      done <<< "$EVENTS"
+      done <<< "${EVENTS}"
     fi
 
     if [[ -v WATCH ]]
@@ -109,10 +110,14 @@ while true; do
     else
         sleep 2
         # Limit the starting time after first run so we're not loading lots of events. We can't set it to now
-        # as otherwise if events are ingested late they might not be picked up.
-        # Disabled for now as setting it to a large value is an issue when setting a Starting Time of < 10 minutes
-        # as it will first print events with the starting date, but then add new ones fromt eh now longer ago starting time.
-        # Needs to be addressed with a better fix in the future
-        # AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
+        # as otherwise if events are ingested late they might not be picked up. The timestamp used in the
+        # aws cli call is not based on the ingestion timestamp, but the timestamp an event occured. Thus
+        # if we set it to now or too close to the current time some events with older timestamps might be ingested
+        # late and therefore not found.
+        AWS_LOGS_NEW_START_TIME=" --start-time $(time_parsing -2minutes) "
+        if [[ "$AWS_LOGS_START_TIME" < "$AWS_LOGS_NEW_START_TIME" ]]
+        then
+          AWS_LOGS_START_TIME="$AWS_LOGS_NEW_START_TIME"
+        fi
     fi
 done

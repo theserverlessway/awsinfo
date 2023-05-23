@@ -1,0 +1,1 @@
+awscli apigateway get-account --output table

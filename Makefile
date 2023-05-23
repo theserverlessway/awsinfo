@@ -65,8 +65,7 @@ EXAMPLE_DIR=scripts/command_example
 SERVICE=${shell }
 
 create:
-	@read -p "Enter the Service Name: " SERVICE_NAME; \
-	if [ -z "$$SERVICE_NAME" ]; then echo "You need to set the Service Name"; exit 1; fi; \
+	@if [ -z "$$SERVICE_NAME" ]; then read -p "Enter the Service Name: " SERVICE_NAME; fi; \
 	read -p "Enter the Command Name [index]: " COMMAND_NAME_INPUT; \
 	COMMAND_NAME=$${COMMAND_NAME_INPUT:-index}; \
 	mkdir -p $(COMMANDS_DIR)/$$SERVICE_NAME && cp $(EXAMPLE_DIR)/command.bash $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.bash && cp $(EXAMPLE_DIR)/command.md $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.md

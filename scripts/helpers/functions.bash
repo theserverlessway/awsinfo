@@ -66,3 +66,11 @@ function print_table(){
 function print_table_excluding(){
   jq -Mcr "del($1)" | print_table $2
 }
+
+function time_parsing() {
+    timestamp=$(awsinfo_date --date "$1" +%s)
+    if [[ "$?" -ne 0 ]]; then
+        exit 1;
+    fi
+    echo $((timestamp * 1000))
+}

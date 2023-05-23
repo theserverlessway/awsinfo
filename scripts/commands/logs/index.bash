@@ -1,11 +1,3 @@
-function time_parsing() {
-    timestamp=$(awsinfo_date --date "$1" +%s)
-    if [[ "$?" -ne 0 ]]; then
-        exit 1;
-    fi
-    echo $((timestamp * 1000))
-}
-
 AWS_LOGS_END_TIME=""
 AWS_LOGS_START_TIME=" --start-time $(time_parsing -10minutes) "
 AWS_LOGS_FILTER_OPTION=""

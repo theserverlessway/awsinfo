@@ -103,7 +103,7 @@ while true; do
         sleep 2
         # Limit the starting time after first run so we're not loading lots of events. We can't set it to now
         # as otherwise if events are ingested late they might not be picked up. The timestamp used in the
-        # aws cli call is not based on the ingestion timestamp, but the timestamp an event occured. Thus
+        # AWSCli call is not based on the ingestion timestamp, but the timestamp an event occured. Thus
         # if we set it to now or too close to the current time some events with older timestamps might be ingested
         # late and therefore not found.
         AWS_LOGS_NEW_START_TIME=" --start-time $(time_parsing -2minutes) "

@@ -51,7 +51,7 @@ function auto_filter(){
       do
         FILTERS+=($(filter_query $param $SECOND_RESOURCE))
       done
-      echo ?$(join "||" ${FILTERS[@]})
+      echo ?$(join "||" "${FILTERS[@]}")
     fi
   fi
 }
@@ -64,7 +64,7 @@ function auto_filter_joined(){
     then
       FILTERS=()
       FILTER_STRING="join('',[$(join "||''," $FIRST_RESOURCE)||''])"
-      echo ?$(filter_query $FILTER_STRING $SECOND_RESOURCE)
+      echo ?$(filter_query "$FILTER_STRING" "$SECOND_RESOURCE")
     fi
   fi
 }

@@ -1,0 +1,7 @@
+# `awsinfo apigatewayv2 domain-names [filters]+`
+
+List all Domain Names
+
+## Filter matches against
+
+* DomainName

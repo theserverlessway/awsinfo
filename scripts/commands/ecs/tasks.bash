@@ -28,11 +28,11 @@ if [[ ! -z "$TASK_FAMILY" ]]; then
   TASK_FAMILY="--family $SELECTED"
 fi
 
-CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- $FIRST_RESOURCE)].[@]")
+CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- "$FIRST_RESOURCE")].[@]")
 select_one Cluster "$CLUSTERS"
 
 TASKS=$(awscli ecs list-tasks --output text $TASK_FAMILY $TASK_NAME --cluster $SELECTED $TASK_STATUS --query taskArns | sed "s/None//g")
-FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- "$SECOND_RESOURCE")
 
 FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster $SELECTED --query \"tasks[$FILTER].taskArn\" --output text --tasks \$0 \$@")
 

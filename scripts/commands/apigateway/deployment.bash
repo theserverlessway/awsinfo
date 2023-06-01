@@ -1,6 +1,6 @@
 source $CURRENT_COMMAND_DIR/rest-apis.sh
 
-FILTER=$(auto_filter_joined description id  -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined description id  -- "$SECOND_RESOURCE")
 
 DEPLOYMENTS_LIST=$(awscli apigateway get-deployments --rest-api-id $SELECTED --output text --query "items[$FILTER].[id]")
 

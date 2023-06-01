@@ -1,6 +1,6 @@
 source $CURRENT_COMMAND_DIR/rest-apis.sh
 
-FILTER=$(auto_filter_joined id name description contentType  -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined id name description contentType  -- "$SECOND_RESOURCE")
 
 awscli apigateway get-models --rest-api-id $SELECTED --output table --query "items[$FILTER].{
   \"1.Id\":id,

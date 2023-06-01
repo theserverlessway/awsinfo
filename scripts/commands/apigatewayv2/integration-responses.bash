@@ -1,6 +1,6 @@
 source $CURRENT_COMMAND_DIR/apis.sh
 
-FILTER=$(auto_filter_joined IntegrationId IntegrationMethod IntegrationType ConnectionType Description -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined IntegrationId IntegrationMethod IntegrationType ConnectionType Description -- "$SECOND_RESOURCE")
 
 INTEGRATIONS_LIST=$(awscli apigatewayv2 get-integrations --api-id $SELECTED --output text --query "Items[$FILTER].[IntegrationId]")
 

@@ -1,4 +1,4 @@
-FILTER=$(auto_filter RouteTableId "$TAG_NAME" VpcId -- $@)
+FILTER=$(auto_filter_joined RouteTableId "$TAG_NAME" VpcId -- $@)
 ROUTE_TABLES_LISTING=$(awscli ec2 describe-route-tables --output text --query "RouteTables[$FILTER].[RouteTableId]")
 
 select_one RouteTable "$ROUTE_TABLES_LISTING"

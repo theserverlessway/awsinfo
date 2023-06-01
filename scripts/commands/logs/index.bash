@@ -43,7 +43,7 @@ LOG_STREAMS_FILTER=""
 
 if [[ $SECOND_RESOURCE =~ .*[a-zA-Z0-9]+.* ]]
 then
-  LOG_STREAMS=$(awscli logs describe-log-streams --log-group-name "$SELECTED" --query "logStreams[$(auto_filter logStreamName -- $SECOND_RESOURCE)].logStreamName" --output text)
+  LOG_STREAMS=$(awscli logs describe-log-streams --log-group-name "$SELECTED" --query "logStreams[$(auto_filter_joined logStreamName -- $SECOND_RESOURCE)].logStreamName" --output text)
   if [[ ! -z "$LOG_STREAMS" ]]
   then
     LOG_STREAMS_FILTER="--log-stream-names $LOG_STREAMS"

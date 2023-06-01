@@ -1,4 +1,4 @@
-COMPUTE_ENVIRONMENTS=$(awscli batch describe-compute-environments --output text --query "sort_by(computeEnvironments,&computeEnvironmentName)[$(auto_filter status state computeEnvironmentName type computeResources.type -- $@)].[computeEnvironmentName]")
+COMPUTE_ENVIRONMENTS=$(awscli batch describe-compute-environments --output text --query "sort_by(computeEnvironments,&computeEnvironmentName)[$(auto_filter_joined status state computeEnvironmentName type computeResources.type -- $@)].[computeEnvironmentName]")
 select_one ComputeEnvironment "$COMPUTE_ENVIRONMENTS"
 
 awscli batch describe-compute-environments --compute-environments $SELECTED --output table --query "computeEnvironments[0].{

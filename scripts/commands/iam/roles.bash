@@ -1,1 +1,1 @@
-awscli iam list-roles --output table --query "Roles[$(auto_filter RoleName RoleId -- $@)].{\"1.Name\":RoleName,\"2.Id\":RoleId,\"3.Arn\":Arn}"
+awscli iam list-roles --output table --query "Roles[$(auto_filter_joined RoleName RoleId -- $@)].{\"1.Name\":RoleName,\"2.Id\":RoleId,\"3.Arn\":Arn}"

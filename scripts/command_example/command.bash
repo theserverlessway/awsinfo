@@ -1,18 +1,27 @@
 # Example of a Simple Command
 
-awscli cloudformation describe-stacks --output table --query "sort_by(Stacks,&StackName)[$(auto_filter StackName -- $@)].{
+awscli cloudformation describe-stacks --output table --query "sort_by(Stacks,&StackName)[$(auto_filter_joined StackName -- $@)].{
   \"1.Name\":StackName,
   \"2.Status\":StackStatus,
   \"3.RoleARN\": RoleARN,
   \"4.CreationTime\":CreationTime,
   \"5.LastUpdated\":LastUpdatedTime}"
 
+
+
+
+
 # Example of a Simple Listing, Filtering and Command
 
-STACK_LISTING=$(awscli cloudformation describe-stacks --output text --query "sort_by(Stacks,&StackName)[$(auto_filter StackName -- $@)].[StackName]")
+STACK_LISTING=$(awscli cloudformation describe-stacks --output text --query "sort_by(Stacks,&StackName)[$(auto_filter_joined StackName -- $@)].[StackName]")
 select_one Stack "$STACK_LISTING"
 
 awscli cloudformation describe-stacks --stack-name $SELECTED --output table
+
+
+
+
+
 
 # Example of Two Step Filtering
 # Here we want to get all details for a specific ChangeSet.
@@ -24,7 +33,7 @@ split_args "$@"
 # Then we're listing all available Stacks and filter them based on their StackName and
 # $FIRST_RESOURCE (which is the filter values before --).
 
-STACK_LISTING=$(awscli cloudformation describe-stacks --output text --query "sort_by(Stacks,&StackName)[$(auto_filter StackName -- $FIRST_RESOURCE)].[StackName]")
+STACK_LISTING=$(awscli cloudformation describe-stacks --output text --query "sort_by(Stacks,&StackName)[$(auto_filter_joined StackName -- $FIRST_RESOURCE)].[StackName]")
 
 # Once we've listed all the Stacks we need to select one to use. In case there is only one in our list of filtered
 # Stacks it will simply select that one. In case there are multiple it will print all and select the first.
@@ -35,7 +44,7 @@ select_one Stack "$STACK_LISTING"
 STACK=$SELECTED
 
 # Here we're listing all ChangeSets and filter them on ChangeSetName and with the second Filter Resource.
-CHANGE_SETS=$(awscli cloudformation list-change-sets --stack-name $SELECTED --query "Summaries[$(auto_filter ChangeSetName -- $SECOND_RESOURCE)].[ChangeSetName]" --output text)
+CHANGE_SETS=$(awscli cloudformation list-change-sets --stack-name $SELECTED --query "Summaries[$(auto_filter_joined ChangeSetName -- $SECOND_RESOURCE)].[ChangeSetName]" --output text)
 
 # And again Select a ChangeSet as before and set the SELECTED variable to that Change Set
 select_one CHANGE-SET "$CHANGE_SETS"

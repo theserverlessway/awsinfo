@@ -1,1 +1,1 @@
-awscli route53 list-hosted-zones --output table --query "HostedZones[$(auto_filter Name Id -- $@)].{\"1.Name\":Name,\"2.Id\":Id,\"3.Private\":Config.PrivateZone,\"4.RecordSets\":ResourceRecordSetCount}"
+awscli route53 list-hosted-zones --output table --query "HostedZones[$(auto_filter_joined Name Id -- $@)].{\"1.Name\":Name,\"2.Id\":Id,\"3.Private\":Config.PrivateZone,\"4.RecordSets\":ResourceRecordSetCount}"

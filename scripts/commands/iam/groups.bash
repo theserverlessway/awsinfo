@@ -1,1 +1,1 @@
-awscli iam list-groups --output table --query "Groups[$(auto_filter GroupName GroupId Path -- $@)].{\"1.Name\":GroupName,\"2.Id\":GroupId,\"3.Path\":Path,\"4.Arn\":Arn}"
+awscli iam list-groups --output table --query "Groups[$(auto_filter_joined GroupName GroupId Path -- $@)].{\"1.Name\":GroupName,\"2.Id\":GroupId,\"3.Path\":Path,\"4.Arn\":Arn}"

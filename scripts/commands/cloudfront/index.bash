@@ -1,4 +1,4 @@
-FILTER=$(auto_filter Id DomainName Status "join(',',Aliases.Items||[''])" -- $@)
+FILTER=$(auto_filter_joined Id DomainName Status "join(',',Aliases.Items||[''])" -- $@)
 
 awscli cloudfront list-distributions --output table --query "DistributionList.Items[$FILTER].{ \
   \"1.Id\": Id, \

@@ -1,9 +1,9 @@
 split_args "$@"
 
-PIPELINES=$(awscli codepipeline list-pipelines --output text --query "pipelines[$(auto_filter name version -- $FIRST_RESOURCE)].[name]")
+PIPELINES=$(awscli codepipeline list-pipelines --output text --query "pipelines[$(auto_filter_joined name version -- $FIRST_RESOURCE)].[name]")
 select_one Pipeline "$PIPELINES"
 
-FILTER=$(auto_filter pipelineExecutionId status "join('',sourceRevisions[].revisionId||[''])" -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined pipelineExecutionId status "join('',sourceRevisions[].revisionId||[''])" -- $SECOND_RESOURCE)
 
 awscli codepipeline list-pipeline-executions --pipeline-name "$SELECTED" --output table --query "pipelineExecutionSummaries[$FILTER].{
   \"1.ExecutionId\":pipelineExecutionId,

@@ -4,4 +4,4 @@ KEYS=$(awscli kms list-keys --output text --query "sort_by(Keys,&KeyArn)[$(auto_
 
 select_one Key "$KEYS"
 
-awscli kms list-key-policies --key-id $SELECTED --output table --query "PolicyNames[$(auto_filter_joined @ -- "$SECOND_RESOURCE")]"
+awscli kms list-key-policies --key-id "$SELECTED" --output table --query "PolicyNames[$(auto_filter_joined @ -- "$SECOND_RESOURCE")]"

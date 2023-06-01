@@ -4,7 +4,7 @@ PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto
 # Stacks it will simply select that one. In case there are multiple it will print all and select the first.
 select_one Project "$PROJECTS"
 
-BUILD_IDS=$(awscli codebuild list-builds-for-project --project-name $SELECTED --output text --query "ids[].[@]" | head -n 99 )
+BUILD_IDS=$(awscli codebuild list-builds-for-project --project-name "$SELECTED" --output text --query "ids[].[@]" | head -n 99 )
 
 # Now we can call the `describe-change-set` command with the Stack and ChangeSet we selected above.
 # The output is set to table and we're using the Query option to select the values we want to have.

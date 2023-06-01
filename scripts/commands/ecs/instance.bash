@@ -18,11 +18,11 @@ select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
+INSTANCES=$(awscli ecs list-container-instances --output text --cluster "$SELECTED" $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
 
 select_one Instance "$INSTANCES"
 
-awscli ecs describe-container-instances --container-instances $SELECTED --cluster $CLUSTER  --output table \
+awscli ecs describe-container-instances --container-instances "$SELECTED" --cluster $CLUSTER  --output table \
   --query "containerInstances[].{ \
     \"1.Arn\":containerInstanceArn, \
     \"2.InstanceId\":ec2InstanceId, \

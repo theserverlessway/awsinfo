@@ -2,4 +2,4 @@ REPOSITORIES=$(awscli codecommit list-repositories --output text --query "reposi
 
 select_one Repository "$REPOSITORIES"
 
-awscli codecommit get-repository --repository-name $SELECTED --output table --query "repositoryMetadata"
+awscli codecommit get-repository --repository-name "$SELECTED" --output table --query "repositoryMetadata"

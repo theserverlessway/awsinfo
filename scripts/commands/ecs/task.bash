@@ -21,11 +21,11 @@ select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-TASKS=$(awscli ecs list-tasks --output text --cluster $SELECTED $TASK_STATUS --query taskArns[].[@])
+TASKS=$(awscli ecs list-tasks --output text --cluster "$SELECTED" "$TASK_STATUS" --query taskArns[].[@])
 
 FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- "$SECOND_RESOURCE")
-FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster $SELECTED --query \"tasks[$FILTER].[taskArn]\" --output text --tasks \$0 \$@")
+FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster "$SELECTED" --query \"tasks[$FILTER].[taskArn]\" --output text --tasks \$0 \$@")
 
 select_one Task "$FILTERED_TASKS"
 
-awscli ecs describe-tasks --tasks $SELECTED --cluster $CLUSTER  --output table --query tasks[0]
+awscli ecs describe-tasks --tasks "$SELECTED" --cluster $CLUSTER  --output table --query tasks[0]

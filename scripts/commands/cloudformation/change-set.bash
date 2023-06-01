@@ -6,7 +6,7 @@ select_one Stack "$STACK_LISTING"
 
 STACK=$SELECTED
 
-CHANGE_SETS=$(awscli cloudformation list-change-sets --stack-name $SELECTED --query "Summaries[$(auto_filter_joined ChangeSetName -- "$SECOND_RESOURCE")].[ChangeSetName]" --output text)
+CHANGE_SETS=$(awscli cloudformation list-change-sets --stack-name "$SELECTED" --query "Summaries[$(auto_filter_joined ChangeSetName -- "$SECOND_RESOURCE")].[ChangeSetName]" --output text)
 select_one CHANGE-SET "$CHANGE_SETS"
 
 awscli cloudformation describe-change-set --stack-name $STACK --change-set-name "$SELECTED" --output table --query "{

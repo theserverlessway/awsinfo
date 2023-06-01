@@ -17,7 +17,7 @@ FILTER=$(auto_filter_joined jobQueueName status "join('',computeEnvironmentOrder
 JOB_QUEUES=$(awscli batch describe-job-queues --output text --query "sort_by(jobQueues,&jobQueueName)[$FILTER].[jobQueueName]")
 select_one JobQueue "$JOB_QUEUES"
 
-awscli batch list-jobs --job-queue $SELECTED --output table --job-status "$JOBS_STATUS" \
+awscli batch list-jobs --job-queue "$SELECTED" --output table --job-status "$JOBS_STATUS" \
   --query "jobSummaryList[$(auto_filter_joined jobName jobId  status statusReason -- "$SECOND_RESOURCE")].{ \
     \"1.Id\":jobId, \
     \"2.Name\":jobName, \

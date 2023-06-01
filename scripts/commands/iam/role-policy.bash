@@ -8,7 +8,7 @@ ROLE=$SELECTED
 ROLES=$(awscli iam list-role-policies --role-name $ROLE --output text --query "PolicyNames[$(filter @ $SECOND_RESOURCE)].[@]")
 select_one Policy "$ROLES"
 
-awscli iam get-role-policy --role-name $ROLE --policy-name $SELECTED --output table --query "@.{
+awscli iam get-role-policy --role-name $ROLE --policy-name "$SELECTED" --output table --query "@.{
   \"PolicyStatement\":PolicyDocument.Statement[].{
     \"1.Effect\": Effect,
     \"2.Action\": [Action][],

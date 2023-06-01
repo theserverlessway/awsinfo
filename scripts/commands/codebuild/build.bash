@@ -4,7 +4,7 @@ PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto
 
 select_one Project "$PROJECTS"
 
-BUILD_IDS=$(awscli codebuild list-builds-for-project --project-name $SELECTED --output text --query "ids[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
+BUILD_IDS=$(awscli codebuild list-builds-for-project --project-name "$SELECTED" --output text --query "ids[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
 
 select_one Build "$BUILD_IDS"
 

@@ -9,4 +9,4 @@ PIPELINE_EXECUTIONS=$(awscli codepipeline list-pipeline-executions --pipeline-na
 
 select_one PipelineExecution "$PIPELINE_EXECUTIONS"
 
-awscli codepipeline get-pipeline-execution --pipeline-name "$PIPELINE" --pipeline-execution-id $SELECTED --output table
+awscli codepipeline get-pipeline-execution --pipeline-name "$PIPELINE" --pipeline-execution-id "$SELECTED" --output table

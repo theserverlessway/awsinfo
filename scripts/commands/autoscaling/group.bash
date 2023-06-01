@@ -2,4 +2,4 @@ AUTOSCALING_GROUPS=$(awscli autoscaling describe-auto-scaling-groups --output te
 
 select_one AutoScalingGroup "$AUTOSCALING_GROUPS"
 
-awscli autoscaling describe-auto-scaling-groups --auto-scaling-group-names $SELECTED --output table --query "AutoScalingGroups[0]"
+awscli autoscaling describe-auto-scaling-groups --auto-scaling-group-names "$SELECTED" --output table --query "AutoScalingGroups[0]"

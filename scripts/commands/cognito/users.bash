@@ -11,4 +11,4 @@ LAST_NAME=$(attribute name)
 FIRST_NAME=$(attribute given_name)
 EMAIL=$(attribute email)
 
-awscli cognito-idp list-users --user-pool-id $SELECTED --output table --query "Users[$(auto_filter_joined Username $LAST_NAME $FIRST_NAME $EMAIL -- "$SECOND_RESOURCE")].{\"1.Username\": Username,\"2.Status\": UserStatus, \"3.Email\": $EMAIL, \"3.FirstName\": $FIRST_NAME, \"4.LastName\": $LAST_NAME}"
+awscli cognito-idp list-users --user-pool-id "$SELECTED" --output table --query "Users[$(auto_filter_joined Username $LAST_NAME $FIRST_NAME $EMAIL -- "$SECOND_RESOURCE")].{\"1.Username\": Username,\"2.Status\": UserStatus, \"3.Email\": $EMAIL, \"3.FirstName\": $FIRST_NAME, \"4.LastName\": $LAST_NAME}"

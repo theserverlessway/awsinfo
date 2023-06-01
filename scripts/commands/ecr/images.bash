@@ -5,7 +5,7 @@ select_one Repository "$REPOSITORY_LISTING"
 
 FILTER=$(auto_filter_joined imageDigest "(imageTags||[''])|join(',',@)" -- "$SECOND_RESOURCE")
 
-awscli ecr describe-images --repository-name $SELECTED --output table --query "sort_by(imageDetails,&imagePushedAt)[$FILTER].{
+awscli ecr describe-images --repository-name "$SELECTED" --output table --query "sort_by(imageDetails,&imagePushedAt)[$FILTER].{
   \"1.Digest\":imageDigest,
   \"2.Tags\":join(', ', sort(imageTags||[''])),
   \"3.ImageSize(Bytes)\":imageSizeInBytes,

@@ -5,4 +5,4 @@ select_one Pipeline "$PIPELINES"
 
 FILTER=$(auto_filter_joined "join('',actionStates[].actionName||[''])" -- "$SECOND_RESOURCE")
 
-awscli codepipeline get-pipeline-state --name $SELECTED --output table --query "stageStates[$FILTER].actionStates[] | [$(auto_filter_joined actionName -- "$SECOND_RESOURCE")]"
+awscli codepipeline get-pipeline-state --name "$SELECTED" --output table --query "stageStates[$FILTER].actionStates[] | [$(auto_filter_joined actionName -- "$SECOND_RESOURCE")]"

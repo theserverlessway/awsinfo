@@ -3,4 +3,4 @@ FILTER=$(auto_filter_joined AvailabilityZone Description NetworkInterfaceId Requ
 NETWORK_INTERFACES=$(awscli ec2 describe-network-interfaces --output text --query "NetworkInterfaces[$FILTER].[NetworkInterfaceId]")
 select_one NetworkInterface "$NETWORK_INTERFACES"
 
-awscli ec2 describe-network-interfaces --network-interface-ids $SELECTED --output table --query "NetworkInterfaces[0]"
+awscli ec2 describe-network-interfaces --network-interface-ids "$SELECTED" --output table --query "NetworkInterfaces[0]"

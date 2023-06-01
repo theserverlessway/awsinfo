@@ -8,4 +8,4 @@ CLUSTER=$SELECTED
 SERVICES=$(awscli ecs list-services --cluster $CLUSTER --output text --query "serviceArns[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
 select_one Service "$SERVICES"
 
-awscli ecs describe-services --cluster $CLUSTER --services $SELECTED --query "services[0]" --output json | print_table_excluding .events DescribeService
+awscli ecs describe-services --cluster $CLUSTER --services "$SELECTED" --query "services[0]" --output json | print_table_excluding .events DescribeService

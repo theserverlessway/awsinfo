@@ -7,4 +7,4 @@ INSTANCE_LIST=$(awscli ec2 describe-instances --output text $EC2_FILTER --query 
 
 select_one Instance "$INSTANCE_LIST"
 
-awscli ec2 describe-instances --instance-ids $SELECTED --output table $EC2_FILTER --query "sort_by(Reservations,&Instances[0].LaunchTime)[].Instances[0][]"
+awscli ec2 describe-instances --instance-ids "$SELECTED" --output table $EC2_FILTER --query "sort_by(Reservations,&Instances[0].LaunchTime)[].Instances[0][]"

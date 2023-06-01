@@ -4,4 +4,4 @@ ENDPOINTS=$(awscli ec2 describe-vpc-endpoints --output text --query "VpcEndpoint
 
 select_one Endpoint "$ENDPOINTS"
 
-awscli ec2 describe-vpc-endpoints --vpc-endpoint-ids $SELECTED --output table
+awscli ec2 describe-vpc-endpoints --vpc-endpoint-ids "$SELECTED" --output table

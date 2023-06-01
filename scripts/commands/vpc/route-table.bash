@@ -3,4 +3,4 @@ ROUTE_TABLES_LISTING=$(awscli ec2 describe-route-tables --output text --query "R
 
 select_one RouteTable "$ROUTE_TABLES_LISTING"
 
-awscli ec2 describe-route-tables --output table --route-table-ids $SELECTED --query "RouteTables[0]"
+awscli ec2 describe-route-tables --output table --route-table-ids "$SELECTED" --query "RouteTables[0]"

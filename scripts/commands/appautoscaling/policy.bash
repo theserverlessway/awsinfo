@@ -6,5 +6,5 @@ POLICY_LIST=$(awscli application-autoscaling describe-scaling-policies --service
 
 select_one Policy "$POLICY_LIST"
 
-awscli application-autoscaling describe-scaling-policies --policy-names $SELECTED --service-namespace $FIRST_RESOURCE --output table --query "ScalingPolicies[0]"
+awscli application-autoscaling describe-scaling-policies --policy-names "$SELECTED" --service-namespace $FIRST_RESOURCE --output table --query "ScalingPolicies[0]"
 

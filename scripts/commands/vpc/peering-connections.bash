@@ -1,4 +1,4 @@
-awscli ec2 describe-vpc-peering-connections --output table --query "VpcPeeringConnections[$(auto_filter_joined AccepterVpcInfo.VpcId AccepterVpcInfo.CidrBlock RequesterVpcInfo.VpcId RequesterVpcInfo.CidrBlock VpcPeeringConnectionId Status.Message -- $@)].{
+awscli ec2 describe-vpc-peering-connections --output table --query "VpcPeeringConnections[$(auto_filter_joined AccepterVpcInfo.VpcId AccepterVpcInfo.CidrBlock RequesterVpcInfo.VpcId RequesterVpcInfo.CidrBlock VpcPeeringConnectionId Status.Message -- "$@")].{
   \"1.Id\":VpcPeeringConnectionId,
   \"2.Status\":Status.Message,
   \"3.RequesterVPC\":RequesterVpcInfo.VpcId,

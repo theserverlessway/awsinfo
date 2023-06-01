@@ -1,1 +1,1 @@
-awscli iam list-policies --scope Local --output table --query "Policies[$(auto_filter_joined PolicyName PolicyId Path -- $@)].{\"1.Name\":PolicyName,\"2.Id\":PolicyId,\"3.AttachedTo\":AttachmentCount,\"4.Path\":Path,\"5.Arn\":Arn}"
+awscli iam list-policies --scope Local --output table --query "Policies[$(auto_filter_joined PolicyName PolicyId Path -- "$@")].{\"1.Name\":PolicyName,\"2.Id\":PolicyId,\"3.AttachedTo\":AttachmentCount,\"4.Path\":Path,\"5.Arn\":Arn}"

@@ -1,4 +1,4 @@
-PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto_filter_joined @ -- $@)].[@]")
+PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto_filter_joined @ -- "$@")].[@]")
 
 # Once we've listed all the Stacks we need to select one to use. In case there is only one in our list of filtered
 # Stacks it will simply select that one. In case there are multiple it will print all and select the first.

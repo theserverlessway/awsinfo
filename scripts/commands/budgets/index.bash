@@ -1,6 +1,6 @@
 ACCOUNT_ID=$(awscli sts get-caller-identity --output text --query "Account")
 
-awscli budgets describe-budgets --account-id $ACCOUNT_ID --output table --query "Budgets[$(auto_filter_joined BudgetName -- $@)].{
+awscli budgets describe-budgets --account-id $ACCOUNT_ID --output table --query "Budgets[$(auto_filter_joined BudgetName -- "$@")].{
   \"1.Name\":BudgetName,
   \"2.Limit\":join(' ', [BudgetLimit.Amount, BudgetLimit.Unit]),
   \"3.TimeUnit\":TimeUnit,

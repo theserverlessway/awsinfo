@@ -1,4 +1,4 @@
-awscli logs describe-export-tasks --output table --query "exportTasks[$(auto_filter_joined taskId taskName logGroupName destination status.code -- $@)].{
+awscli logs describe-export-tasks --output table --query "exportTasks[$(auto_filter_joined taskId taskName logGroupName destination status.code -- "$@")].{
   \"1.Id\": taskId,
   \"2.Name\": taskName,
   \"3.LogGroup\": logGroupName,

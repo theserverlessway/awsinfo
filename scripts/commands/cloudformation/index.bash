@@ -1,1 +1,1 @@
-awscli cloudformation describe-stacks --output table --query "sort_by(Stacks,&StackName)[$(auto_filter_joined StackName -- $@)].{\"1.Name\":StackName,\"2.Status\":StackStatus,\"3.RoleARN\": RoleARN, \"4.CreationTime\":CreationTime,\"5.LastUpdated\":LastUpdatedTime}"
+awscli cloudformation describe-stacks --output table --query "sort_by(Stacks,&StackName)[$(auto_filter_joined StackName -- "$@")].{\"1.Name\":StackName,\"2.Status\":StackStatus,\"3.RoleARN\": RoleARN, \"4.CreationTime\":CreationTime,\"5.LastUpdated\":LastUpdatedTime}"

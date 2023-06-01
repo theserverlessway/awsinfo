@@ -1,4 +1,4 @@
-FILTER=$(auto_filter_joined AlarmName StateValue "Namespace||['']" "MetricName||['']" -- $@)
+FILTER=$(auto_filter_joined AlarmName StateValue "Namespace||['']" "MetricName||['']" -- "$@")
 
 awscli cloudwatch describe-alarms --output table --query "MetricAlarms[$FILTER].{
   \"1.Name\":AlarmName,

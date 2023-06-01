@@ -1,4 +1,4 @@
-DELIVERY_STREAMS=$(awscli firehose list-delivery-streams --limit 5000 --output text --query "DeliveryStreamNames[$(auto_filter_joined @ -- $@)].[@]")
+DELIVERY_STREAMS=$(awscli firehose list-delivery-streams --limit 5000 --output text --query "DeliveryStreamNames[$(auto_filter_joined @ -- "$@")].[@]")
 
 select_one DeliveryStream "$DELIVERY_STREAMS"
 

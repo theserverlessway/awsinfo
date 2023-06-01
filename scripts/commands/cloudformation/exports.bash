@@ -1,1 +1,1 @@
-awscli cloudformation list-exports --output table --query "Exports[$(auto_filter_joined ExportingStackId Name -- $@)].{\"1.Name\":Name,\"2.Value\":Value}"
+awscli cloudformation list-exports --output table --query "Exports[$(auto_filter_joined ExportingStackId Name -- "$@")].{\"1.Name\":Name,\"2.Value\":Value}"

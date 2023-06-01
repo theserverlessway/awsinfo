@@ -1,1 +1,1 @@
-awscli cognito-idp list-user-pools --max-results 60 --output table --query "UserPools[$(auto_filter_joined Id Name -- $@)].{\"1.Name\":Name,\"2.Id\":Id, \"3.Triggers\": length(LambdaConfig)}"
+awscli cognito-idp list-user-pools --max-results 60 --output table --query "UserPools[$(auto_filter_joined Id Name -- "$@")].{\"1.Name\":Name,\"2.Id\":Id, \"3.Triggers\": length(LambdaConfig)}"

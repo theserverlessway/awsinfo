@@ -1,4 +1,4 @@
-PIPELINES=$(awscli codepipeline list-pipelines --output text --query "pipelines[$(auto_filter_joined name version -- $@)].[name]")
+PIPELINES=$(awscli codepipeline list-pipelines --output text --query "pipelines[$(auto_filter_joined name version -- "$@")].[name]")
 
 select_one Pipeline "$PIPELINES"
 

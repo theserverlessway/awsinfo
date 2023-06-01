@@ -40,22 +40,6 @@ function filter(){
     fi
 }
 
-function auto_filter(){
-  if [[ $# -gt 1 ]]
-  then
-    split_args "$@"
-    if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
-    then
-      declare -a AUTO_FILTER
-      for param in $FIRST_RESOURCE
-      do
-        AUTO_FILTER+=("$(filter_query $param $SECOND_RESOURCE)")
-      done
-      echo ?"$(join "||" "${AUTO_FILTER[@]}")"
-    fi
-  fi
-}
-
 function auto_filter_joined(){
   if [[ $# -gt 1 ]]
   then

@@ -1,4 +1,4 @@
-IAM_GROUPS=$(awscli iam list-groups --output text --query "Groups[$(auto_filter_joined GroupName GroupId Path -- $@)].[GroupName]")
+IAM_GROUPS=$(awscli iam list-groups --output text --query "Groups[$(auto_filter_joined GroupName GroupId Path -- "$@")].[GroupName]")
 
 select_one Group "$IAM_GROUPS"
 

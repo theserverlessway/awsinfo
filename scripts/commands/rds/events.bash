@@ -7,7 +7,7 @@ while getopts "h:" opt; do
 done
 shift $(($OPTIND-1))
 
-awscli rds describe-events --output table --duration $DURATION --query "reverse(sort_by(Events,&Date))[$(auto_filter_joined SourceArn SourceType Message -- $@)].{
+awscli rds describe-events --output table --duration $DURATION --query "reverse(sort_by(Events,&Date))[$(auto_filter_joined SourceArn SourceType Message -- "$@")].{
   \"1.Source\":SourceIdentifier,
   \"2.Type\":SourceType,
   \"3.Message\":Message,

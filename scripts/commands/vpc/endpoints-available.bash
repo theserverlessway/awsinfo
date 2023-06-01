@@ -1,4 +1,4 @@
-FILTER=$(auto_filter_joined "join('',ServiceType[].ServiceType||[''])" ServiceName Owner "join('',AvailabilityZones||[])" -- $@)
+FILTER=$(auto_filter_joined "join('',ServiceType[].ServiceType||[''])" ServiceName Owner "join('',AvailabilityZones||[])" -- "$@")
 
 awscli ec2 describe-vpc-endpoint-services --output table \
   --query "ServiceDetails[$FILTER].{ \

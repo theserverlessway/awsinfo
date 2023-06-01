@@ -1,4 +1,4 @@
-FILTER=$(auto_filter_joined VpcEndpointId VpcEndpointType VpcId ServiceName "join('',SubnetIds)" -- $@)
+FILTER=$(auto_filter_joined VpcEndpointId VpcEndpointType VpcId ServiceName "join('',SubnetIds)" -- "$@")
 
 awscli ec2 describe-vpc-endpoints --output table \
   --query "VpcEndpoints[$FILTER].{

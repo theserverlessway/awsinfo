@@ -1,1 +1,1 @@
-awscli ec2 describe-key-pairs --output table --query "KeyPairs[$(auto_filter_joined KeyName KeyFingerprint -- $@)].{\"1.Name\":KeyName,\"2.Fingerprint\":KeyFingerprint}"
+awscli ec2 describe-key-pairs --output table --query "KeyPairs[$(auto_filter_joined KeyName KeyFingerprint -- "$@")].{\"1.Name\":KeyName,\"2.Fingerprint\":KeyFingerprint}"

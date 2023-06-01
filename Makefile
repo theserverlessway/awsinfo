@@ -71,4 +71,4 @@ create:
 	mkdir -p $(COMMANDS_DIR)/$$SERVICE_NAME && cp $(EXAMPLE_DIR)/command.bash $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.bash && cp $(EXAMPLE_DIR)/command.md $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.md
 
 shellcheck:
-	find ./scripts/ -type f -name "*.bash" -o -name "*.sh" | xargs -tn 1 shellcheck
+	find ./scripts/ -type f -name "*.bash" -o -name "*.sh" | xargs -n 1 shellcheck -f gcc

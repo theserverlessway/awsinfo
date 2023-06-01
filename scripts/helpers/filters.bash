@@ -26,7 +26,7 @@ function filter_query(){
             FILTERS[$#]="contains(to_string($item),'$1')"
             shift
         done
-        echo "$(join '&&' ${FILTERS[@]})"
+        echo "$(join '&&' "${FILTERS[@]}")"
     else
         echo "true==true"
     fi
@@ -46,12 +46,12 @@ function auto_filter(){
     split_args "$@"
     if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
     then
-      FILTERS=()
+      declare -a AUTO_FILTER
       for param in $FIRST_RESOURCE
       do
-        FILTERS+=($(filter_query $param $SECOND_RESOURCE))
+        AUTO_FILTER+=("$(filter_query $param $SECOND_RESOURCE)")
       done
-      echo ?$(join "||" "${FILTERS[@]}")
+      echo ?"$(join "||" "${AUTO_FILTER[@]}")"
     fi
   fi
 }
@@ -62,9 +62,8 @@ function auto_filter_joined(){
     split_args "$@"
     if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
     then
-      FILTERS=()
       FILTER_STRING="join('',[$(join "||''," $FIRST_RESOURCE)||''])"
-      echo ?$(filter_query "$FILTER_STRING" "$SECOND_RESOURCE")
+      echo ?"$(filter_query "$FILTER_STRING" $SECOND_RESOURCE)"
     fi
   fi
 }

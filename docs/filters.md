@@ -94,19 +94,16 @@ If you have a large enough CloudFormation stack (and of course the same applies 
 
 Many different commands allow you to split filters for the first and second resource with `--`. In the following Example we want to see all stack resources that are a RecordSet
 
-For CloudFormation stack resources AWSInfo matches against the LogicalId, PhysicalId and the Type. And because the match just has to be unique we don't even have to write out `RecordSet` but can simply write `Rec Set` or any other unique combination.
+For CloudFormation stack resources AWSInfo matches against the LogicalId, PhysicalId and the Type. And because the match just has to be unique we don't even have to write out `RecordSet` but can simply write `Rec Set` or any other unique combination. Filtering also happens across all supported attributes, so we can add multiple filter terms that can match on mutliple attributes, e.g. if we want to find all Record Sets that also have www in them we can use the following filter command. This makes filtering out similar resources easier as well as some attribute might share a very similar name, but resources can be differentiated by the combination of multiple attributes.
 
 ```
-○ → awsinfo-dev cloudformation resources tsl -- Rec Set
+○ → awsinfo-dev cloudformation resources tsl -- Rec Set www
 Selected Stack tslw-infrastructure
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 |                                                                ListStackResources                                                                |
 +-------------------------------------------+---------------------------+--------------------------+------------------+----------------------------+
 |                1.LogicalId                |       2.PhysicalId        |         3.Type           |    4.Status      |       5.LastUpdated        |
 +-------------------------------------------+---------------------------+--------------------------+------------------+----------------------------+
-|  TheserverlesswayComDistributionRecord    |  theserverlessway.com     |  AWS::Route53::RecordSet |  CREATE_COMPLETE |  2017-09-27T10:51:13.920Z  |
-|  TheserverlesswayComMXRecord              |  theserverlessway.com     |  AWS::Route53::RecordSet |  CREATE_COMPLETE |  2017-09-25T13:05:58.200Z  |
-|  TheserverlesswayComTXTRecord             |  theserverlessway.com     |  AWS::Route53::RecordSet |  UPDATE_COMPLETE |  2017-09-26T13:29:09.276Z  |
 |  WwwTheserverlesswayComDistributionRecord |  www.theserverlessway.com |  AWS::Route53::RecordSet |  CREATE_COMPLETE |  2017-09-27T10:48:38.026Z  |
 +-------------------------------------------+---------------------------+--------------------------+------------------+----------------------------+
 ```

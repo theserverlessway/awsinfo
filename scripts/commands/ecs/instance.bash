@@ -13,12 +13,12 @@ shift $(($OPTIND-1))
 
 split_args "$@"
 
-CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter @ -- $FIRST_RESOURCE)].[@]")
+CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- $FIRST_RESOURCE)].[@]")
 select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter @ -- $SECOND_RESOURCE)].[@]")
+INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query "containerInstanceArns[$(auto_filter_joined @ -- $SECOND_RESOURCE)].[@]")
 
 select_one Instance "$INSTANCES"
 

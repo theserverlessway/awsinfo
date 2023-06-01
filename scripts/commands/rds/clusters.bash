@@ -1,4 +1,4 @@
-awscli rds describe-db-clusters --output table --query "DBClusters[$(auto_filter DBClusterIdentifier Engine EngineVersion EngineMode Status Endpoint -- $@)].{ \
+awscli rds describe-db-clusters --output table --query "DBClusters[$(auto_filter_joined DBClusterIdentifier Engine EngineVersion EngineMode Status Endpoint -- $@)].{ \
     \"1.Id\":DBClusterIdentifier, \
     \"2.Engine\":join(':',[Engine, EngineVersion, EngineMode]), \
     \"3.Status\":Status, \

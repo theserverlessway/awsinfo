@@ -1,4 +1,4 @@
-awscli batch describe-compute-environments --output table --query "sort_by(computeEnvironments,&computeEnvironmentName)[$(auto_filter status state computeEnvironmentName type computeResources.type -- $@)].{
+awscli batch describe-compute-environments --output table --query "sort_by(computeEnvironments,&computeEnvironmentName)[$(auto_filter_joined status state computeEnvironmentName type computeResources.type -- $@)].{
   \"1.Name\":computeEnvironmentName,
   \"2.Type\":type,
   \"3.Provisioning\":computeResources.type,

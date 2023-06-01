@@ -1,5 +1,5 @@
 awscli efs describe-file-systems --output table \
-  --query "FileSystems[$(auto_filter FileSystemId LifeCycleState Name PerformanceMode ThroughputMode 'to_string(Encrypted)' -- $@)].{ \
+  --query "FileSystems[$(auto_filter_joined FileSystemId LifeCycleState Name PerformanceMode ThroughputMode 'to_string(Encrypted)' -- $@)].{ \
     \"1.Id\":FileSystemId, \
     \"2.Name\":Name, \
     \"3.State\":LifeCycleState, \

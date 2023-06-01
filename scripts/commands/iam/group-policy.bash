@@ -1,6 +1,6 @@
 split_args "$@"
 
-IAM_GROUPS=$(awscli iam list-groups --output text --query "Groups[$(auto_filter GroupName GroupId -- $FIRST_RESOURCE )].[GroupName]")
+IAM_GROUPS=$(awscli iam list-groups --output text --query "Groups[$(auto_filter_joined GroupName GroupId -- $FIRST_RESOURCE )].[GroupName]")
 select_one Group "$IAM_GROUPS"
 
 GROUP=$SELECTED

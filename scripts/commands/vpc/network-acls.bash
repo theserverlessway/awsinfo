@@ -1,6 +1,6 @@
 SUBNETS="join(',',Associations[].SubnetId)"
 
-FILTER=$(auto_filter VpcId NetworkAclId $SUBNETS $TAG_NAME -- $@)
+FILTER=$(auto_filter_joined VpcId NetworkAclId $SUBNETS $TAG_NAME -- $@)
 
 awscli ec2 describe-network-acls --output table --query "NetworkAcls[$FILTER].{
     \"1.Name\":$TAG_NAME,

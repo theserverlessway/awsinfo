@@ -1,7 +1,7 @@
 START_DATE=$(awsinfo_date --date="-14 days" +%Y-%m-%d)
 END_DATE=$(awsinfo_date +%Y-%m-%d)
 
-FILTER=$(auto_filter "join('',Keys)" -- $@)
+FILTER=$(auto_filter_joined "join('',Keys)" -- $@)
 
 SERVICES=$(awscli ce get-cost-and-usage --time-period Start=$START_DATE,End=$END_DATE --granularity DAILY --metrics UNBLENDED_COST --group-by Type=DIMENSION,Key=SERVICE --output text --query "ResultsByTime[].Groups[$FILTER].[join('',Keys)]" | sort | uniq)
 

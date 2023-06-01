@@ -1,5 +1,5 @@
 awscli ec2 describe-nat-gateways --output table \
-  --query "NatGateways[$(auto_filter_joined NatGatewayId State SubnetId VpcId -- $@)].{ \
+  --query "NatGateways[$(auto_filter_joined NatGatewayId State SubnetId VpcId -- "$@")].{ \
     \"1.Id\":NatGatewayId, \
     \"2.State\":State, \
     \"3.Vpc\":VpcId, \

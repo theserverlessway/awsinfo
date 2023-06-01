@@ -11,11 +11,11 @@ shift $(($OPTIND-1))
 
 split_args "$@"
 
-BUCKETS=$(awscli s3api list-buckets --output text --query "Buckets[$(auto_filter_joined Name -- $FIRST_RESOURCE)].[Name]")
+BUCKETS=$(awscli s3api list-buckets --output text --query "Buckets[$(auto_filter_joined Name -- "$FIRST_RESOURCE")].[Name]")
 
 select_one Bucket "$BUCKETS"
 
-awscli s3api list-objects-v2 --bucket $SELECTED ${PREFIX:-} ${MAX_ITEMS:-} --output table --query "$SORT_BY[$(auto_filter_joined Key  -- $SECOND_RESOURCE)].{
+awscli s3api list-objects-v2 --bucket "$SELECTED" ${PREFIX:-} ${MAX_ITEMS:-} --output table --query "$SORT_BY[$(auto_filter_joined Key  -- "$SECOND_RESOURCE")].{
   \"1.Key\":Key,
   \"2.LastModified\":LastModified,
   \"3.ETag\":ETag,

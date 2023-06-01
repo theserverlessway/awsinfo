@@ -1,23 +1,23 @@
 echoerr() {
-    echo -e "$@" 1>&2;
+    echo -e "$*" 1>&2;
 }
 
 export -f echoerr
 
 echoinfomsg() {
-    echoerr "$BLUE""$@""$NC"
+    echoerr "$BLUE""$*""$NC"
 }
 
 export -f echoinfomsg
 
 echoerrmsg() {
-    echoerr "$RED""$@""$NC"
+    echoerr "$RED""$*""$NC"
 }
 
 export -f echoerrmsg
 
 echosuccess() {
-    echo -e "$GREEN""$@""$NC" 1>&2;
+    echo -e "$GREEN""$*""$NC" 1>&2;
 }
 
 export -f echosuccess
@@ -60,11 +60,11 @@ function split_args(){
 }
 
 function print_table(){
-  jq -crs | python3 $DIR/combine_calls.py $1
+  jq -crs | python3 "$DIR/combine_calls.py" "$1"
 }
 
 function print_table_excluding(){
-  jq -Mcr "del($1)" | print_table $2
+  jq -Mcr "del($1)" | print_table "$*"
 }
 
 function time_parsing() {

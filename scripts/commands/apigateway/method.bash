@@ -12,4 +12,4 @@ source $CURRENT_COMMAND_DIR/resource.sh
 
 echosuccess "Selected HTTPMethod $HTTP_REQUEST_METHOD"
 
-awscli apigateway get-method --rest-api-id $SELECTED_REST_API --resource-id $SELECTED --http-method $HTTP_REQUEST_METHOD --output table
+awscli apigateway get-method --rest-api-id $SELECTED_REST_API --resource-id "$SELECTED" --http-method $HTTP_REQUEST_METHOD --output table

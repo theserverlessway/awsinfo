@@ -31,7 +31,7 @@ setup(){
   assert_output -p SecondLogGroup
   assert_success
 
-  run awsinfo cloudformation resources index bats $STACKPOSTFIX -- Second Log Group
+  run awsinfo cloudformation resources index bats $STACKPOSTFIX -- Second Log Group AWS Logs LogGroup
   assert_output -p index-bats
   assert_output -p CREATE_COMPLETE
   refute_output -p FirstLogGroup

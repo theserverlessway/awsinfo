@@ -10,7 +10,7 @@ shift $(($OPTIND-1))
 
 split_args "$@"
 
-ACCOUNTS=$(awscli organizations list-accounts --output text --query "Accounts[$(auto_filter_joined Name Id Status Email -- $FIRST_RESOURCE)].[Id]")
+ACCOUNTS=$(awscli organizations list-accounts --output text --query "Accounts[$(auto_filter_joined Name Id Status Email -- "$FIRST_RESOURCE")].[Id]")
 select_one Account "$ACCOUNTS"
 
 ACCOUNT_ID=$SELECTED

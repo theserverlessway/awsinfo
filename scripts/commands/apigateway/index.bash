@@ -1,6 +1,6 @@
 # Example of a Simple Command
 
-FILTER=$(auto_filter_joined id name "join('',endpointConfiguration.types)" -- $@)
+FILTER=$(auto_filter_joined id name "join('',endpointConfiguration.types)" -- "$@")
 awscli apigateway get-rest-apis --output table --query "sort_by(items,&name)[$FILTER].{
   \"1.Name\":name,
   \"2.Id\":id,

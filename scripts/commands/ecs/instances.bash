@@ -13,16 +13,16 @@ shift $(($OPTIND-1))
 
 split_args "$@"
 
-CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- $FIRST_RESOURCE)].[@]")
+CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- "$FIRST_RESOURCE")].[@]")
 select_one Cluster "$CLUSTERS"
 
-INSTANCES=$(awscli ecs list-container-instances --output text --cluster $SELECTED $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query containerInstanceArns)
+INSTANCES=$(awscli ecs list-container-instances --output text --cluster "$SELECTED" $INSTANCE_FILTER "$INSTANCE_FILTER_ARG" --query containerInstanceArns)
 
-FILTER=$(auto_filter_joined containerInstanceArn ec2InstanceId status "to_string(agentConnected)" "attributes[].value|[0]||''" -- $SECOND_RESOURCE)
+FILTER=$(auto_filter_joined containerInstanceArn ec2InstanceId status "to_string(agentConnected)" "attributes[].value|[0]||''" -- "$SECOND_RESOURCE")
 
 if [[ ! -z "$INSTANCES" ]]
 then
-  awscli ecs describe-container-instances --container-instances $INSTANCES --cluster $SELECTED  --output table \
+  awscli ecs describe-container-instances --container-instances $INSTANCES --cluster "$SELECTED"  --output table \
     --query "containerInstances[$FILTER].{ \
       \"1.Arn\":containerInstanceArn, \
       \"2.InstanceId\":ec2InstanceId, \

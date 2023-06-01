@@ -1,4 +1,4 @@
-FILTER=$(auto_filter_joined jobQueueName status "join('',computeEnvironmentOrder[].computeEnvironment)" -- $@)
+FILTER=$(auto_filter_joined jobQueueName status "join('',computeEnvironmentOrder[].computeEnvironment)" -- "$@")
 
 awscli batch describe-job-queues --output json --query "sort_by(jobQueues,&jobQueueName)[$FILTER].{
   \"1.Name\":jobQueueName,

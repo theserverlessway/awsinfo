@@ -28,13 +28,13 @@ if [[ ! -z "$TASK_FAMILY" ]]; then
   TASK_FAMILY="--family $SELECTED"
 fi
 
-CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- $FIRST_RESOURCE)].[@]")
+CLUSTERS=$(awscli ecs list-clusters --output text --query "clusterArns[$(auto_filter_joined @ -- "$FIRST_RESOURCE")].[@]")
 select_one Cluster "$CLUSTERS"
 
-TASKS=$(awscli ecs list-tasks --output text $TASK_FAMILY $TASK_NAME --cluster $SELECTED $TASK_STATUS --query taskArns | sed "s/None//g")
-FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- $SECOND_RESOURCE)
+TASKS=$(awscli ecs list-tasks --output text $TASK_FAMILY $TASK_NAME --cluster "$SELECTED" "$TASK_STATUS" --query taskArns | sed "s/None//g")
+FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- "$SECOND_RESOURCE")
 
-FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster $SELECTED --query \"tasks[$FILTER].taskArn\" --output text --tasks \$0 \$@")
+FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster "$SELECTED" --query \"tasks[$FILTER].taskArn\" --output text --tasks \$0 \$@")
 
 echo "$FILTERED_TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --query \"reverse(sort_by(tasks,$SORT_BY))[].{\\\"1.Task\\\":taskArn,\\\"2.Definition\\\":taskDefinitionArn,\\\"3.Instance\\\":containerInstanceArn,\\\"4.Status/Health\\\":join('/',[lastStatus,healthStatus]),
-        \\\"5.CreatedAt\\\":createdAt,\\\"6.CPU/Memory\\\":join('/', [cpu , memory]),\\\"7.Containers\\\":length(containers),\\\"8.Group\\\":group,\\\"9.CapacityProvider\\\":capacityProviderName}\" --cluster $SELECTED --tasks \$0 \$@" | sed "s/arn.*\///g" | print_table DescribeTasks
+        \\\"5.CreatedAt\\\":createdAt,\\\"6.CPU/Memory\\\":join('/', [cpu , memory]),\\\"7.Containers\\\":length(containers),\\\"8.Group\\\":group,\\\"9.CapacityProvider\\\":capacityProviderName}\" --cluster "$SELECTED" --tasks \$0 \$@" | sed "s/arn.*\///g" | print_table DescribeTasks

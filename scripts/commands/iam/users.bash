@@ -1,1 +1,1 @@
-awscli iam list-users --output table --query "Users[$(auto_filter_joined UserName UserId Path -- $@)].{\"1.Name\":UserName,\"2.Id\":UserId,\"3.Arn\":Arn,\"4.Path\": Path,\"5.PasswordLastUsed\": PasswordLastUsed}"
+awscli iam list-users --output table --query "Users[$(auto_filter_joined UserName UserId Path -- "$@")].{\"1.Name\":UserName,\"2.Id\":UserId,\"3.Arn\":Arn,\"4.Path\": Path,\"5.PasswordLastUsed\": PasswordLastUsed}"

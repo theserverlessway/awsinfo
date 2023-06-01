@@ -1,6 +1,6 @@
 FROM python:latest
 RUN apt-get update
-RUN apt-get install -y groff less jq make bash coreutils python3 curl
+RUN apt-get install -y groff less jq make bash coreutils python3 curl shellcheck
 
 ADD "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" "session-manager-plugin.deb"
 RUN dpkg -i session-manager-plugin.deb

@@ -1,1 +1,1 @@
-awscli cloudformation list-stack-sets --status ACTIVE --output table --query "sort_by(Summaries,&StackSetName)[$(auto_filter_joined StackSetName -- $@)].{\"1.Name\":StackSetName,\"2.Id\":StackSetId,\"3.Status\": Status}"
+awscli cloudformation list-stack-sets --status ACTIVE --output table --query "sort_by(Summaries,&StackSetName)[$(auto_filter_joined StackSetName -- "$@")].{\"1.Name\":StackSetName,\"2.Id\":StackSetId,\"3.Status\": Status}"

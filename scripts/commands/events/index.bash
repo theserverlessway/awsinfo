@@ -1,4 +1,4 @@
-FILTER=$(auto_filter_joined Name State ScheduleExpression EventPattern -- $@)
+FILTER=$(auto_filter_joined Name State ScheduleExpression EventPattern -- "$@")
 
 awscli events list-rules --output table \
   --query "Rules[$FILTER].{ \

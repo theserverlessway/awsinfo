@@ -1,1 +1,1 @@
-awscli codebuild list-projects --output table --query "projects[$(auto_filter_joined @ -- $@)]"
+awscli codebuild list-projects --output table --query "projects[$(auto_filter_joined @ -- "$@")]"

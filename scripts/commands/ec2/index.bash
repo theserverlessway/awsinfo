@@ -1,6 +1,6 @@
 source $CURRENT_COMMAND_DIR/terminated-instances.sh
 
-FILTER=$(auto_filter_joined "$TAG_NAME" InstanceId InstanceType State.Name Placement.AvailabilityZone PublicIpAddress PrivateIpAddress InstanceLifecycle -- $@)
+FILTER=$(auto_filter_joined "$TAG_NAME" InstanceId InstanceType State.Name Placement.AvailabilityZone PublicIpAddress PrivateIpAddress InstanceLifecycle -- "$@")
 
 awscli ec2 describe-instances --output table $EC2_FILTER --query "sort_by($SORT_BY)[].Instances[$FILTER][].{
   \"1.Name\":$TAG_NAME,

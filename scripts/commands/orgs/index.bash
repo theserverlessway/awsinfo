@@ -1,1 +1,1 @@
-awscli organizations list-accounts --output table --query "sort_by(Accounts,&Name)[$(auto_filter_joined Name Id Status Email JoinedMethod JoinedTimestamp -- $@)].{\"1.Name\":Name,\"2.Id\":Id,\"3.Status\":Status,\"4.Email\":Email,\"5.JoinedVia\":JoinedMethod,\"6.Joined\":JoinedTimestamp}"
+awscli organizations list-accounts --output table --query "sort_by(Accounts,&Name)[$(auto_filter_joined Name Id Status Email JoinedMethod JoinedTimestamp -- "$@")].{\"1.Name\":Name,\"2.Id\":Id,\"3.Status\":Status,\"4.Email\":Email,\"5.JoinedVia\":JoinedMethod,\"6.Joined\":JoinedTimestamp}"

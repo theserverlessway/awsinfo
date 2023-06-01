@@ -69,3 +69,6 @@ create:
 	read -p "Enter the Command Name [index]: " COMMAND_NAME_INPUT; \
 	COMMAND_NAME=$${COMMAND_NAME_INPUT:-index}; \
 	mkdir -p $(COMMANDS_DIR)/$$SERVICE_NAME && cp $(EXAMPLE_DIR)/command.bash $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.bash && cp $(EXAMPLE_DIR)/command.md $(COMMANDS_DIR)/$$SERVICE_NAME/$$COMMAND_NAME.md
+
+shellcheck:
+	find ./scripts/ -type f -name "*.bash" -o -name "*.sh" | xargs -n 1 shellcheck -f gcc

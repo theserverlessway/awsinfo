@@ -1,4 +1,4 @@
-awscli rds describe-db-instances --output table --query "DBInstances[$(auto_filter_joined DBInstanceIdentifier DBInstanceClass Engine EngineVersion DBInstanceStatus Endpoint.Address AvailabilityZone DBClusterIdentifier -- $@)].{ \
+awscli rds describe-db-instances --output table --query "DBInstances[$(auto_filter_joined DBInstanceIdentifier DBInstanceClass Engine EngineVersion DBInstanceStatus Endpoint.Address AvailabilityZone DBClusterIdentifier -- "$@")].{ \
     \"1.Id\":DBInstanceIdentifier, \
     \"2.Class\":DBInstanceClass, \
     \"3.Engine\":join(':',[Engine, EngineVersion]), \

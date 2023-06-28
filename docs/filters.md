@@ -97,7 +97,7 @@ Many different commands allow you to split filters for the first and second reso
 For CloudFormation stack resources AWSInfo matches against the LogicalId, PhysicalId and the Type. And because the match just has to be unique we don't even have to write out `RecordSet` but can simply write `Rec Set` or any other unique combination. Filtering also happens across all supported attributes, so we can add multiple filter terms that can match on mutliple attributes, e.g. if we want to find all Record Sets that also have www in them we can use the following filter command. This makes filtering out similar resources easier as well as some attribute might share a very similar name, but resources can be differentiated by the combination of multiple attributes.
 
 ```
-○ → awsinfo-dev cloudformation resources tsl -- Rec Set www
+○ → awsinfo cloudformation resources tsl -- Rec Set www
 Selected Stack tslw-infrastructure
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 |                                                                ListStackResources                                                                |

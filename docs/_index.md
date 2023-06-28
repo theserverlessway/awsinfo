@@ -200,6 +200,7 @@ Following is a list of all available commands and links to their source document
 * [`ecr`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecr/index.md)
 * [`ecr images`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecr/images.md)
 * [`ecs`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/index.md)
+* [`ecs cluster`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/cluster.md)
 * [`ecs instance`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/instance.md)
 * [`ecs instances`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/instances.md)
 * [`ecs service`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/ecs/service.md)

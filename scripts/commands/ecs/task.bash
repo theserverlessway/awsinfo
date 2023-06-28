@@ -1,8 +1,8 @@
-TASK_STATUS=""
+TASK_STATUS="RUNNING"
 
 while getopts "s" opt; do
     case "$opt" in
-        s) TASK_STATUS="--desired-status STOPPED" ;;
+        s) TASK_STATUS="STOPPED" ;;
     esac
 done
 
@@ -21,7 +21,7 @@ select_one Cluster "$CLUSTERS"
 
 CLUSTER=$SELECTED
 
-TASKS=$(awscli ecs list-tasks --output text --cluster "$SELECTED" "$TASK_STATUS" --query taskArns[].[@])
+TASKS=$(awscli ecs list-tasks --output text --cluster "$SELECTED" --desired-status "$TASK_STATUS" --query taskArns[].[@])
 
 FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastStatus group cpu memory launchType capacityProviderName -- "$SECOND_RESOURCE")
 FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster "$SELECTED" --query \"tasks[$FILTER].[taskArn]\" --output text --tasks \$0 \$@")

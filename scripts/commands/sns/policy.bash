@@ -1,4 +1,4 @@
 TOPICS=$(awscli sns list-topics --output text --query "Topics[$(filter TopicArn "$@")].[TopicArn]")
 select_one Topic "$TOPICS"
 
-awscli sns list-subscriptions-by-topic --topic-arn "$SELECTED" --output table --query "Subscriptions"
+awscli sns get-topic-attributes --topic-arn "$SELECTED" --query Attributes.Policy --output text | jq

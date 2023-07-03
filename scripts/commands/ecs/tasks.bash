@@ -36,5 +36,5 @@ FILTER=$(auto_filter_joined taskArn taskDefinitionArn containerInstanceArn lastS
 
 FILTERED_TASKS=$(echo "$TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --cluster "$SELECTED" --query \"tasks[$FILTER].taskArn\" --output text --tasks \$0 \$@")
 
-echo "$FILTERED_TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --query \"reverse(sort_by(tasks,$SORT_BY))[].{\\\"1.Task\\\":taskArn,\\\"2.Definition\\\":taskDefinitionArn,\\\"3.Instance\\\":containerInstanceArn,\\\"4.Status/Health\\\":join('/',[lastStatus,healthStatus]),
+echo "$FILTERED_TASKS" | xargs -rn 99 bash -c "awscli ecs describe-tasks --output json --query \"reverse(sort_by(tasks,$SORT_BY))[].{\\\"1.Task\\\":taskArn,\\\"2.Definition\\\":taskDefinitionArn,\\\"3.Instance\\\":containerInstanceArn,\\\"4.Status/Health\\\":join('/',[lastStatus,healthStatus]),
         \\\"5.CreatedAt\\\":createdAt,\\\"6.CPU/Memory\\\":join('/', [cpu , memory]),\\\"7.Containers\\\":length(containers),\\\"8.Group\\\":group,\\\"9.CapacityProvider\\\":capacityProviderName}\" --cluster "$SELECTED" --tasks \$0 \$@" | sed "s/arn.*\///g" | print_table DescribeTasks

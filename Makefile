@@ -8,22 +8,11 @@ TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 GIT_COMMIT=$(shell git rev-parse HEAD)
 DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 
-BUILD_ARGS=--build-arg AWSINFO_VERSION="$(DATE)-$(GIT_COMMIT)" -t $(CONTAINER) .
-
-
-build:
-	docker build $(BUILD_ARGS)
-
 build-no-cache:
-	docker build --pull --no-cache $(BUILD_ARGS)
+	docker build --pull --no-cache -t $(CONTAINER) .
 
-install: build-no-cache
-	docker tag $(CONTAINER) $(CONTAINER_NAME):latest
-
-release: install
-	docker push $(CONTAINER_NAME):latest
-	docker tag $(CONTAINER_NAME):latest $(OLD_CONTAINER_NAME):latest
-	docker push $(OLD_CONTAINER_NAME):latest
+release:
+	docker buildx build --builder multiarch --push --platform=linux/amd64,linux/arm64 -t docker.io/theserverlessway/awsinfo .
 
 test: build-no-cache
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)

@@ -11,8 +11,11 @@ DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 build-no-cache:
 	docker build --pull --no-cache -t $(CONTAINER) .
 
+create-builder:
+	docker buildx create --name multiarch --bootstrap --use
+
 release:
-	docker buildx build --builder multiarch --push --platform=linux/amd64,linux/arm64 -t docker.io/theserverlessway/awsinfo .
+	docker buildx build --push --platform=linux/amd64,linux/arm64 -t docker.io/theserverlessway/awsinfo .
 
 test: build-no-cache
 	STACKPOSTFIX=$(shell date +%s%N) ./tests/test-helpers/bats/bin/bats $(TESTFILES)

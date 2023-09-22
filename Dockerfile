@@ -1,16 +1,13 @@
 FROM python:latest
-RUN apt-get update
-RUN apt-get install -y groff less jq make bash coreutils python3 curl shellcheck
+RUN apt-get update && apt-get install -y groff less jq make bash coreutils python3 curl shellcheck && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN wget https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_$(if [ $(dpkg --print-architecture) = "amd64" ] ; then echo "64bit" ; else echo "arm64" ; fi)/session-manager-plugin.deb
-RUN dpkg -i session-manager-plugin.deb
-RUN rm session-manager-plugin.deb
+RUN wget https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_$(if [ $(dpkg --print-architecture) = "amd64" ] ; then echo "64bit" ; else echo "arm64" ; fi)/session-manager-plugin.deb && dpkg -i session-manager-plugin.deb && rm session-manager-plugin.deb
 
 RUN pip3 install awscli
 
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
-    ./aws/install
+    ./aws/install && rm awscliv2.zip && rm -fr ./aws
 
 COPY scripts /awsinfo/scripts
 

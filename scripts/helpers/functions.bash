@@ -23,8 +23,12 @@ echosuccess() {
 export -f echosuccess
 
 function select_one(){
-    type=$1
-    OUTPUT=$(sort <<< "$2")
+  select_one_unsorted "$1" "$(sort <<< "$2")"
+}
+
+function select_one_unsorted(){
+    type="$1"
+    OUTPUT="$2"
     if [[ -z "$OUTPUT" ]]
     then
         echoerrmsg "Found no matching $type with supplied arguments"

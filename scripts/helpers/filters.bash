@@ -4,12 +4,12 @@ function join {
     OUTPUT=""
     if [[ $# -gt 0 ]]
     then
-        OUTPUT="$1"
+        OUTPUT="to_string($1)"
         shift
         for var in $@
         do
             OUTPUT+=$joiner
-            OUTPUT+=$var
+            OUTPUT+="to_string($var)"
         done
     fi
     echo $OUTPUT

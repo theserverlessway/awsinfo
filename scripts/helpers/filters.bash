@@ -4,7 +4,7 @@ function join {
     OUTPUT=""
     if [[ $# -gt 0 ]]
     then
-        OUTPUT="to_string($1)"
+        OUTPUT="$1"
         shift
         for var in $@
         do
@@ -46,7 +46,7 @@ function auto_filter_joined(){
     split_args "$@"
     if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
     then
-      FILTER_STRING="join('',[$(join "||''," $FIRST_RESOURCE)||''])"
+      FILTER_STRING="join('',[$(join "||''," \'\' $FIRST_RESOURCE)||''])"
       echo ?"$(filter_query "$FILTER_STRING" $SECOND_RESOURCE)"
     fi
   fi

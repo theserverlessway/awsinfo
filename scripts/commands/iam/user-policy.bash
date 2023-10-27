@@ -5,7 +5,7 @@ select_one User "$USERS"
 
 USER=$SELECTED
 
-USERS=$(awscli iam list-user-policies --user-name $USER --output text --query "PolicyNames[$(filter @ $SECOND_RESOURCE)].[@]")
+USERS=$(awscli iam list-user-policies --user-name $USER --output text --query "PolicyNames[$(auto_filter_joined @ -- $SECOND_RESOURCE)].[@]")
 select_one Policy "$USERS"
 
 awscli iam get-user-policy --user-name $USER --policy-name "$SELECTED" --output table --query "@.{

@@ -1,1 +1,1 @@
-awscli kms list-keys --output table --query "Keys[$(filter KeyId "$@")].{\"1.Id\": KeyId, \"2.Arn\": KeyArn}"
+awscli kms list-keys --output table --query "Keys[$(auto_filter_joined KeyId -- "$@")].{\"1.Id\": KeyId, \"2.Arn\": KeyArn}"

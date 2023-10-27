@@ -1,6 +1,6 @@
 echo "Getting data, ... (filter queues for faster results)"
 
-FILTER_QUERY=$(filter "@" "$@")
+FILTER_QUERY=$(auto_filter_joined "@" -- "$@")
 
 queues=$(awscli sqs list-queues --query "QueueUrls[$FILTER_QUERY]" --output text | sed s/^None//g)
 

@@ -5,7 +5,7 @@ select_one Group "$IAM_GROUPS"
 
 GROUP=$SELECTED
 
-IAM_GROUPS=$(awscli iam list-group-policies --group-name $GROUP --output text --query "PolicyNames[$(filter @ $SECOND_RESOURCE)].[@]")
+IAM_GROUPS=$(awscli iam list-group-policies --group-name $GROUP --output text --query "PolicyNames[$(auto_filter_joined @ -- $SECOND_RESOURCE)].[@]")
 select_one Policy "$IAM_GROUPS"
 
 awscli iam get-group-policy --group-name $GROUP --policy-name "$SELECTED" --output table --query "@.{

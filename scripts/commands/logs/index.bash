@@ -35,7 +35,7 @@ declare -A SEEN
 
 split_args "$@"
 
-LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(filter "logGroupName" $FIRST_RESOURCE)].[logGroupName]" --output text)
+LOG_GROUPS=$(awscli logs describe-log-groups --query "logGroups[$(auto_filter_joined "logGroupName" -- $FIRST_RESOURCE)].[logGroupName]" --output text)
 select_one LogGroup "$LOG_GROUPS"
 LOG_GROUP=$SELECTED
 

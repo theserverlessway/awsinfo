@@ -1,4 +1,4 @@
-function join {
+function join_with_to_string {
     joiner=$1
     shift
     OUTPUT=""
@@ -10,6 +10,23 @@ function join {
         do
             OUTPUT+=$joiner
             OUTPUT+="to_string($var)"
+        done
+    fi
+    echo $OUTPUT
+}
+
+function join {
+    joiner=$1
+    shift
+    OUTPUT=""
+    if [[ $# -gt 0 ]]
+    then
+        OUTPUT="$1"
+        shift
+        for var in $@
+        do
+            OUTPUT+=$joiner
+            OUTPUT+="$var"
         done
     fi
     echo $OUTPUT
@@ -32,21 +49,13 @@ function filter_query(){
     fi
 }
 
-function filter(){
-    if [[ $# -gt 1 ]]
-    then
-        echo -n "?"
-        filter_query "$@"
-    fi
-}
-
 function auto_filter_joined(){
   if [[ $# -gt 1 ]]
   then
     split_args "$@"
     if [ -n "$FIRST_RESOURCE" ] && [ -n "$SECOND_RESOURCE" ]
     then
-      FILTER_STRING="join('',[$(join "||''," \'\' $FIRST_RESOURCE)||''])"
+      FILTER_STRING="join('',[$(join_with_to_string "||''," \'\' $FIRST_RESOURCE)||''])"
       echo ?"$(filter_query "$FILTER_STRING" $SECOND_RESOURCE)"
     fi
   fi

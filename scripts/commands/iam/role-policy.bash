@@ -5,7 +5,7 @@ select_one Role "$ROLES"
 
 ROLE=$SELECTED
 
-ROLES=$(awscli iam list-role-policies --role-name $ROLE --output text --query "PolicyNames[$(filter @ $SECOND_RESOURCE)].[@]")
+ROLES=$(awscli iam list-role-policies --role-name $ROLE --output text --query "PolicyNames[$(auto_filter_joined @ -- $SECOND_RESOURCE)].[@]")
 select_one Policy "$ROLES"
 
 awscli iam get-role-policy --role-name $ROLE --policy-name "$SELECTED" --output table --query "@.{

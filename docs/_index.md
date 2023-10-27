@@ -255,6 +255,7 @@ Following is a list of all available commands and links to their source document
 * [`iam policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/policies.md)
 * [`iam policy-version`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/policy-version.md)
 * [`iam role`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/role.md)
+* [`iam role-permissions`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/role-permissions.md)
 * [`iam role-policies`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/role-policies.md)
 * [`iam role-policy`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/role-policy.md)
 * [`iam roles`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/iam/roles.md)

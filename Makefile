@@ -2,7 +2,7 @@
 
 OLD_CONTAINER_NAME=flomotlik/awsinfo
 CONTAINER_NAME=theserverlessway/awsinfo
-CONTAINER=$(CONTAINER_NAME):dev
+CONTAINER=$(CONTAINER_NAME)
 TEST_HELPERS=tests/test-helpers
 TESTFILES=tests/commands/**/*.bats tests/commands/*.bats
 GIT_COMMIT=$(shell git rev-parse HEAD)

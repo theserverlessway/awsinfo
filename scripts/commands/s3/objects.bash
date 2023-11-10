@@ -1,10 +1,10 @@
-SORT_BY="sort_by(Contents,&Key)"
+SORT_BY="sort_by(Contents||[{Key: ''}],&Key)"
 
 while getopts "p:m:l" opt; do
     case "$opt" in
         p) PREFIX="--prefix $OPTARG" ;;
         m) MAX_ITEMS="--max-items $OPTARG" ;;
-        l) SORT_BY="reverse(sort_by(Contents,&LastModified))" ;;
+        l) SORT_BY="reverse(sort_by(Contents||[{LastModified: ''}],&LastModified))" ;;
     esac
 done
 shift $(($OPTIND-1))

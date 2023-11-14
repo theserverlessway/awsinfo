@@ -1,8 +1,6 @@
 name: unit-tests
 on:
   push:
-    branches:
-      - "*"
   schedule:
     - cron: "0 0 * * 1"
 jobs:

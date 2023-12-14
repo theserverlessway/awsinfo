@@ -6,4 +6,4 @@ select_one Project "$PROJECTS"
 
 BUILD_IDS=$(awscli codebuild list-builds-for-project --project-name "$SELECTED" --max-items 100 --output text --query "ids[$(auto_filter_joined @ -- "$SECOND_RESOURCE")].[@]")
 
-select_one Build "$BUILD_IDS"
+select_one_unsorted Build "$BUILD_IDS"

@@ -1,10 +1,20 @@
+MAX_BUILDS="10"
+
+while getopts "m:" opt; do
+  case "$opt" in
+  m) MAX_BUILDS="$OPTARG" ;;
+  esac
+done
+
+shift "$(($OPTIND - 1))"
+
 split_args "$@"
 
 PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto_filter_joined @ -- "$FIRST_RESOURCE")].[@]")
 
 select_one Project "$PROJECTS"
 
-BUILD_IDS=$(awscli codebuild list-builds-for-project --max-items 99 --project-name "$SELECTED" --output text --query "ids[].[@]" | head -n 99 )
+BUILD_IDS=$(awscli codebuild list-builds-for-project --max-items "$MAX_BUILDS" --project-name "$SELECTED" --output text --query "ids[].[@]" | sed '$d' )
 
 awscli codebuild batch-get-builds --output table --query "reverse(builds)[$(auto_filter_joined id buildNumber currentPhase buildStatus -- "$SECOND_RESOURCE")].{
   \"1.Id\":id,

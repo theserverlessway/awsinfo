@@ -168,6 +168,7 @@ Following is a list of all available commands and links to their source document
 * [`codebuild`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/index.md)
 * [`codebuild build`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/build.md)
 * [`codebuild build-reports`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/build-reports.md)
+* [`codebuild build-status`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/build-status.md)
 * [`codebuild builds`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/builds.md)
 * [`codebuild report`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/report.md)
 * [`codebuild report-groups`](https://github.com/theserverlessway/awsinfo/blob/master/scripts/commands/codebuild/report-groups.md)

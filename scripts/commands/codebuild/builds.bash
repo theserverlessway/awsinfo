@@ -14,7 +14,7 @@ PROJECTS=$(awscli codebuild list-projects --output text --query "projects[$(auto
 
 select_one Project "$PROJECTS"
 
-BUILD_IDS=$(awscli codebuild list-builds-for-project --max-items "$MAX_BUILDS" --project-name "$SELECTED" --output text --query "ids[].[@]" | sed '$d' )
+BUILD_IDS=$(awscli codebuild list-builds-for-project --max-items "$MAX_BUILDS" --project-name "$SELECTED" --output text --query "ids[].[@]" | sed 's/^None$//g')
 
 awscli codebuild batch-get-builds --output table --query "reverse(builds)[$(auto_filter_joined id buildNumber currentPhase buildStatus -- "$SECOND_RESOURCE")].{
   \"1.Id\":id,
